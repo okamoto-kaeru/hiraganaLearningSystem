@@ -32,6 +32,7 @@ $(document).ready(function() {
 	var answerArr = new Array(10);		// 학습자의 답
 	var collectAnswerArr = new Array(10);	// 정답
 	var resultOX = new Array(10);	// 결과 ox
+	var amountOfCollectAnswer = 0;   // to show the score
 	
 	function doTest() {	
 		
@@ -78,6 +79,7 @@ $(document).ready(function() {
 			answerArr[count] = $(this).attr('src');		// 학습자가 고른 답을 answerArr에 담는다.
 			resultOX[count] = "images/quiz/collect.png";	// o를 담는다
 			judge.attr('src', "images/quiz/collect.png");
+			amountOfCollectAnswer++;
 			$(this).addClass("selected");
 			answering();
 		});
@@ -103,7 +105,7 @@ $(document).ready(function() {
 		$('#showResult tr:last').after('<tr><td>' + (count + 1) + '</td>' 
 									+ '<td><img src="' + collectAnswerArr[count].hiraganaImage + '" style="width: 40; height: 50;"></td>'
 									+'<td><img src="' + answerArr[count] + '" style="width: 40; height: 50;"></td>'
-									+'<td><img src="' + resultOX[count] + '" style="width: 40; height: 50;"></td></tr>');
+									+'<td><img src="' + resultOX[count] + '" style="width: 50; height: 50;"></td></tr>');
 		count++;
 		$('#nextQuiz').show();
 		if(count == 10) {
@@ -129,6 +131,7 @@ $(document).ready(function() {
 			$('#amountOfQuiz').text(count + 1 + '번째 문제');
 			doTest();
 		} else {
+			$('#showResult tr:last').after('<tr><th colspan="3">점수</th><td style="font-size: 3em; color: orange;">' + (amountOfCollectAnswer * 10) + ' 점</td></tr>');
 			$('.jsModal').fadeIn();
 		}
 	});
@@ -153,7 +156,7 @@ $(document).ready(function() {
 <img id="judge" class="center" width="400px" height="400px" style="position: absolute; top: 300px; left: 278px; display: none;">
 
 <!-- hiragana 퀴즈에 메인 이미지 -->
-<img id="explain" src="images/hiraganaImages/hiraganaQuiz.png" width="960px" height="552px" style="position: absolute; top: 227px;">
+<img id="explain" src="images/linkImages/hiraganaQuizAssociateExplain.png" width="960px" height="552px" style="position: absolute; top: 227px;">
 
 <!-- 스타트 버튼, 다음 문제 버튼 -->
 <input type="button" class="button greenButton center" id="start" value="공부 시작" style="margin-top: 50px; height: 30px;">
@@ -164,7 +167,7 @@ $(document).ready(function() {
 	<div class="modalBackGround">
 		<div class="modalContent">
 			<h2>성적</h2>
-			<table class="table" id="showResult">
+			<table class="table" id="showResult" style="text-align: center;">
 				<tr>
 					<th>문제 번호</th><th>정답</th><th>당신의 답</th><th>결과</th>
 				</tr>

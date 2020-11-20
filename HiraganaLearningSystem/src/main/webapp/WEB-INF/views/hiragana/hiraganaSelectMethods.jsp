@@ -6,13 +6,14 @@
 	<tr>
 		<td><a href="goHiraganaMovie?hiraganaLine=${hiraganaLine}"><img src="images/linkImages/goMovie.png" height=250px width=400px></a></td>
 		<td>
-			<a href="hiraganaTestForm?hiraganaLine=${hiraganaLine}"><img src="" height=250px width=400px></a>
+			<a href="hiraganaTestForm?hiraganaLine=${hiraganaLine}"><img src="images/linkImages/hiraganaQuizAssociate.png" height=250px width=400px></a>
 			<span style="color: red;">*로그인 필수</span>
 		</td>
 	</tr>
 	<tr>
+	    <td><a href="#"><img src="images/linkImages/hiraganaQuizText.png" height=250px width=400px></a></td>
 		<td><a href="#"><img src="images/linkImages/goWrite.png" height=250px width=400px></a></td>
-		<td><a href="#"><img src="" height=250px width=400px></a></td>
+		<td><a href="#"><img src="images/linkImages/hiraganaQuizWord.png" height=250px width=400px></a></td>
 	</tr>
 </table>
 
