@@ -8,7 +8,7 @@
 		<td><a href="goHiraganaMovie?hiraganaLine=${hiraganaLine}"><img src="images/linkImages/goMovie.png" height=250px width=400px></a></td>
 	</tr>
 	<tr>
-	    <td style="color: purple;"></td>
+	    <td style="color: purple;">2</td>
 		<td>
 			<a href="hiraganaTestForm?hiraganaLine=${hiraganaLine}"><img src="images/linkImages/hiraganaQuizAssociate.png" height=250px width=400px></a>
 			<span style="color: red;">*로그인 필수</span>
