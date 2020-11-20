@@ -111,7 +111,7 @@ public class AdminController {
 		String fileName= "";
 		
 		if(!uploadFile.isEmpty()) {	// 상품 이미지가 업로드 됨
-			String rootPath = session.getServletContext().getRealPath("WEB-INF/resource/images/productImages/");
+			String rootPath = session.getServletContext().getRealPath("WEB-INF/resources/images/productImages/");
 			
 			// logging용
 			System.out.println("---------------------------------------------");
@@ -154,7 +154,7 @@ public class AdminController {
 		String fileName = "";
 		
 		if(!uploadFile.isEmpty()) {
-			String rootPath = session.getServletContext().getRealPath("WEB-INF/resource/images/productImages/");
+			String rootPath = session.getServletContext().getRealPath("WEB-INF/resources/images/productImages/");
 			
 			fileName = uploadFile.getOriginalFilename();
 			

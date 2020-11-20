@@ -22,9 +22,11 @@
 		<div id="bestProductImages">
 			<c:forEach items="${bestProductList}" var="bestItem">
 				<div style="display: inline-block; margin-left: 10px; border: 1px solid #ccc;">
-					<a href="productDetail?pseq=${bestItem.pseq}"><img class="productImages" src="images/productImages/${bestItem.image}"  width="100" height="100"></a>
-					<h3>${bestItem.productName}</h3>
-					<p>${bestItem.price2}</p>
+					<a href="productDetail?pseq=${bestItem.pseq}">
+						<img class="productImages" src="images/productImages/${bestItem.image}"  width="100" height="100">
+						<h3>${bestItem.productName}</h3>
+						<p>${bestItem.price2}</p>
+					</a>
 				</div>
 			</c:forEach>
 		</div>

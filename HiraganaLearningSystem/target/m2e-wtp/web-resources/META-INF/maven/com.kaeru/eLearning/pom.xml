@@ -13,7 +13,16 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+	<!-- 오라클 JDBC라이브러리 관리 사이트 -->
+	<repositories>
+	        <repository>
+	            <id>oracle</id>
+	            <name>ORACLE JDBC Repository</name>
+	            <url>http://maven.jahia.org/maven2</url>
+	        </repository>
+	</repositories>
 	<dependencies>
+		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -47,14 +56,11 @@
 		</dependency>
 		
 		<!-- JDBC Driver -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc</artifactId>
-			<version>18.3</version>
-			<scope>system</scope>
-			<systemPath>E:\okamoto green\java\lib-jar/ojdbc8.jar</systemPath>
-		</dependency>
-		
+		<dependency> 
+	     	<groupId>com.oracle</groupId> 
+	     	<artifactId>ojdbc7</artifactId> 
+	     	<version>12.1.0.2</version> 
+		 </dependency>
 		
 		<!-- DBCP 설정 -->
 		<dependency>

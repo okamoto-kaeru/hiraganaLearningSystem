@@ -38,6 +38,6 @@
 			<td><input type="file" name="productImage"></td>
 		</tr>
 	</table>
-	<input type="submit" value="저장" onclick="return adminProductCheck()">
+	<input class="button pinkButton" type="submit" value="저장" onclick="return adminProductCheck()">
 </form>
 <%@ include file="../../footer.jsp" %>
