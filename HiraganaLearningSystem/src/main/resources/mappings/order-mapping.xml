@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderDAO">
+	
+	<select id="getMaxOseq" resultType="int">
+		SELECT MAX(oseq) FROM orders
+	</select>
+	
+	<insert id="insertOrders" parameterType="order">
+		INSERT INTO orders(oseq, memberId) VALUES(#{oseq}, #{memberId})
+	</insert>
+	
+	<insert id="insertOrderDetail" parameterType="order">
+		INSERT INTO order_detail(odseq, oseq, pseq, quantity) VALUES(order_detail_seq.NEXTVAL, #{oseq}, #{pseq}, #{quantity})
+	</insert>
+	
+	<select id="getOrderNumber" parameterType="String" resultType="Integer">
+		SELECT DISTINCT oseq FROM orders_view WHERE memberId=#{memberId} AND result='1' ORDER BY oseq DESC
+	</select>
+	
+	<select id="getOrderedNow" parameterType="order" resultType="order">
+		SELECT * FROM orders_view WHERE memberId=#{memberId} AND result='1' AND oseq=#{oseq}
+	</select>
+	
+	<select id="getOrdered" parameterType="order" resultType="order">
+		SELECT * FROM orders_view WHERE memberId=#{memberId} AND oseq=#{oseq}
+	</select>
+	
+	<select id="getOrderList" parameterType="String" resultType="order">
+		SELECT * FROM orders_view WHERE memberId=#{memberId} AND result='1' ORDER BY oseq DESC
+	</select>
+	
+	<!-- 주문 번호를 모드 조회 -->
+	<select id="getAllOrderNumber" parameterType="String" resultType="Integer">
+		SELECT DISTINCT oseq FROM orders_view WHERE memberId=#{memberId} ORDER BY oseq DESC
+	</select>
+
+</mapper>

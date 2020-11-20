@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WorkerDAO">
+
+	<select id="getWorker" resultType="worker">
+		SELECT * FROM worker WHERE id=#{id}
+	</select>
+	
+	
+	<!-- product 관련 -->
+	<select id="getTotalProduct" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM product WHERE productName LIKE '%'|| #{productName} ||'%'
+	</select>
+	
+	<select id="getProductList" parameterType="HashMap" resultType="product">
+	<![CDATA[
+		SELECT *    
+		    FROM (SELECT ROWNUM AS rn, pseq, regdate, productName, price1, price2, useyn FROM (SELECT * FROM product ORDER BY useyn DESC)
+		        WHERE productName LIKE '%'|| #{productName} ||'%' AND ROWNUM <= #{criteria.pageNumberNow} * #{criteria.numPerPage} ORDER BY ROWNUM)
+		    WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}
+    ]]>
+	</select>
+	
+	<insert id="insertProduct">
+		INSERT INTO product(pseq, productName, kind, price1, price2, price3, content, image, useyn) 
+				VALUES(product_seq.NEXTVAL, #{productName}, #{kind}, #{price1}, #{price2}, #{price3}, #{content}, #{image}, #{useyn})
+	</insert>
+	
+	<update id="updateProduct">
+		UPDATE product SET productName=#{productName}, kind=#{kind}, price1=#{price1}, price2=#{price2}, price3=#{price3}, content=#{content}, image=#{image}, useyn=#{useyn}
+			WHERE pseq=#{pseq}
+	</update>
+	
+	
+	
+	<!-- order관련 -->
+	<!-- pageNation용 list 총갯수 조회 -->
+	<select id="getTotalOrder" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM orders_view WHERE memberName LIKE '%'|| #{memberName} ||'%'
+	</select>
+	
+	<select id="adminOrderList" parameterType="HashMap" resultType="order">
+	<![CDATA[
+		SELECT * 
+			FROM (SELECT rownum as rn, odseq, oseq, memberId, memberName, zipNum, address, phone, indate, pseq, productName, quantity, price2, result 
+					FROM (SELECT * FROM orders_view ORDER BY result, oseq DESC) 
+						WHERE memberName LIKE '%'|| #{memberName} ||'%' AND rownum <= #{criteria.pageNumberNow} * #{criteria.numPerPage} ORDER BY ROWNUM)
+					WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}
+	]]>
+	</select>
+	
+	<select id="updateOrderDetail" parameterType="int">
+		UPDATE order_detail SET result='2' WHERE odseq=#{odseq}
+	</select>
+	
+	
+	
+	<!-- 회원 관리 -->
+	<select id="getTotalMember" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE memberName LIKE '%'|| #{memberName} ||'%'
+	</select>
+	
+	<select id="memberList" parameterType="HashMap" resultType="member">
+	<![CDATA[
+		SELECT * FROM (SELECT ROWNUM as rn, memberId, pwd, memberName, email, zipNum, address, phone, useyn, regdate 
+                    FROM (SELECT * FROM member ORDER BY memberName)
+                    WHERE memberName LIKE '%'|| #{memberName} ||'%' AND ROWNUM <= #{criteria.pageNumberNow} * #{criteria.numPerPage} ORDER BY ROWNUM) 
+    			WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}
+    ]]>
+	</select>
+	
+	<update id="updateMember">
+		UPDATE member SET useyn=#{useyn} WHERE memberId=#{memberId}
+	</update>
+	
+	
+	
+	<!-- 게시판 관리 -->
+	<select id="getTotalBoard" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM board WHERE writerId LIKE '%'|| #{writerId} ||'%'
+	</select>
+	
+	<select id="getBoardListByWriterId" parameterType="HashMap" resultType="board">
+	<![CDATA[
+		SELECT * 
+		    FROM (SELECT ROWNUM as rn, bseq, title, content, writerId, writeDate
+		                FROM (SELECT * FROM board ORDER BY bseq DESC) 
+		                WHERE writerId LIKE '%'|| #{writerId} ||'%' AND ROWNUM <= #{criteria.pageNumberNow} * #{criteria.numPerPage}) 
+		    WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}
+	]]>
+	</select>
+
+</mapper>

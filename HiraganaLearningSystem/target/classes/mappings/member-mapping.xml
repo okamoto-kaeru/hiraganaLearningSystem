@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberDAO">
+
+	<select id="getMemberByMemberId" parameterType="String" resultType="member">
+		SELECT * FROM member WHERE memberId=#{memberId}
+	</select>
+	
+	<insert id="insertMember">
+		INSERT INTO member(memberId, pwd, memberName, email, zipNum, address, phone) VALUES(#{memberId}, #{pwd}, #{memberName}, #{email}, #{zipNum}, #{address}, #{phone})
+	</insert>
+	
+	<!-- id 찾기 -->
+	<select id="findId" resultType="member">
+		SELECT * FROM member WHERE memberName=#{memberName} AND email=#{email}
+	</select>
+	
+	<!-- password 찾기 -->
+	<select id="findPassword" resultType="member">
+		SELECT * FROM member WHERE memberName=#{memberName} AND memberId=#{memberId} AND email=#{email}
+	</select>
+	
+	<!-- password 변경 -->
+	<update id="updatePassword">
+		UPDATE member SET pwd=#{pwd} WHERE memberId=#{memberId}
+	</update>
+	
+</mapper>

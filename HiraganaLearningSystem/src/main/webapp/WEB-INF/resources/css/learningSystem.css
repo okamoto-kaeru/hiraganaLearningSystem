@@ -1,0 +1,264 @@
+@charset "utf-8";
+
+html, body{
+	height: 100%;
+	margin: 0;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+#container {
+	position: relative;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    min-height: 100vh;
+    width: 960px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+	color: #e998fa;
+}
+
+h2{
+	color: #9fdefd;
+}
+
+.clear{
+	clear:both;
+}
+
+.push{
+	height: 50px;
+}
+
+footer{
+	width: 100%;
+	text-align: right;
+	color: #808080;
+	font-size: 10px;
+	padding: 30px 0;
+	margin-top: auto;
+}
+
+header{
+	padding-top: 8px;
+	height: 100px;
+}
+
+#headerLogo{
+	position: relative;
+	left: 50px;
+}
+
+#headerNav{
+	float: right;
+	margin-bottom: 2em;
+	padding-top: 15px;
+}
+
+#headerNav ul li{
+	display: inline-block;
+	font-weight: 1px;
+    color:#00cc00;
+    margin-right: 5px;
+}
+
+a:link{
+	color:#00c100;
+}
+
+a:hover{
+	color:#88ff88;
+}
+
+a:visited{
+	color:#a5b3f1;
+}
+
+a:visited:hover{
+	color:#a6fffd;
+}
+
+
+.subMenu {
+	font-size: 2em;
+	float: left; 
+	width: 10%;
+	margin-left: 0;
+	margin-top: -65px;
+	text-align: center;
+	position: fixed;
+	background-color: white;
+}
+
+.subMenuProduct {
+	font-size: 2em;
+	float: left; 
+	width: 10%;
+	margin-left: 0;
+	margin-top: 30px;
+	text-align: center;
+	position: fixed;
+	background-color: white;
+}
+
+.subMenu img{
+	display: inline-block;
+	width: 150px;
+}
+
+#mainLogo {
+    width: 230px;
+    height: 150px;
+    margin-top: 8px;
+    float: left;
+}
+
+#joinMain{
+	margin-top: 30px;
+	font-size: 16px;
+	color: #404040;
+}
+
+#joinMain table{
+	border-collapse: separate;
+    border-spacing: 0px 10px;
+}
+
+#addInfo{
+	margin-top: 30px;
+}
+
+
+/* button관련 */
+.button{
+	border-radius: 10px;
+    border-color: rgb(255, 240, 245);
+    width: 10em;
+    cursor: pointer;
+}
+
+.glayButton{
+	background-color: #c0c0c0;
+	color: #ffffff;
+}
+
+.greenButton{
+	background-color: #b3ffb3;
+	color: green;
+}
+
+.orangeButton{
+	background-color: rgb(255, 205, 148); 
+    color: #fd5200; 
+}
+
+.pinkButton{
+    background-color: #f7dbfd;
+    color:#dd00dd;
+}
+
+.blueButton{
+	background-color: #cce6ff;
+	color: #006595;
+}
+
+.redButton{
+	background-color: #ff8083;
+	color: #bb0004;
+}
+
+
+#indexTable tr{
+	padding: 10px, 0;
+}
+
+#detailTable tr{
+	padding: 10px, 0;
+}
+
+#joinMain table{
+	margin: auto;
+}
+
+.table{
+	border-spacing: 2em 0.5em;
+}
+
+.table th{
+	background-color: #ceffdf;
+}
+
+#quantity{
+	width: 3em;
+	height: 20px;
+	font-size: 16px;
+}
+
+.center{
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.pointer{
+	cursor : pointer;
+}
+
+#boardContent{
+	background-color: #ebffd5; 
+	width: 100%; 
+	height: 4em; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+#replyTable {
+	border: 1px solid #ccc;
+	margin-top: 30px;
+}
+
+#replyTable td {
+	border: 1px solid #ccc;
+}
+
+#replyTable th{
+	background-color: #e1c8b5; 
+}
+
+
+.selected {
+	border: 3px solid #ff8040;
+}
+
+
+/* modal window */
+.modal {
+	display: none;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.modalBackGround {
+	background-color: rgba(0, 0, 0, 0.8);
+	height: 100vh;
+	width: 100%;
+	position: absolute;
+}
+
+.modalContent {
+	background-color: #fff;
+	left: 50%;
+	top: 50%;
+	padding: 40px;
+	position: absolute;
+	transform: translate(-50%, -50%);
+}

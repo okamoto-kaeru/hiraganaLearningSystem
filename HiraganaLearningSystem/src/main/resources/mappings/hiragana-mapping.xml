@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HiraganaDAO">
+
+	<select id="getHiragana" parameterType="String" resultType="hiragana">
+		SELECT * FROM hiragana WHERE hiraganaId=#{hiraganaId}
+	</select>
+	
+	<select id="getHiraganaLine" parameterType="String" resultType="hiragana">
+		SELECT * FROM hiragana WHERE hiraganaLine=#{hiraganaLine}
+	</select>
+	
+	<select id="getHiraganaMovie" parameterType="String" resultType="String">
+		SELECT movie FROM hiraganaLineTable WHERE hiraganaLine=#{hiraganaLine}
+	</select>
+
+</mapper>

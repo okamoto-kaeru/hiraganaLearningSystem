@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+  <configuration>
+  	<typeAliases>
+  		<typeAlias type="com.kaeru.eLearning.member.MemberVO" alias="member"/>
+  		<typeAlias type="com.kaeru.eLearning.product.ProductVO" alias="product"/>
+  		<typeAlias type="com.kaeru.eLearning.order.OrderVO" alias="order"/>
+  		<typeAlias type="com.kaeru.eLearning.cart.CartVO" alias="cart"/>
+  		<typeAlias type="com.kaeru.eLearning.board.BoardVO" alias="board"/>
+  		<typeAlias type="com.kaeru.eLearning.address.AddressVO" alias="address"/>
+  		<typeAlias type="com.kaeru.eLearning.worker.WorkerVO" alias="worker"/>
+  		<typeAlias type="com.kaeru.eLearning.hiragana.HiraganaVO" alias="hiragana"/>
+  	</typeAliases>
+  	
+  	<mappers>
+  		<mapper resource="mappings/member-mapping.xml"/>
+  		<mapper resource="mappings/product-mapping.xml"/>
+  		<mapper resource="mappings/order-mapping.xml"/>
+  		<mapper resource="mappings/cart-mapping.xml"/>
+  		<mapper resource="mappings/board-mapping.xml"/>
+  		<mapper resource="mappings/address-mapping.xml"/>
+  		<mapper resource="mappings/worker-mapping.xml"/>
+  		<mapper resource="mappings/hiragana-mapping.xml"/>
+  	</mappers>
+  </configuration>
