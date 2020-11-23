@@ -33,36 +33,13 @@ $(document).ready(function() {
 	var collectAnswerArr = new Array(10);	// 정답
 	var resultOX = new Array(10);	// 결과 ox
 	var amountOfCollectAnswer = 0;   // to show the score
+	var countDown = 11;  // doTest()에서 쓰는 countdown변수 선언
+	var answer; // answer를 담을 변수 선언
 	
+	// 히라가나 퀴즈 구현
 	function doTest() {	
+		makeAnswer();
 		
-		// o, x를 숨긴다.
-		$('#judge').hide();
-		
-		// 히라가나 객체 순서를 썩는다
-		for(var i = 0 ; i < 5 ; i++) {
-			var num = Math.floor(Math.random() * 5);
-			var temp = hiraganaVOArr[i];
-			hiraganaVOArr[i] = hiraganaVOArr[num];
-			hiraganaVOArr[num] = temp;
-		}
-		
-		// 각 이미지를 배치
-		for(var i = 0 ; i < 5 ; i++) {
-			imagesButtonArr[i].attr('src', hiraganaVOArr[i].hiraganaAssociativeImage);
-		}
-		
-		// 정답을 고른다
-		var answer = Math.floor(Math.random() * 5);
-		// 정답을 collectAnswerArr에 담는다.
-		collectAnswerArr[count] = hiraganaVOArr[answer];
-		
-		
-		// 문제를 음성으로 낸다.
-		$('#hiraganaSound source').attr('src', '/sounds/hiraganaSounds/' + hiraganaVOArr[answer].hiraganaSound);
-		
-		// countdown변수 선언
-		var countDown = 11;
 		var id = setInterval(function() {
 			if(countDown == 1) {
 				clearInterval(id);
@@ -73,10 +50,6 @@ $(document).ready(function() {
 				judge.attr('src', "images/quiz/wrong.png");
 				answering();
 			} else {
-				if(countDown == 10 || countDown == 6 || countDown == 3) {
-					$('#hiraganaSound').get(0).play();
-					console.log($('#hiraganaSound source').attr('src'));
-				}
 				countDown--;
 				$('#countDown').text(countDown);
 			}
@@ -109,9 +82,10 @@ $(document).ready(function() {
 		}
 	};
 	
+	// 퀴즈 결과를 표시 + 퀴즈 성적을 하나씩 준비
 	function answering() {
 		$('.imageButton').off();
-		judge.slideDown(1000);			// 이미지가 내려온다.
+		judge.slideDown(500);			// 이미지가 내려온다.
 		$('#showResult tr:last').after('<tr><td>' + (count + 1) + '</td>' 
 									+ '<td><img src="' + collectAnswerArr[count].hiraganaImage + '" style="width: 40; height: 50;"></td>'
 									+'<td><img src="' + answerArr[count] + '" style="width: 40; height: 50;"></td>'
@@ -123,17 +97,52 @@ $(document).ready(function() {
 		}
 	}
 	
+	// 답을 정한다.
+	function makeAnswer() {
+		// o, x를 숨긴다.
+		$('#judge').hide();
+		
+		// 히라가나 객체 순서를 썩는다
+		for(var i = 0 ; i < 5 ; i++) {
+			var num = Math.floor(Math.random() * 5);
+			var temp = hiraganaVOArr[i];
+			hiraganaVOArr[i] = hiraganaVOArr[num];
+			hiraganaVOArr[num] = temp;
+		}
+		
+		// 각 이미지를 배치
+		for(var i = 0 ; i < 5 ; i++) {
+			imagesButtonArr[i].attr('src', hiraganaVOArr[i].hiraganaAssociativeImage);
+		}
+		
+		// 정답을 고른다
+		answer = Math.floor(Math.random() * 5);
+		// 정답을 collectAnswerArr에 담는다.
+		collectAnswerArr[count] = hiraganaVOArr[answer];
+		
+		
+		// 문제를 음성으로 낸다.
+		$('#hiraganaSound source').attr('src', '/sounds/hiraganaSounds/' + hiraganaVOArr[answer].hiraganaSound);
+	}
 	
-	// start 버튼을 클릭할 때 기능
+	
+	
+	/*--------------------------------- start 버튼을 클릭할 때 기능 ---------------------------------*/
 	$('#start').one('click', function() {
 		$('#hiraganaBGSound').get(0).play();
 		// 설명화면을 제거
 		$('#explain').fadeOut(500);
 		$('#start').hide();
+		var timeID = setInterval(function() {
+			$('#hiraganaSound').get(0).play();
+			if(countDown == 0) {
+				clearInterval(timeID);
+			}
+		}, 3000);
 		doTest();
 	});
 	
-	// 다음 문제 버튼을 클릭하면 다음 문제가 나온다.
+	/*--------------------------------- 다음 문제 버튼을 클릭하면 다음 문제가 나온다. ---------------------------------*/
 	$('#nextQuiz').on('click', function() {
 		$('.imageButton').removeClass('selected');
 		if(count < 10) {
@@ -142,7 +151,7 @@ $(document).ready(function() {
 			$('#amountOfQuiz').text(count + 1 + '번째 문제');
 			doTest();
 		} else {
-			$('#showResult tr:last').after('<tr><th colspan="3">점수</th><td style="font-size: 3em; color: orange;">' + (amountOfCollectAnswer * 10) + ' 점</td></tr>');
+			$('#showResult tr:last').after('<tr><th colspan="2">점수</th><td colspan="2" style="font-size: 2.5em; color: orange;">' + (amountOfCollectAnswer * 10) + ' 점</td></tr>');
 			$('.jsModal').fadeIn();
 		}
 	});

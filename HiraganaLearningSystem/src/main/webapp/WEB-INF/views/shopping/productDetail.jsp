@@ -15,8 +15,7 @@
 	}
 </script>
 
-<h1>교재 사기</h1>
-<div style="margin-top: -20px;">
+<div style="margin-top: 20px;">
 	<%@ include file="productMenu.jsp" %>
 	<div style="width: 80%; float: right">
 		<h1>상품 상세 정보</h1>

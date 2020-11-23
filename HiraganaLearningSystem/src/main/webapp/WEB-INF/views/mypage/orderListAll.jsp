@@ -37,5 +37,5 @@
 			<h3>주문 하신 상품이 없습니다.</h3>
 		</c:otherwise>
 	</c:choose>
-	
+</div>
 <%@ include file="../footer.jsp" %>

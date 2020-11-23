@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.kaeru.eLearning.board.BoardService;
 import com.kaeru.eLearning.board.BoardVO;
 import com.kaeru.eLearning.member.MemberVO;
