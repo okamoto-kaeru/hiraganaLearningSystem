@@ -13,6 +13,7 @@
   		<typeAlias type="com.kaeru.eLearning.address.AddressVO" alias="address"/>
   		<typeAlias type="com.kaeru.eLearning.worker.WorkerVO" alias="worker"/>
   		<typeAlias type="com.kaeru.eLearning.hiragana.HiraganaVO" alias="hiragana"/>
+  		<typeAlias type="com.kaeru.eLearning.member.GradeVO" alias="grade"/>
   	</typeAliases>
   	
   	<mappers>
@@ -24,5 +25,6 @@
   		<mapper resource="mappings/address-mapping.xml"/>
   		<mapper resource="mappings/worker-mapping.xml"/>
   		<mapper resource="mappings/hiragana-mapping.xml"/>
+  		<mapper resource="mappings/grade-mapping.xml"/>
   	</mappers>
   </configuration>

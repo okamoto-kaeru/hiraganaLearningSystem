@@ -132,6 +132,7 @@ $(document).ready(function() {
 		$('#hiraganaBGSound').get(0).play();
 		// 설명화면을 제거
 		$('#explain').fadeOut(500);
+		$('#caution').fadeOut(500);
 		$('#start').hide();
 		var timeID = setInterval(function() {
 			$('#hiraganaSound').get(0).play();
@@ -151,11 +152,24 @@ $(document).ready(function() {
 			$('#amountOfQuiz').text(count + 1 + '번째 문제');
 			doTest();
 		} else {
+			$('#score').attr('value', amountOfCollectAnswer * 10)
 			$('#showResult tr:last').after('<tr><th colspan="2">점수</th><td colspan="2" style="font-size: 2.5em; color: orange;">' + (amountOfCollectAnswer * 10) + ' 점</td></tr>');
 			$('.jsModal').fadeIn();
 		}
 	});
 });
+
+// 화면 이동
+function goNewGradeAndOneMoreTime() {
+	document.frm.aciton = "goNewGradeAndOneMoreTime";
+	document.frm.submit();
+}
+
+function goNewGradeAndGohiraganaWrite() {
+	document.frm.aciton = "goNewGradeAndGohiraganaWrite";
+	document.frm.submit();
+}
+
 
 </script>    
 
@@ -186,6 +200,7 @@ $(document).ready(function() {
 </audio>
 <input type="button" class="button greenButton center" id="start" value="공부 시작" style="margin-top: 50px; height: 30px;">
 <span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="margin-top: 50px; height: 30px; display: none;">
+<p id="caution" style="color: red;">*음성이 나옵니다.</p>
 
 <!-- 성적 확인 시 modal 표시 -->
 <div class="modal jsModal">
@@ -197,8 +212,13 @@ $(document).ready(function() {
 					<th>문제 번호</th><th>정답</th><th>당신의 답</th><th>결과</th>
 				</tr>
 			</table>
-			<input type="button" class="button blueButton center" onclick="location.href='hiraganaTestForm?hiraganaLine=${hiraganaLine}'" value="다시 하기" style="margin-top: 50px; height: 30px;">
-			<input type="button" class="button greenButton center" onclick="location.href='hiraganaWrite'" value="다음 단계로 가기" style="margin-top: 50px; height: 30px;">
+			<form method="post" name="frm">	<!-- 성적을 기록하는 hidden -->
+				<input type="hidden" name="hiraganaLine" value="${hiraganaLine}">
+				<input type="hidden" name="score">
+				<input type="hidden" name="memberId" value="${memberId}">
+				<input type="button" class="button blueButton center" onclick="goNewGradeAndOneMoreTime()" value="다시 하기" style="margin-top: 20px; height: 50px;">
+				<input type="button" class="button greenButton center" onclick="goNewGradeAndGohiraganaWrite()" value="다음 단계로 가기" style="margin-top: 20px; height: 50px;">
+			</form>
 		</div>
 	</div>
 </div>

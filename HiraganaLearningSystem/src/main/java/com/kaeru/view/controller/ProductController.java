@@ -73,13 +73,15 @@ public class ProductController {
 	
 	// 장바구니에 상품 담기
 	@RequestMapping(value="/putCart")
-	public String putCart(CartVO vo, HttpSession session) {
+	public String putCart(CartVO cartVO, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "productDetail");
+			model.addAttribute("pseq", cartVO.getPseq());
 			return "member/login";
 		} else {
-			vo.setMemberId(loginUser.getMemberId());
-			cartService.insertCart(vo);
+			cartVO.setMemberId(loginUser.getMemberId());
+			cartService.insertCart(cartVO);
 			return "redirect:cartList";
 		}
 		
@@ -90,6 +92,7 @@ public class ProductController {
 	public String getCartList(HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "cartList");
 			return "member/login";
 		} else {
 			String memberId = loginUser.getMemberId();
@@ -119,9 +122,10 @@ public class ProductController {
 	
 	// 장바구니에 있는 상품을 주문 처리
 	@RequestMapping(value="/insertOrder")
-	public String insertOrder(HttpSession session, OrderVO vo, Model model) {
+	public String insertOrder(OrderVO orderVO, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "insertOrder");
 			return "member/login";
 		} else {
 			// oseq의 최대값을 조회
@@ -129,18 +133,18 @@ public class ProductController {
 			
 			// orders 테이블에 주문자를 먼저 놓어 준다.
 			String memberId = loginUser.getMemberId();
-			vo.setMemberId(memberId);
-			vo.setOseq(maxOseq + 1);
-			orderService.insertOrders(vo);
+			orderVO.setMemberId(memberId);
+			orderVO.setOseq(maxOseq + 1);
+			orderService.insertOrders(orderVO);
 			
 			// cartList를 조회
 			List<CartVO> cartList = cartService.getCartList(memberId);
 			
 			// 장바구니에 있는 각 상세 주문 정보를 order_detail 테이블에 저장
 			for(CartVO cartVO : cartList) {
-				vo.setPseq(cartVO.getPseq());
-				vo.setQuantity(cartVO.getQuantity());
-				orderService.insertOrderDetail(vo);
+				orderVO.setPseq(cartVO.getPseq());
+				orderVO.setQuantity(cartVO.getQuantity());
+				orderService.insertOrderDetail(orderVO);
 				cartService.updateCart(cartVO);
 			}
 			
@@ -154,27 +158,23 @@ public class ProductController {
 	@RequestMapping(value="/orderedNowList")
 	public String orderedNowListView(@RequestParam(value="oseq") int oseq, OrderVO orderVO, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
-		if(loginUser == null) {
-			return "member/login";
-		} else {
-			// 지금 주문한 내역을 저장
-			orderVO.setMemberId(loginUser.getMemberId());
-			orderVO.setOseq(oseq);
-			List<OrderVO> orderList = orderService.getOrderedNow(orderVO);
-			
-			
-			
-			model.addAttribute("orderList", orderList);
-			
-			// 각 주문 가격을 더한다.
-			int totalPrice = 0;
-			for(OrderVO vo : orderList) {
-				totalPrice += vo.getPrice2() * vo.getQuantity();
-			}
-			model.addAttribute("totalPrice", totalPrice);
-			
-			return "mypage/orderedNowList";
+		// 지금 주문한 내역을 저장
+		orderVO.setMemberId(loginUser.getMemberId());
+		orderVO.setOseq(oseq);
+		List<OrderVO> orderList = orderService.getOrderedNow(orderVO);
+		
+		
+		
+		model.addAttribute("orderList", orderList);
+		
+		// 각 주문 가격을 더한다.
+		int totalPrice = 0;
+		for(OrderVO vo : orderList) {
+			totalPrice += vo.getPrice2() * vo.getQuantity();
 		}
+		model.addAttribute("totalPrice", totalPrice);
+		
+		return "mypage/orderedNowList";
 	}
 	
 	
@@ -183,6 +183,7 @@ public class ProductController {
 	public String orderListView(HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "orderList");
 			return "member/login";
 		} else {
 			// 발송 미처리의 주문번호를 조회 List에 담는다.
@@ -230,6 +231,7 @@ public class ProductController {
 	public String orderDetailView(OrderVO orderVO, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "orderDetail");
 			return "member/login";
 		} else {
 			orderVO.setMemberId(loginUser.getMemberId());
@@ -265,6 +267,7 @@ public class ProductController {
 	public String orderListAllView(HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "orderListAll");
 			return "member/login";
 		} else {
 			// 발송 미처리의 주문번호를 조회 List에 담는다.

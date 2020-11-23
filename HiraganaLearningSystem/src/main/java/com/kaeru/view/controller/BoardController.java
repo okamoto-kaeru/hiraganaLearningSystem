@@ -40,9 +40,10 @@ public class BoardController {
 	
 	// 새글 작성 화면 표시
 	@RequestMapping(value="/writeBoard", method=RequestMethod.GET)
-	public String writeBoardView(HttpSession session) {
+	public String writeBoardView(HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "writeBoard");
 			return "member/login";
 		} else {
 			return "board/writeBoard";
@@ -51,16 +52,12 @@ public class BoardController {
 	
 	// 새글 등록후 게시글 표시
 	@RequestMapping(value="/writeBoard", method=RequestMethod.POST)
-	public String writeBoardAction(BoardVO vo, HttpSession session) {
+	public String writeBoardAction(BoardVO vo, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
-		if(loginUser == null) {
-			return "member/login";
-		} else {
-			vo.setWriterId(loginUser.getMemberId());
-			boardService.writeBoard(vo);
-			
-			return "redirect:boardMain";
-		}
+		vo.setWriterId(loginUser.getMemberId());
+		boardService.writeBoard(vo);
+		
+		return "redirect:boardMain";
 			
 	}
 	
@@ -87,9 +84,12 @@ public class BoardController {
 	
 	// repWrite 요청을 받으면, reply를 DB에 저장후 다시 댓글 작성한 게시판에 이동
 	@RequestMapping(value="/repWrite")
-	public String replyWriteAction(BoardVO rep, HttpSession session) {
+	public String replyWriteAction(BoardVO rep, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "getBoard");
+			model.addAttribute("rep", rep);
+			model.addAttribute("bseq", rep.getBseq());
 			return "member/login";
 		} else {
 			rep.setReplyId(loginUser.getMemberId());
@@ -104,6 +104,8 @@ public class BoardController {
 	public String modifyBoardView(@RequestParam(value="bseq") int bseq, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "modifyBoard");
+			model.addAttribute("bseq", bseq);
 			return "member/login";
 		} else {
 			BoardVO board = boardService.getBoard(bseq);
@@ -115,9 +117,11 @@ public class BoardController {
 	
 	// 게시글 삭제
 	@RequestMapping(value="deleteBoard")
-	public String deleteBoard(@RequestParam(value="bseq") int bseq, HttpSession session) {
+	public String deleteBoard(@RequestParam(value="bseq") int bseq, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "modifyBoard");
+			model.addAttribute("bseq", bseq);
 			return "member/login";
 		} else {
 			boardService.deleteBoard(bseq);
@@ -127,22 +131,21 @@ public class BoardController {
 	
 	// 게시글 수정
 	@RequestMapping(value="/updateBoard")
-	public String updateBoard(BoardVO vo, HttpSession session) {
+	public String updateBoard(BoardVO vo, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
-		if(loginUser == null) {
-			return "member/login";
-		} else {
-			vo.setWriterId(loginUser.getMemberId());
-			boardService.updateBoard(vo);
-			return "redirect:getBoard?bseq=" + vo.getBseq();
-		}
+
+		vo.setWriterId(loginUser.getMemberId());
+		boardService.updateBoard(vo);
+		return "redirect:getBoard?bseq=" + vo.getBseq();
 	}
 	
 	// 댓글 삭제
 	@RequestMapping(value="/deleteReply")
-	public String deleteReply(BoardVO vo, HttpSession session) {
+	public String deleteReply(BoardVO vo, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
+			model.addAttribute("jump", "modifyBoard");
+			model.addAttribute("bseq", vo.getBseq());
 			return "member/login";
 		} else {
 			vo.setReplyId(loginUser.getMemberId());

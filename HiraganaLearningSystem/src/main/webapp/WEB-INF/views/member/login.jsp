@@ -8,6 +8,11 @@
 			<tr>
 				<td rowspan="3">
 					<a href="index" title="메인 페이지로 가기"><img src="images/kaeruClass.jpg" id="mainLogo" alt="메인 페이지로 이동"></a>
+					<!-- 로그인 화면에 오기 전 화면 정보 저장 -->
+					<input type="hidden" name="jump" value="${jump}">
+					<input type="hidden" name="pseq" value="${pseq}">
+					<input type="hidden" name="hiraganaLine" value="${hiraganaLine}">
+
 				</td>
 				<td colspan="2">
 					<input type="button" name="new_user" class="button pinkButton" onclick="location.href='join'" value="신규가입"	 style="width: 120px; float: right;">

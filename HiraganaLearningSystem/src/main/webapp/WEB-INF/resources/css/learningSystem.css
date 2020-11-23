@@ -67,19 +67,19 @@ header{
 }
 
 a:link{
-	color:#00c100;
-}
-
-a:hover{
-	color:#88ff88;
-}
-
-a:visited{
 	color:#a5b3f1;
 }
 
-a:visited:hover{
+a:hover{
 	color:#a6fffd;
+}
+
+a:visited{
+	color:#c488ff;
+}
+
+a:visited:hover{
+	color:#ef7bff;
 }
 
 
