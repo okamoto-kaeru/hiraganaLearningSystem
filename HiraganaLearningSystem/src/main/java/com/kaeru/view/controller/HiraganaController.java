@@ -55,7 +55,7 @@ public class HiraganaController {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		
 		model.addAttribute("hiraganaLine", hiraganaLine);
-		
+
 		if(loginUser == null) {
 			model.addAttribute("jump", "hiraganaTestForm");
 			return "member/login";
@@ -79,7 +79,6 @@ public class HiraganaController {
 	@RequestMapping(value="/newGradeAndOneMoreTime")
 	public String newGradeAndOneMoreTime(GradeVO gradeVO) {
 		gradeService.insertGrade(gradeVO);
-		System.out.println(gradeVO);
 		return "redirect: hiraganaTestForm?hiraganaLine=" + gradeVO.getHiraganaLine();
 	}
 	

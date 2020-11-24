@@ -14,8 +14,8 @@ $(document).ready(function() {
 		},
 		url: 'hiraganaQuiz',
 		data : { hiraganaLine : '${hiraganaLine}' },
-		success: function(result) {			
-			hiraganaVOArr = result;
+		success: function(hiraganaLineList) {			
+			hiraganaVOArr = hiraganaLineList;
 		},
 		error: function() {
 			alert("failed to data receive!");
@@ -40,12 +40,13 @@ $(document).ready(function() {
 	function doTest() {	
 		makeAnswer();
 		
+		countDown = 11;
 		var id = setInterval(function() {
 			if(countDown == 1) {
 				clearInterval(id);
 				countDown--;
 				$('#countDown').text(countDown);
-				answerArr[count] = "images/quiz/wrong.png";
+				answerArr[count] = "images/quiz/timeup.png";
 				resultOX[count] = "images/quiz/wrong.png";	// x를 담는다
 				judge.attr('src', "images/quiz/wrong.png");
 				answering();
@@ -85,6 +86,7 @@ $(document).ready(function() {
 	// 퀴즈 결과를 표시 + 퀴즈 성적을 하나씩 준비
 	function answering() {
 		$('.imageButton').off();
+		clearInterval(timeID);	// 퀴즈 음성을 멈춘다.
 		judge.slideDown(500);			// 이미지가 내려온다.
 		$('#showResult tr:last').after('<tr><td>' + (count + 1) + '</td>' 
 									+ '<td><img src="' + collectAnswerArr[count].hiraganaImage + '" style="width: 40; height: 50;"></td>'
@@ -97,6 +99,8 @@ $(document).ready(function() {
 		}
 	}
 	
+	
+	var timeID;
 	// 답을 정한다.
 	function makeAnswer() {
 		// o, x를 숨긴다.
@@ -122,24 +126,34 @@ $(document).ready(function() {
 		
 		
 		// 문제를 음성으로 낸다.
-		$('#hiraganaSound source').attr('src', '/sounds/hiraganaSounds/' + hiraganaVOArr[answer].hiraganaSound);
+		$('#quizSrc').attr('src', 'sounds/hiraganaSounds/' + hiraganaVOArr[answer].hiraganaSound);
+			$('#quizSound').get(0).load();
+			$('#quizSound').get(0).play();
+			
+		timeID = setInterval(function() {
+			$('#quizSrc').attr('src', 'sounds/hiraganaSounds/' + hiraganaVOArr[answer].hiraganaSound);
+			$('#quizSound').get(0).load();
+			$('#quizSound').get(0).play();
+			if(countDown == 0) {
+				clearInterval(timeID);
+			}
+		}, 4000);
+		
 	}
 	
 	
 	
 	/*--------------------------------- start 버튼을 클릭할 때 기능 ---------------------------------*/
 	$('#start').one('click', function() {
-		$('#hiraganaBGSound').get(0).play();
+		var audio = $('#hiraganaBGSound');
+		audio.prop('volume', 0.4);
+		audio.get(0).play();
+		
 		// 설명화면을 제거
 		$('#explain').fadeOut(500);
 		$('#caution').fadeOut(500);
 		$('#start').hide();
-		var timeID = setInterval(function() {
-			$('#hiraganaSound').get(0).play();
-			if(countDown == 0) {
-				clearInterval(timeID);
-			}
-		}, 3000);
+		
 		doTest();
 	});
 	
@@ -158,18 +172,6 @@ $(document).ready(function() {
 		}
 	});
 });
-
-// 화면 이동
-function goNewGradeAndOneMoreTime() {
-	document.frm.aciton = "goNewGradeAndOneMoreTime";
-	document.frm.submit();
-}
-
-function goNewGradeAndGohiraganaWrite() {
-	document.frm.aciton = "goNewGradeAndGohiraganaWrite";
-	document.frm.submit();
-}
-
 
 </script>    
 
@@ -191,15 +193,17 @@ function goNewGradeAndGohiraganaWrite() {
 <!-- hiragana 퀴즈에 메인 이미지 -->
 <img id="explain" src="images/linkImages/hiraganaQuizAssociateExplain.png" width="960px" height="580px" style="position: absolute; top: 130px;">
 
-<!-- 스타트 버튼, 다음 문제 버튼 -->
+<!-- audio -->
 <audio id="hiraganaBGSound">
 	<source src="sounds/hiraganaSounds/hiraganaBGSong.mp3" type="audio/mpeg">
 </audio>
-<audio id="hiraganaSound">
-	<source src="" type="audio/mpeg">
+<audio id="quizSound">
+	<source id="quizSrc" src="" type="audio/mpeg">
 </audio>
+
+<!-- 스타트 버튼, 다음 문제 버튼 -->
 <input type="button" class="button greenButton center" id="start" value="공부 시작" style="margin-top: 50px; height: 30px;">
-<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="margin-top: 50px; height: 30px; display: none;">
+<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="margin-top: 50px; margin-bottom: 30px; height: 30px; display: none;">
 <p id="caution" style="color: red;">*음성이 나옵니다.</p>
 
 <!-- 성적 확인 시 modal 표시 -->
@@ -212,10 +216,10 @@ function goNewGradeAndGohiraganaWrite() {
 					<th>문제 번호</th><th>정답</th><th>당신의 답</th><th>결과</th>
 				</tr>
 			</table>
-			<form method="post" name="frm">	<!-- 성적을 기록하는 hidden -->
+			<form method="get" name="frm">	<!-- 성적을 기록하는 hidden -->
 				<input type="hidden" name="hiraganaLine" value="${hiraganaLine}">
-				<input type="hidden" name="score">
 				<input type="hidden" name="memberId" value="${memberId}">
+				<input type="hidden" id="score" name="score">
 				<input type="button" class="button blueButton center" onclick="goNewGradeAndOneMoreTime()" value="다시 하기" style="margin-top: 20px; height: 50px;">
 				<input type="button" class="button greenButton center" onclick="goNewGradeAndGohiraganaWrite()" value="다음 단계로 가기" style="margin-top: 20px; height: 50px;">
 			</form>

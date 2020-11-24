@@ -11,6 +11,7 @@
 <script type="text/javascript" src="js/member.js"></script>
 <script type="text/javascript" src="js/product.js"></script>
 <script type="text/javascript" src="js/board.js"></script>
+<script type="text/javascript" src="js/hiragana.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <title>개구리 선생님의 일본어 교실</title>
 </head>
