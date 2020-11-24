@@ -4,7 +4,12 @@ function goNewGradeAndOneMoreTime() {
 	document.frm.submit();
 }
 
-function goNewGradeAndGohiraganaWrite() {
-	document.frm.action = "newGradeAndGohiraganaWrite";
+function goNewGradeAndGoHiraganaTextQuiz() {
+	document.frm.action = "newGradeAndGoHiraganaTextQuiz";
+	document.frm.submit();
+}
+
+function goNewGradeAndGoHiraganaWrite() {
+	document.frm.action = "newGradeAndGoHiraganaWrite";
 	document.frm.submit();
 }

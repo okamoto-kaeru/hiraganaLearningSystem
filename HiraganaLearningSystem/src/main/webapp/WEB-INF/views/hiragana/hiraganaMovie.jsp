@@ -8,6 +8,6 @@
 		gyroscope; picture-in-picture" allowfullscreen style="margin-top: 30px;"></iframe>
 
 
-<input type="button" class="button greenButton center" value="외웠어요! 다음 단계로 가요!" style="width: 20em; margin-top: 20px;" onclick="location.href='hiraganaTestForm?hiraganaLine=${hiraganaLine}'">
+<input type="button" class="button greenButton center" value="외웠어요! 다음 단계로 가요!" style="width: 20em; margin-top: 20px;" onclick="location.href='hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=associativeQuiz'">
 <p style="color: red;">* 로그인하셔야 다음 단계로 갈 수 있습니다.</p>
 <%@ include file="../footer.jsp" %>

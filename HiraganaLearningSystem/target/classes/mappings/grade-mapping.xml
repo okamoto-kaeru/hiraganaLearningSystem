@@ -3,7 +3,7 @@
 <mapper namespace="GradeDAO">
 
 	<insert id="insertGrade" parameterType="grade">
-		INSERT INTO grade(gradeSeq, memberId, hiraganaLine, score) VALUES(gradeSequence.NEXTVAL, #{memberId}, #{hiraganaLine}, #{score})
+		INSERT INTO grade(gradeSeq, memberId, hiraganaLine, whatQuiz, score) VALUES(gradeSequence.NEXTVAL, #{memberId}, #{hiraganaLine}, #{whatQuiz}, #{score})
 	</insert>
 
 </mapper>

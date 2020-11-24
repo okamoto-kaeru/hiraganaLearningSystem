@@ -1,6 +1,8 @@
 package com.kaeru.view.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -50,41 +52,60 @@ public class HiraganaController {
 	
 	
 	// hiragana 퀴즈로 화면 이동
-	@RequestMapping(value="/hiraganaTestForm")
-	public String hiraganaTestView(@RequestParam(value="hiraganaLine") String hiraganaLine, HttpSession session, Model model) {
+	@RequestMapping(value="/hiraganaAssociativeQuizForm")
+	public String hiraganaAssociativeQuizView(@RequestParam(value="hiraganaLine") String hiraganaLine,
+											@RequestParam(value="whatQuiz", defaultValue="") String whatQuiz,
+											HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		
 		model.addAttribute("hiraganaLine", hiraganaLine);
+		model.addAttribute("whatQuiz", whatQuiz);
 
 		if(loginUser == null) {
-			model.addAttribute("jump", "hiraganaTestForm");
+			model.addAttribute("jump", "hiraganaAssociativeQuizForm");
 			return "member/login";
 		} else {
 			model.addAttribute("memberId", loginUser.getMemberId());
-			return "hiragana/hiraganaTextTest";
+			return "hiragana/hiraganaAssociativeQuiz";
 		}
 	}
 	
-	// ajax를 이용하여 hiragana퀴즈에 필요한 데이터 전송
+	/* ajax를 이용하여 hiragana퀴즈에 필요한 데이터 전송
 	@RequestMapping(value="/hiraganaQuiz", produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<HiraganaVO> hiraganaQuizData(@RequestParam(value="hiraganaLine") String hiraganaLine, Model model) {
+	public List<HiraganaVO> hiraganaQuizData(@RequestParam(value="hiraganaLine") String hiraganaLine) {
 				
 		List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
 		return hiraganaLineList;
 	}
-	
+	*/
+	@RequestMapping(value="/hiraganaQuiz", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> hiraganaQuizData(@RequestParam(value="hiraganaLine") String hiraganaLine,
+												@RequestParam(value="whatQuiz") String whatQuiz) {
+				
+		List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
+		Map<String, Object> map = new HashMap<>();
+		map.put("hiraganaLineList", hiraganaLineList);
+		map.put("whatQuiz", whatQuiz);
+		return map;
+	}
 	
 	// 히라가나 퀴즈 결과하고 진행도를 저장한다
 	@RequestMapping(value="/newGradeAndOneMoreTime")
 	public String newGradeAndOneMoreTime(GradeVO gradeVO) {
 		gradeService.insertGrade(gradeVO);
-		return "redirect: hiraganaTestForm?hiraganaLine=" + gradeVO.getHiraganaLine();
+		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + gradeVO.getHiraganaLine() + "&whatQuiz=" + gradeVO.getWhatQuiz();
 	}
 	
+	@RequestMapping(value="/newGradeAndGoHiraganaTextQuiz")
+	public String goNewGradeAndGoHiraganaTextQuiz(GradeVO gradeVO) {
+		gradeService.insertGrade(gradeVO);
+		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + gradeVO.getHiraganaLine() + "&whatQuiz=textQuiz";
+	}
 	
 	// 프린트 출력 화면으로 이동
-	@RequestMapping(value="newGradeAndGohiraganaWrite")
+	@RequestMapping(value="newGradeAndGoHiraganaWrite")
 	public String hiraganaWriteView(GradeVO gradeVO) {
 		gradeService.insertGrade(gradeVO);
 		return "hiraganaWrite?hiraganaLine=" + gradeVO.getHiraganaLine();

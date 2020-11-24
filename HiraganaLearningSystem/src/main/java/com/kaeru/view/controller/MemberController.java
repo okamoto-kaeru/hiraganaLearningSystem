@@ -41,6 +41,7 @@ public class MemberController {
 	public String loginAction(@RequestParam(value="jump", defaultValue="") String jump,
 							  @RequestParam(value="pseq", defaultValue="") String pseq,
 							  @RequestParam(value="hiraganaLine", defaultValue="") String hiraganaLine,
+							  @RequestParam(value="whatQuiz", defaultValue="") String whatQuiz,
 							  MemberVO vo, Model model) {
 		MemberVO loginUser = memberService.getMemberByMemberId(vo.getMemberId());
 		
@@ -48,6 +49,7 @@ public class MemberController {
 		model.addAttribute("jump", jump);
 		model.addAttribute("pseq", pseq);
 		model.addAttribute("hiraganaLine", hiraganaLine);
+		model.addAttribute("whatQuiz", whatQuiz);
 		
 		if (loginUser == null) { // 아이디가 없음
 			model.addAttribute("message", "아이디가 존재하지 않습니다.");	

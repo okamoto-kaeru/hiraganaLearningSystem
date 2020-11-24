@@ -12,6 +12,7 @@
 					<input type="hidden" name="jump" value="${jump}">
 					<input type="hidden" name="pseq" value="${pseq}">
 					<input type="hidden" name="hiraganaLine" value="${hiraganaLine}">
+					<input type="hidden" name="whatQuiz" value="${whatQuiz}">
 
 				</td>
 				<td colspan="2">

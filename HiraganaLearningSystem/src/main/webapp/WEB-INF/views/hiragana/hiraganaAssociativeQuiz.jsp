@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
+$(window).on('load', function() {
 	
 	var hiraganaVOArr = [];
+	var whatQuiz;
 	// ajax를 이용해서 controller에서 hiraganaLineList가져오기
 	$.ajax({
 		type: 'GET',
@@ -13,9 +15,13 @@ $(document).ready(function() {
 			"Content-type": "application/json; charset=UTF-8"
 		},
 		url: 'hiraganaQuiz',
-		data : { hiraganaLine : '${hiraganaLine}' },
-		success: function(hiraganaLineList) {			
-			hiraganaVOArr = hiraganaLineList;
+		data : { hiraganaLine : '${hiraganaLine}',
+				 whatQuiz : '${whatQuiz}' },
+		success: function(map) {
+			console.log(map.hiraganaLineList);
+			console.log(map.whatQuiz);
+			whatQuiz = map.whatQuiz;
+			hiraganaVOArr = map.hiraganaLineList;
 		},
 		error: function() {
 			alert("failed to data receive!");
@@ -115,9 +121,17 @@ $(document).ready(function() {
 		}
 		
 		// 각 이미지를 배치
-		for(var i = 0 ; i < 5 ; i++) {
-			imagesButtonArr[i].attr('src', hiraganaVOArr[i].hiraganaAssociativeImage);
+		
+		if(whatQuiz == "associativeQuiz") {
+			for(var i = 0 ; i < 5 ; i++) {
+				imagesButtonArr[i].attr('src', hiraganaVOArr[i].hiraganaAssociativeImage);
+			}
+		} else {
+			for(var i = 0 ; i < 5 ; i++) {
+				imagesButtonArr[i].attr('src', hiraganaVOArr[i].hiraganaImage);
+			}
 		}
+		
 		
 		// 정답을 고른다
 		answer = Math.floor(Math.random() * 5);
@@ -191,7 +205,14 @@ $(document).ready(function() {
 <img id="judge" class="center" width="400px" height="400px" style="position: absolute; top: 210px; left: 278px; display: none;">
 
 <!-- hiragana 퀴즈에 메인 이미지 -->
-<img id="explain" src="images/linkImages/hiraganaQuizAssociateExplain.png" width="960px" height="580px" style="position: absolute; top: 130px;">
+<c:choose>
+	<c:when test='${whatQuiz == "associativeQuiz"}'>
+		<img id="explain" src="images/linkImages/hiraganaQuizAssociateExplain.png" width="960px" height="580px" style="position: absolute; top: 130px;">
+	</c:when>
+	<c:otherwise>
+		<img id="explain" src="images/linkImages/hiraganaQuizTextExplain.png" width="960px" height="580px" style="position: absolute; top: 130px;">
+	</c:otherwise>
+</c:choose>
 
 <!-- audio -->
 <audio id="hiraganaBGSound">
@@ -202,8 +223,8 @@ $(document).ready(function() {
 </audio>
 
 <!-- 스타트 버튼, 다음 문제 버튼 -->
-<input type="button" class="button greenButton center" id="start" value="공부 시작" style="margin-top: 50px; height: 30px;">
-<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="margin-top: 50px; margin-bottom: 30px; height: 30px; display: none;">
+<input type="button" class="button greenButton center" id="start" value="공부 시작" style="margin-top: 50px; height: 50px;">
+<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="margin-top: 50px; margin-bottom: 30px; height: 50px; display: none;">
 <p id="caution" style="color: red;">*음성이 나옵니다.</p>
 
 <!-- 성적 확인 시 modal 표시 -->
@@ -217,11 +238,19 @@ $(document).ready(function() {
 				</tr>
 			</table>
 			<form method="get" name="frm">	<!-- 성적을 기록하는 hidden -->
-				<input type="hidden" name="hiraganaLine" value="${hiraganaLine}">
-				<input type="hidden" name="memberId" value="${memberId}">
+				<input type="hidden" name="hiraganaLine" id="hiraganaLine" value="${hiraganaLine}">
+				<input type="hidden" name="memberId" id="memberId" value="${memberId}">
+				<input type="hidden" name="whatQuiz" id="whatQuiz" value="${whatQuiz}">
 				<input type="hidden" id="score" name="score">
 				<input type="button" class="button blueButton center" onclick="goNewGradeAndOneMoreTime()" value="다시 하기" style="margin-top: 20px; height: 50px;">
-				<input type="button" class="button greenButton center" onclick="goNewGradeAndGohiraganaWrite()" value="다음 단계로 가기" style="margin-top: 20px; height: 50px;">
+				<c:choose>
+					<c:when test='${whatQuiz == "associativeQuiz"}'>
+						<input type="button" class="button greenButton center" onclick="goNewGradeAndGoHiraganaTextQuiz()" value="다음 단계로 가기" style="margin-top: 20px; height: 50px;">
+					</c:when>
+					<c:otherwise>
+						<input type="button" class="button greenButton center" onclick="goNewGradeAndGoHiraganaWrite()" value="다음 단계로 가기" style="margin-top: 20px; height: 50px;">
+					</c:otherwise>
+				</c:choose>
 			</form>
 		</div>
 	</div>
