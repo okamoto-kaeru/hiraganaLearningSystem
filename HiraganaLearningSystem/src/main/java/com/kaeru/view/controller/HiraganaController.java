@@ -66,19 +66,16 @@ public class HiraganaController {
 			return "member/login";
 		} else {
 			model.addAttribute("memberId", loginUser.getMemberId());
+			
+			// 무순 행을 공부하는지 전달
+			List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
+			model.addAttribute("whatLine", hiraganaLineList.get(0).getHiraganaText());
 			return "hiragana/hiraganaAssociativeQuiz";
 		}
 	}
 	
-	/* ajax를 이용하여 hiragana퀴즈에 필요한 데이터 전송
-	@RequestMapping(value="/hiraganaQuiz", produces="application/json; charset=UTF-8")
-	@ResponseBody
-	public List<HiraganaVO> hiraganaQuizData(@RequestParam(value="hiraganaLine") String hiraganaLine) {
-				
-		List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
-		return hiraganaLineList;
-	}
-	*/
+	
+	/* ajax를 이용하여 hiragana퀴즈에 필요한 데이터 전송 */
 	@RequestMapping(value="/hiraganaQuiz", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> hiraganaQuizData(@RequestParam(value="hiraganaLine") String hiraganaLine,

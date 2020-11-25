@@ -95,7 +95,7 @@ $(window).on('load', function() {
 		clearInterval(timeID);	// 퀴즈 음성을 멈춘다.
 		judge.slideDown(500);			// 이미지가 내려온다.
 		$('#showResult tr:last').after('<tr><td>' + (count + 1) + '</td>' 
-									+ '<td><img src="' + collectAnswerArr[count].hiraganaImage + '" style="width: 40; height: 50;"></td>'
+									+ '<td><img src="images/hiraganaTextImages/' + collectAnswerArr[count].hiraganaImage + '" style="width: 40; height: 50;"></td>'
 									+'<td><img src="' + answerArr[count] + '" style="width: 40; height: 50;"></td>'
 									+'<td><img src="' + resultOX[count] + '" style="width: 50; height: 50;"></td></tr>');
 		count++;
@@ -124,11 +124,11 @@ $(window).on('load', function() {
 		
 		if(whatQuiz == "associativeQuiz") {
 			for(var i = 0 ; i < 5 ; i++) {
-				imagesButtonArr[i].attr('src', hiraganaVOArr[i].hiraganaAssociativeImage);
+				imagesButtonArr[i].attr('src', 'images/hiraganaAssociativeImages/' + hiraganaVOArr[i].hiraganaAssociativeImage);
 			}
 		} else {
 			for(var i = 0 ; i < 5 ; i++) {
-				imagesButtonArr[i].attr('src', hiraganaVOArr[i].hiraganaImage);
+				imagesButtonArr[i].attr('src', 'images/hiraganaTextImages/' + hiraganaVOArr[i].hiraganaImage);
 			}
 		}
 		
@@ -190,6 +190,8 @@ $(window).on('load', function() {
 </script>    
 
 <%@ include file="../header.jsp" %>
+
+<span style="position:absolute; font-size: 4em; top: 25px; left: 30px; color: rgb(255, 205, 148);">${whatLine}행</span>
 
 <!-- 히라가나 퀴즈 화면 -->
 <div class="test" style="position: relative; top: 30px; border: 1px solid #ccc; padding-top: 20px; padding-bottom: 20px;">
