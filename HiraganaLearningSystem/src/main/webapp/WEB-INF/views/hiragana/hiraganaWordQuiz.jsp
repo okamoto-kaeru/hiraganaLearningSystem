@@ -5,8 +5,7 @@
 <script type="text/javascript">
 $(window).on('load', function() {
 	
-	var hiraganaVOArr = [];
-	var whatQuiz;
+	var hiraganaWordList = [];
 	// ajax를 이용해서 controller에서 hiraganaLineList가져오기
 	$.ajax({
 		type: 'GET',
@@ -14,14 +13,11 @@ $(window).on('load', function() {
 			Accept: "application/json; charset=UTF-8",
 			"Content-type": "application/json; charset=UTF-8"
 		},
-		url: 'hiraganaQuiz',
-		data : { hiraganaLine : '${hiraganaLine}',
-				 whatQuiz : '${whatQuiz}' },
-		success: function(map) {
-			console.log(map.hiraganaLineList);
-			console.log(map.whatQuiz);
-			whatQuiz = map.whatQuiz;
-			hiraganaVOArr = map.hiraganaLineList;
+		url: 'hiraganaWordQuiz',
+		data : { hiraganaLine : '${hiraganaLine}' },
+		success: function(hiraganaWordListJSON) {
+			console.log(hiraganaWordListJSON);
+			hiraganaWordList = hiraganaWordListJSON;
 		},
 		error: function() {
 			alert("failed to data receive!");

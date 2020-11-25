@@ -13,5 +13,10 @@
 	<select id="getHiraganaMovie" parameterType="String" resultType="String">
 		SELECT movie FROM hiraganaLineTable WHERE hiraganaLine=#{hiraganaLine}
 	</select>
-
+	
+	
+	<!-- 단어형 퀴즈용 -->
+	<select id="getHiraganaWordQuiz">
+		SELECT * FROM hiraganaWordQuiz WHERE hiraganaLine=#{hiraganaLine}
+	</select>
 </mapper>

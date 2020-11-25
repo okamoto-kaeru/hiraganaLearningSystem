@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kaeru.eLearning.board.BoardService;
 import com.kaeru.eLearning.board.BoardVO;
+import com.kaeru.eLearning.hiragana.HiraganaService;
+import com.kaeru.eLearning.hiragana.HiraganaWordQuizVO;
 import com.kaeru.eLearning.member.MemberVO;
 import com.kaeru.eLearning.order.OrderVO;
 import com.kaeru.eLearning.product.ProductService;
@@ -122,7 +124,6 @@ public class AdminController {
 			try {
 				uploadFile.transferTo(file);
 			} catch (IllegalStateException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -162,7 +163,6 @@ public class AdminController {
 			try {
 				uploadFile.transferTo(file);
 			} catch (IllegalStateException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -296,5 +296,66 @@ public class AdminController {
 		boardService.deleteReply(vo);
 		System.out.println(vo);
 		return "redirect:getBoardAdmin?bseq=" + vo.getBseq();
+	}
+	
+	
+	
+	/*---------------------- 단어 퀴즈용 ----------------------*/
+	// 히라가나 단어 리스트 화면 이동
+	@RequestMapping(value="hiraganaWordList")
+	public String hiraganaWordListView(@RequestParam(value="hiraganaWordKind", defaultValue="") String hiraganaWordKind, Criteria criteria, Model model) {
+		List<HiraganaWordQuizVO> hiraganaWordList = workerService.getHiraganaWord(hiraganaWordKind, criteria);
+		model.addAttribute("hiraganaWordList", hiraganaWordList);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCriteria(criteria);
+		pageMaker.setTotalCount(workerService.getTotalHiraganaWord(hiraganaWordKind));
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "admin/adminQuizManagement/adminHiraganaWordList";
+	}
+	
+	// 히라가나 단어 등록 화면 이동
+	@RequestMapping(value="/insertHiraganaWord", method=RequestMethod.GET)
+	public String insertHiraganaWordView() {
+		return "admin/adminQuizManagement/adminHiraganaWordInsert";
+	}
+	
+	// 히라가나 단어형 퀴즈 등록 
+	@RequestMapping(value="/insertHiraganaWord", method=RequestMethod.POST)
+	public String insertHiraganaWord(@RequestParam(value="uploadWordImage") MultipartFile uploadWordImage,
+									@RequestParam(value="uploadWordSound") MultipartFile uploadWordSound,
+									HiraganaWordQuizVO vo, HttpSession session) {
+		// image file이 있을 때 처리
+		String imageFileName = "";
+		if(! uploadWordImage.isEmpty()) {
+			String root_path = session.getServletContext().getRealPath("/WEB-INF/resources/images/hiraganaWordImages");
+			imageFileName = root_path + uploadWordImage.getOriginalFilename();
+			File file = new File(imageFileName);
+			try {
+				uploadWordImage.transferTo(file);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// sound file 있을 때 처리
+		String soundFileName = "";
+		if(! uploadWordSound.isEmpty()) {
+			String root_path = session.getServletContext().getRealPath("/WEB-INF/resources/sounds/hiraganaWordSounds");
+			soundFileName = root_path + uploadWordSound.getOriginalFilename();
+			File file = new File(soundFileName);
+			try {
+				uploadWordSound.transferTo(file);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		vo.setHiraganaWordImage(imageFileName);
+		vo.setHiraganaWordSound(soundFileName);
+		
+		workerService.insertHiraganaWord(vo);
+		return "redirect: hiraganaWordList";
 	}
 }

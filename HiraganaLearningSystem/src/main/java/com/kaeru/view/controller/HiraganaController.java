@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kaeru.eLearning.hiragana.HiraganaService;
 import com.kaeru.eLearning.hiragana.HiraganaVO;
+import com.kaeru.eLearning.hiragana.HiraganaWordQuizVO;
 import com.kaeru.eLearning.member.GradeService;
 import com.kaeru.eLearning.member.GradeVO;
 import com.kaeru.eLearning.member.MemberVO;
@@ -70,7 +71,13 @@ public class HiraganaController {
 			// 무순 행을 공부하는지 전달
 			List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
 			model.addAttribute("whatLine", hiraganaLineList.get(0).getHiraganaText());
-			return "hiragana/hiraganaAssociativeQuiz";
+			
+			// や행하고 わ행인 경우 선택자가 5개가 아니고 3개이므로 다른 화면의로 이동
+			if(hiraganaLine.equals("hiraganaLine_ya") || hiraganaLine.equals("hiraganaLine_wa")) {
+				return "hiragana/hiraganaAssociativeQuizForYaAndWa";
+			} else {
+				return "hiragana/hiraganaAssociativeQuiz";
+			}
 		}
 	}
 	
@@ -101,10 +108,42 @@ public class HiraganaController {
 		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + gradeVO.getHiraganaLine() + "&whatQuiz=textQuiz";
 	}
 	
-	// 프린트 출력 화면으로 이동
-	@RequestMapping(value="newGradeAndGoHiraganaWrite")
+	/* 프린트 출력 화면으로 이동 */
+	@RequestMapping(value="/newGradeAndGoHiraganaWrite")
 	public String hiraganaWriteView(GradeVO gradeVO) {
 		gradeService.insertGrade(gradeVO);
 		return "hiraganaWrite?hiraganaLine=" + gradeVO.getHiraganaLine();
+	}
+	
+	
+	// 단어형 퀴즈 화면 이동
+	@RequestMapping(value="/hiraganaWordQuizForm")
+	public String hiraganaWordQuizView(@RequestParam(value="hiraganaLine") String hiraganaLine,
+										HttpSession session, Model model) {
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+
+		model.addAttribute("hiraganaLine", hiraganaLine);
+		
+		if(loginUser == null) {
+			model.addAttribute("jump", "hiraganaWordQuizForm");
+			return "member/login";
+		} else {
+			model.addAttribute("memberId", loginUser.getMemberId());
+		
+			// 무순 행을 공부하는지 전달
+			List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
+			model.addAttribute("whatLine", hiraganaLineList.get(0).getHiraganaText());
+			return "hiraganaWordQuiz";
+		}
+	}
+	
+	
+	/* ajax를 이용하여 hiragana퀴즈에 필요한 데이터 전송 */
+	@RequestMapping(value="/hiraganaWordQuiz", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public List<HiraganaWordQuizVO> hiraganaQuizData(@RequestParam(value="hiraganaLine") String hiraganaLine) {
+				
+		List<HiraganaWordQuizVO> hiraganaWordList = hiraganaService.getHiraganaWordQuiz(hiraganaLine);
+		return hiraganaWordList;
 	}
 }

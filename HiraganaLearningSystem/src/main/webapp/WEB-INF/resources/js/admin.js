@@ -66,3 +66,23 @@ function goUpdateOrderDetail() {
 		document.frm.submit();
 	}
 }
+
+
+/* 히라가나 단어 등록의 필요한 정보 입력 확인 */
+function adminHiraganaWordCheck() {
+	if(document.frm.hiraganaWordId.value == "") {
+		alert("단어 아이디를 입력해 주세요.");
+		document.frm.hiraganaWordId.focus();
+		return false;
+	} else if(document.frm.hiraganaWordKind.value == "") {
+		alert("히라가나 단어를 입력해 주세요.");
+		document.frm.hiraganaWordKind.focus();
+		return false;
+	} else if(document.frm.hiraganaLine.value == "") {
+		alert("히라가나 행을 입력해 주세요.");
+		document.frm.hiraganaLine.focus();
+		return false;
+	} else {
+		return true;
+	}
+}

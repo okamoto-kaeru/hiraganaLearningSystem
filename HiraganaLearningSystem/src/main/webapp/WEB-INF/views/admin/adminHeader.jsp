@@ -21,7 +21,7 @@
 				<a href="adminProduct">상품 정보</a> / 
 				<a href="adminOrderList">주문 정보</a> / 
 				<a href="adminBoardList">게시판 정보</a> / 
-				<a href="*">학습 정보</a> / 
+				<a href="hiraganaWordList">히라가나 단어 정보</a> / 
 				<a href="adminLogout">로그아웃</a>
 			</nav>
 			<hr color="lightgreen" width="100%" style="margin-top: 50px;">

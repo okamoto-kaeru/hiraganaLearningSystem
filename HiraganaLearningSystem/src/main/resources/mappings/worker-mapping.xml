@@ -90,4 +90,21 @@
 	]]>
 	</select>
 
+	<!-- 히라가나 단어 관련 -->
+	<select id="getTotalHiraganaWord" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM hiraganaWordQuiz WHERE hiraganaWordKind LIKE '%' || #{hiraganaWordKind} || '%'
+	</select>
+	
+	<select id="getHiraganaWord" parameterType="HashMap" resultType="hiraganaWord">
+	<![CDATA[
+		SELECT * FROM (SELECT ROWNUM AS rn, hiraganaWordId, hiraganaWordKind, hiraganaLine 
+							FROM (SELECT * FROM hiraganaWordQuiz ORDER BY hiraganaWordId)
+							WHERE ROWNUM <= #{criteria.pageNumberNow} * #{criteria.numPerPage} AND hiraganaWordKind LIKE '%' || #{hiraganaWordKind} || '%')
+				WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}
+	]]>
+	</select>
+	
+	<insert id="insertHiraganaWord" parameterType="hiraganaWord">
+		INSERT INTO hiraganaWordQuiz VALUES(#{hiraganaWordId}, #{hiraganaWordKind}, #{hiraganaWordImage}, #{hiraganaWordSound}, #{hiraganaLine})
+	</insert>
 </mapper>

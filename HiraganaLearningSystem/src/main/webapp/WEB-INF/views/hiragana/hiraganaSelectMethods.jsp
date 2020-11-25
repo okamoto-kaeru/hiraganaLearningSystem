@@ -27,7 +27,7 @@
     </tr>
     <tr>
         <td style="font-size: 1.5em; text-align: left;">⑤ 단어형 퀴즈를 풀고<br> <span style="color: #ff8040; font-size: 1.5em;">완전히</span> 외워 봅시다!</td>
-        <td><a href="#"><img src="images/linkImages/hiraganaQuizWord.png" height=250px width=400px></a></td>
+        <td><a href="hiraganaWordQuizForm?hiraganaLine=${hiraganaLine}"><img src="images/linkImages/hiraganaQuizWord.png" height=250px width=400px></a></td>
 	</tr>
 </table>
 

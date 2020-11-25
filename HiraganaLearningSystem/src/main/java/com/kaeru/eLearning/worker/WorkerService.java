@@ -3,6 +3,7 @@ package com.kaeru.eLearning.worker;
 import java.util.List;
 
 import com.kaeru.eLearning.board.BoardVO;
+import com.kaeru.eLearning.hiragana.HiraganaWordQuizVO;
 import com.kaeru.eLearning.member.MemberVO;
 import com.kaeru.eLearning.order.OrderVO;
 import com.kaeru.eLearning.product.ProductVO;
@@ -45,4 +46,12 @@ public interface WorkerService {
 	public int getTotalBoard(String writerId);
 	
 	public List<BoardVO> getBoardListByWriterId(String writerId, Criteria criteria);
+	
+	
+	// hiragana
+	public int getTotalHiraganaWord(String hiraganaWordKind);
+	
+	public List<HiraganaWordQuizVO> getHiraganaWord(String hiraganaWordKind, Criteria criteria);
+	
+	public void insertHiraganaWord(HiraganaWordQuizVO vo);
 }

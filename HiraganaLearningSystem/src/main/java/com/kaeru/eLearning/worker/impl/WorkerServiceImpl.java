@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kaeru.eLearning.board.BoardVO;
+import com.kaeru.eLearning.hiragana.HiraganaWordQuizVO;
 import com.kaeru.eLearning.member.MemberVO;
 import com.kaeru.eLearning.order.OrderVO;
 import com.kaeru.eLearning.product.ProductVO;
@@ -97,5 +98,19 @@ public class WorkerServiceImpl implements WorkerService {
 	public List<BoardVO> getBoardListByWriterId(String writerId, Criteria criteria) {
 		return workerDAO.getBoardListByWriterId(writerId, criteria);
 	}
+	
+	@Override
+	public int getTotalHiraganaWord(String hiraganaWordKind) {
+		return workerDAO.getTotalHiraganaWord(hiraganaWordKind);
+	}
+	
+	@Override
+	public List<HiraganaWordQuizVO> getHiraganaWord(String hiraganaWordKind, Criteria criteria) {
+		return workerDAO.getHiraganaWord(hiraganaWordKind, criteria);
+	}
 
+	@Override
+	public void insertHiraganaWord(HiraganaWordQuizVO vo) {
+		workerDAO.insertHiraganaWord(vo);
+	}
 }

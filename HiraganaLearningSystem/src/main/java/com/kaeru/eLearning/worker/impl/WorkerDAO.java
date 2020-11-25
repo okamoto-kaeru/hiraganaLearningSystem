@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kaeru.eLearning.board.BoardVO;
+import com.kaeru.eLearning.hiragana.HiraganaWordQuizVO;
 import com.kaeru.eLearning.member.MemberVO;
 import com.kaeru.eLearning.order.OrderVO;
 import com.kaeru.eLearning.product.ProductVO;
@@ -93,5 +94,22 @@ public class WorkerDAO {
 		map.put("writerId", writerId);
 		map.put("criteria", criteria);
 		return mybatis.selectList("WorkerDAO.getBoardListByWriterId", map);
+	}
+	
+	
+	// 히라가나 단어 관련
+	public int getTotalHiraganaWord(String hiraganaWordKind) {
+		return mybatis.selectOne("WorkerDAO.getTotalHiraganaWord", hiraganaWordKind);
+	}
+	
+	public List<HiraganaWordQuizVO> getHiraganaWord(String hiraganaWordKind, Criteria criteria) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("hiraganaWordKind", hiraganaWordKind);
+		map.put("criteria", criteria);
+		return mybatis.selectList("WorkerDAO.getHiraganaWord", map);
+	}
+	
+	public void insertHiraganaWord(HiraganaWordQuizVO vo) {
+		mybatis.insert("WorkerDAO.insertHiraganaWord", vo);
 	}
 }

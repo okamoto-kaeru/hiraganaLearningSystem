@@ -29,7 +29,7 @@ $(window).on('load', function() {
 	});
 	
 	
-	var imagesButtonArr = [$('#image1'), $('#image2'), $('#image3'), $('#image4'), $('#image5')]
+	var imagesButtonArr = [$('#image1'), $('#image2'), $('#image3')]
 	
 	var timerID;
 	var count = 0;
@@ -113,8 +113,8 @@ $(window).on('load', function() {
 		$('#judge').hide();
 		
 		// 히라가나 객체 순서를 썩는다
-		for(var i = 0 ; i < 5 ; i++) {
-			var num = Math.floor(Math.random() * 5);
+		for(var i = 0 ; i < 3 ; i++) {
+			var num = Math.floor(Math.random() * 3);
 			var temp = hiraganaVOArr[i];
 			hiraganaVOArr[i] = hiraganaVOArr[num];
 			hiraganaVOArr[num] = temp;
@@ -123,18 +123,18 @@ $(window).on('load', function() {
 		// 각 이미지를 배치
 		
 		if(whatQuiz == "associativeQuiz") {
-			for(var i = 0 ; i < 5 ; i++) {
+			for(var i = 0 ; i < 3 ; i++) {
 				imagesButtonArr[i].attr('src', 'images/hiraganaAssociativeImages/' + hiraganaVOArr[i].hiraganaAssociativeImage);
 			}
 		} else {
-			for(var i = 0 ; i < 5 ; i++) {
+			for(var i = 0 ; i < 3 ; i++) {
 				imagesButtonArr[i].attr('src', 'images/hiraganaTextImages/' + hiraganaVOArr[i].hiraganaImage);
 			}
 		}
 		
 		
 		// 정답을 고른다
-		answer = Math.floor(Math.random() * 5);
+		answer = Math.floor(Math.random() * 3);
 		// 정답을 collectAnswerArr에 담는다.
 		collectAnswerArr[count] = hiraganaVOArr[answer];
 		
@@ -195,11 +195,9 @@ $(window).on('load', function() {
 <!-- 히라가나 퀴즈 화면 -->
 <div class="test" style="height: 510px; position: relative; top: 30px; border: 1px solid #ccc; padding-top: 20px; padding-bottom: 20px;">
 <span id="amountOfQuiz" style="font-size: 35px; margin-left: 50px; position: absolute; top: 10px; left: -30px; color: #6af702">첫번째 문제</span><span id="countDown" style="font-size: 5em; margin-left: 50px; position: absolute; top: 10px; right: 30px; color: #5151ff">시작!</span>
-	<img id="image1" width="200" height="250" class="pointer imageButton" style="position: relative; right: 50px;">
-	<img id="image2" width="200" height="250" class="pointer imageButton" style="position: relative; left: 50px;"><br>
-	<img id="image3" width="200" height="250" class="pointer imageButton" style="position: relative; right: 100px;">
-	<img id="image4" width="200" height="250" class="pointer imageButton" style="position: relative;">
-	<img id="image5" width="200" height="250" class="pointer imageButton" style="position: relative; left: 100px;">
+	<img id="image1" width="200" height="250" class="pointer imageButton" style="position: relative; top: 150px; left: -30px;">
+	<img id="image2" width="200" height="250" class="pointer imageButton" style="position: relative; top: 150px; ">
+	<img id="image3" width="200" height="250" class="pointer imageButton" style="position: relative; top: 150px; right: -30px;">
 </div>
 
 <!-- o, x 이미지 -->

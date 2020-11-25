@@ -9,4 +9,6 @@ public interface HiraganaService {
 	List<HiraganaVO> getHiraganaLine(String hiraganaLine);
 	
 	public String getHiraganaMovie(String hiraganaLine);
+	
+	public List<HiraganaWordQuizVO> getHiraganaWordQuiz(String hiraganaLine);
 }
