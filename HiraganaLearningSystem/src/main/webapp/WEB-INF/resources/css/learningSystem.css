@@ -262,3 +262,10 @@ a:visited:hover{
 	position: absolute;
 	transform: translate(-50%, -50%);
 }
+
+#hiraganaInput img{
+	width: 80px;
+	height: 80px;
+	cursor : pointer;
+	display: none;
+}

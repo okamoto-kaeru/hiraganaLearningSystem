@@ -3,7 +3,7 @@
 <%@ include file="../adminHeader.jsp" %>
 
 <h2>새 히라가나 단어 등록</h2>
-
+<p style="color: red; font-size: 20px;">${message}</p>
 <form action="insertQuiz" method="post" enctype="multipart/form-data" name="frm">
 	<table class="table center" style="text-align: left;">
 		<tr>

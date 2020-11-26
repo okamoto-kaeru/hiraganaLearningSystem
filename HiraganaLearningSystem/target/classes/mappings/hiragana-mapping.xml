@@ -16,7 +16,7 @@
 	
 	
 	<!-- 단어형 퀴즈용 -->
-	<select id="getHiraganaWordQuiz">
+	<select id="getHiraganaWordQuiz" parameterType="String" resultType="hiraganaWord">
 		SELECT * FROM hiraganaWordQuiz WHERE hiraganaLine=#{hiraganaLine}
 	</select>
 </mapper>

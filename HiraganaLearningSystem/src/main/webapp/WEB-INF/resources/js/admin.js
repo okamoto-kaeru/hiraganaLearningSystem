@@ -86,3 +86,8 @@ function adminHiraganaWordCheck() {
 		return true;
 	}
 }
+
+function deleteHiraganaWord() {
+	document.frm.action= "deleteHiraganaWord";
+	document.frm.submit();
+}

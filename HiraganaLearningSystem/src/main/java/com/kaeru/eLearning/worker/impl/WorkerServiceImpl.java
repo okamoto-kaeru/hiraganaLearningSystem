@@ -110,7 +110,22 @@ public class WorkerServiceImpl implements WorkerService {
 	}
 
 	@Override
+	public HiraganaWordQuizVO getWordByhiraganaWordSeq(int hiraganaWordSeq) {
+		return workerDAO.getWordByhiraganaWordSeq(hiraganaWordSeq);
+	}	
+	
+	@Override
 	public void insertHiraganaWord(HiraganaWordQuizVO vo) {
 		workerDAO.insertHiraganaWord(vo);
+	}
+
+	@Override
+	public void updateHiraganaWord(HiraganaWordQuizVO vo) {
+		workerDAO.updateHiraganaWord(vo);
+	}
+
+	@Override
+	public void deleteHiraganaWord(int hiraganaWordSeq) {
+		workerDAO.deleteHiraganaWord(hiraganaWordSeq);
 	}
 }

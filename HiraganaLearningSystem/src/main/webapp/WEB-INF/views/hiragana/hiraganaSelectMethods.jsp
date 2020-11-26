@@ -10,14 +10,14 @@
 	<tr>
 	    <td style="font-size: 1.5em; text-align: left;">② <span style="color: #88ff88; font-size: 1.5em;">퀴즈</span>를 통해서<br> 연상법 그림을 외워 봅시다!</td>
 		<td>
-			<a href="hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=associativeQuiz"><img src="images/linkImages/hiraganaQuizAssociate.png" height=250px width=400px></a>
+			<a href="hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=hiraganaAssociativeQuiz"><img src="images/linkImages/hiraganaQuizAssociate.png" height=250px width=400px></a>
 			<span style="color: red;">*로그인 필수</span>
 		</td>
 	</tr>
 	<tr>
 	    <td style="font-size: 1.5em; text-align: left;">③ 이제 <span style="color: #9fdefd; font-size: 1.5em;">히라가나</span>를<br> 외워 봅시다!</td>
 	    <td>
-	        <a href="hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=textQuiz"><img src="images/linkImages/hiraganaQuizText.png" height=250px width=400px></a>
+	        <a href="hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=hiraganaTextQuiz"><img src="images/linkImages/hiraganaQuizText.png" height=250px width=400px></a>
 	        <span style="color: red;">*로그인 필수</span>
 	    </td>
 	</tr>

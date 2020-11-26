@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class HiraganaWordQuizVO {
+	private int hiraganaWordSeq;
 	private String hiraganaWordId;
 	private String hiraganaWordKind;
 	private String hiraganaWordImage;

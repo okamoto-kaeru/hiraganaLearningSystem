@@ -105,7 +105,7 @@ public class HiraganaController {
 	@RequestMapping(value="/newGradeAndGoHiraganaTextQuiz")
 	public String goNewGradeAndGoHiraganaTextQuiz(GradeVO gradeVO) {
 		gradeService.insertGrade(gradeVO);
-		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + gradeVO.getHiraganaLine() + "&whatQuiz=textQuiz";
+		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + gradeVO.getHiraganaLine() + "&whatQuiz=hiraganaTextQuiz";
 	}
 	
 	/* 프린트 출력 화면으로 이동 */
@@ -129,11 +129,12 @@ public class HiraganaController {
 			return "member/login";
 		} else {
 			model.addAttribute("memberId", loginUser.getMemberId());
-		
+			model.addAttribute("whatQuiz", "hiraganaWordQuiz");
+			
 			// 무순 행을 공부하는지 전달
 			List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
 			model.addAttribute("whatLine", hiraganaLineList.get(0).getHiraganaText());
-			return "hiraganaWordQuiz";
+			return "hiragana/hiraganaWordQuiz";
 		}
 	}
 	
@@ -146,4 +147,17 @@ public class HiraganaController {
 		List<HiraganaWordQuizVO> hiraganaWordList = hiraganaService.getHiraganaWordQuiz(hiraganaLine);
 		return hiraganaWordList;
 	}
+	
+	@RequestMapping(value="gradeAndHiraganaWordOneMoreTime")
+	public String gradeAndHiraganaWordOneMoreTime(GradeVO gradeVO) {
+		gradeService.insertGrade(gradeVO);
+		return "redirect: hiraganaWordQuizForm?hiraganaLine=" + gradeVO.getHiraganaLine();
+	}
+	
+	@RequestMapping(value="gradeAndGoHiraganaHome")
+	public String gradeAndGoHiraganaHome(GradeVO gradeVO) {
+		gradeService.insertGrade(gradeVO);
+		return "hiragana/hiraganaHome";
+	}
+
 }

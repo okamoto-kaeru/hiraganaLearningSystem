@@ -109,7 +109,19 @@ public class WorkerDAO {
 		return mybatis.selectList("WorkerDAO.getHiraganaWord", map);
 	}
 	
+	public HiraganaWordQuizVO getWordByhiraganaWordSeq(int hiraganaWordSeq) {
+		return mybatis.selectOne("WorkerDAO.getWordByhiraganaWordSeq", hiraganaWordSeq);
+	}
+	
 	public void insertHiraganaWord(HiraganaWordQuizVO vo) {
 		mybatis.insert("WorkerDAO.insertHiraganaWord", vo);
+	}
+	
+	public void updateHiraganaWord(HiraganaWordQuizVO vo) {
+		mybatis.update("WorkerDAO.updateHiraganaWord", vo);
+	}
+	
+	public void deleteHiraganaWord(int hiraganaWordSeq) {
+		mybatis.delete("WorkerDAO.deleteHiraganaWord", hiraganaWordSeq);
 	}
 }

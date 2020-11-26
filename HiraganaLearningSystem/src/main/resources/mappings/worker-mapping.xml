@@ -97,14 +97,26 @@
 	
 	<select id="getHiraganaWord" parameterType="HashMap" resultType="hiraganaWord">
 	<![CDATA[
-		SELECT * FROM (SELECT ROWNUM AS rn, hiraganaWordId, hiraganaWordKind, hiraganaLine 
+		SELECT * FROM (SELECT ROWNUM AS rn, hiraganaWordSeq, hiraganaWordId, hiraganaWordKind, hiraganaLine 
 							FROM (SELECT * FROM hiraganaWordQuiz ORDER BY hiraganaWordId)
 							WHERE ROWNUM <= #{criteria.pageNumberNow} * #{criteria.numPerPage} AND hiraganaWordKind LIKE '%' || #{hiraganaWordKind} || '%')
 				WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}
 	]]>
 	</select>
 	
+	<select id="getWordByhiraganaWordSeq" parameterType="int" resultType="hiraganaWord">
+		SELECT * FROM hiraganaWordQuiz WHERE hiraganaWordSeq=#{hiraganaWordSeq}
+	</select>
+	
 	<insert id="insertHiraganaWord" parameterType="hiraganaWord">
-		INSERT INTO hiraganaWordQuiz VALUES(#{hiraganaWordId}, #{hiraganaWordKind}, #{hiraganaWordImage}, #{hiraganaWordSound}, #{hiraganaLine})
+		INSERT INTO hiraganaWordQuiz VALUES(hiraganaWordSequence.NEXTVAL, #{hiraganaWordId}, #{hiraganaWordKind}, #{hiraganaWordImage}, #{hiraganaWordSound}, #{hiraganaLine})
 	</insert>
+	
+	<update id="updateHiraganaWord" parameterType="hiraganaWord">
+		UPDATE hiraganaWordQuiz SET hiraganaWordId=#{hiraganaWordId}, hiraganaWordKind=#{hiraganaWordKind}, hiraganaWordImage=#{hiraganaWordImage}, hiraganaWordSound=#{hiraganaWordSound}, hiraganaLine=#{hiraganaLine} WHERE hiraganaWordSeq=#{hiraganaWordSeq}
+	</update>
+	
+	<delete id="deleteHiraganaWord" parameterType="int">
+		DELETE hiraganaWordQuiz WHERE hiraganaWordSeq=#{hiraganaWordSeq}
+	</delete>
 </mapper>

@@ -28,7 +28,6 @@ $(window).on('load', function() {
 		}
 	});
 	
-	
 	var imagesButtonArr = [$('#image1'), $('#image2'), $('#image3'), $('#image4'), $('#image5')]
 	
 	var timerID;
@@ -122,7 +121,7 @@ $(window).on('load', function() {
 		
 		// 각 이미지를 배치
 		
-		if(whatQuiz == "associativeQuiz") {
+		if(whatQuiz == "hiraganaAssociativeQuiz") {
 			for(var i = 0 ; i < 5 ; i++) {
 				imagesButtonArr[i].attr('src', 'images/hiraganaAssociativeImages/' + hiraganaVOArr[i].hiraganaAssociativeImage);
 			}
@@ -188,6 +187,10 @@ $(window).on('load', function() {
 	});
 });
 
+// ajax 읽기가 끝나면 스타트 버튼이 나옴
+$(document).ajaxComplete(function() {
+	$('#start').fadeIn(300);
+});
 </script>    
 
 <%@ include file="../header.jsp" %>
@@ -207,7 +210,7 @@ $(window).on('load', function() {
 
 <!-- hiragana 퀴즈에 메인 이미지 -->
 <c:choose>
-	<c:when test='${whatQuiz == "associativeQuiz"}'>
+	<c:when test='${whatQuiz == "hiraganaAssociativeQuiz"}'>
 		<img id="explain" src="images/linkImages/hiraganaQuizAssociateExplain.png" width="960px" height="580px" style="position: absolute; top: 130px;">
 	</c:when>
 	<c:otherwise>
@@ -220,7 +223,7 @@ $(window).on('load', function() {
 
 
 <!-- audio -->
-<audio id="hiraganaBGSound">
+<audio id="hiraganaBGSound" loop>
 	<source src="sounds/hiraganaSounds/hiraganaBGSong.mp3" type="audio/mpeg">
 </audio>
 <audio id="quizSound">
@@ -228,8 +231,8 @@ $(window).on('load', function() {
 </audio>
 
 <!-- 스타트 버튼, 다음 문제 버튼 -->
-<input type="button" class="button greenButton center" id="start" value="공부 시작" style="margin-top: 50px; height: 50px;">
-<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="margin-top: 50px; margin-bottom: 30px; height: 50px; display: none;">
+<input type="button" class="button greenButton center" id="start" value="공부 시작" style="margin-top: 50px; height: 50px; display: none; font-size: 2em;">
+<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="margin-top: 50px; margin-bottom: 30px; height: 50px; display: none; font-size: 2em;">
 <p id="caution" style="color: red;">*음성이 나옵니다.</p>
 
 <!-- 성적 확인 시 modal 표시 -->
@@ -249,7 +252,7 @@ $(window).on('load', function() {
 				<input type="hidden" id="score" name="score">
 				<input type="button" class="button blueButton center" onclick="goNewGradeAndOneMoreTime()" value="다시 하기" style="margin-top: 20px; height: 50px;">
 				<c:choose>
-					<c:when test='${whatQuiz == "associativeQuiz"}'>
+					<c:when test='${whatQuiz == "hiraganaAssociativeQuiz"}'>
 						<input type="button" class="button greenButton center" onclick="goNewGradeAndGoHiraganaTextQuiz()" value="다음 단계로 가기" style="margin-top: 20px; height: 50px;">
 					</c:when>
 					<c:otherwise>

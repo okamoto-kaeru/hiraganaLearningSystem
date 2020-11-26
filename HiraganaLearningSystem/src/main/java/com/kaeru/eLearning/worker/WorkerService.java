@@ -53,5 +53,11 @@ public interface WorkerService {
 	
 	public List<HiraganaWordQuizVO> getHiraganaWord(String hiraganaWordKind, Criteria criteria);
 	
+	public HiraganaWordQuizVO getWordByhiraganaWordSeq(int hiraganaWordSeq);
+	
 	public void insertHiraganaWord(HiraganaWordQuizVO vo);
+	
+	public void updateHiraganaWord(HiraganaWordQuizVO vo);
+	
+	public void deleteHiraganaWord(int hiraganaWordSeq);
 }

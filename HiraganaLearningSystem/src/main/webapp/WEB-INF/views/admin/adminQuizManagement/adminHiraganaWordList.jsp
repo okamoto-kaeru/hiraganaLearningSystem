@@ -3,7 +3,7 @@
 <%@ include file="../adminHeader.jsp" %>
 
 <h2>상품 정보</h2>
-<form action="searchHiraganaWord">
+<form action="hiraganaWordList">
 	<input type="text" name="hiraganaWordKind">
 	<input type="submit" class="button pinkButton" value="검색">
 </form>
@@ -30,6 +30,7 @@
 				<c:when test="${word.hiraganaLine == 'hiraganaLine_ra'}"><td>ら행</td></c:when>
 				<c:when test="${word.hiraganaLine == 'hiraganaLine_wa'}"><td>わ행</td></c:when>				
 			</c:choose>
+			<td><a href="updateHiraganaWord?hiraganaWordSeq=${word.hiraganaWordSeq}">정보 수정</a></td>
 		</tr>
 	</c:forEach>
 </table>

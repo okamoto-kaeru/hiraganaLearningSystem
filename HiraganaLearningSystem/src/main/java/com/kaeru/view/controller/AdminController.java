@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kaeru.eLearning.board.BoardService;
 import com.kaeru.eLearning.board.BoardVO;
-import com.kaeru.eLearning.hiragana.HiraganaService;
 import com.kaeru.eLearning.hiragana.HiraganaWordQuizVO;
 import com.kaeru.eLearning.member.MemberVO;
 import com.kaeru.eLearning.order.OrderVO;
@@ -315,17 +314,20 @@ public class AdminController {
 		return "admin/adminQuizManagement/adminHiraganaWordList";
 	}
 	
+	
 	// 히라가나 단어 등록 화면 이동
 	@RequestMapping(value="/insertHiraganaWord", method=RequestMethod.GET)
 	public String insertHiraganaWordView() {
 		return "admin/adminQuizManagement/adminHiraganaWordInsert";
 	}
 	
+	
 	// 히라가나 단어형 퀴즈 등록 
 	@RequestMapping(value="/insertQuiz", method=RequestMethod.POST)
 	public String insertHiraganaWord(@RequestParam(value="uploadWordImage") MultipartFile uploadWordImage,
 									@RequestParam(value="uploadWordSound") MultipartFile uploadWordSound,
-									HiraganaWordQuizVO vo, HttpSession session) {
+									HiraganaWordQuizVO vo, HttpSession session, Model model) {
+
 		// image file이 있을 때 처리
 		String imageFileName = "";
 		if(! uploadWordImage.isEmpty()) {
@@ -357,6 +359,66 @@ public class AdminController {
 		vo.setHiraganaWordSound(soundFileName);
 		
 		workerService.insertHiraganaWord(vo);
+		return "redirect: hiraganaWordList";
+	}
+	
+	// 히라가나 단어 정보 수정 화면 이동
+	@RequestMapping(value="updateHiraganaWord", method=RequestMethod.GET)
+	public String updateHiraganaWordView(@RequestParam(value="hiraganaWordSeq") int hiraganaWordSeq, Model model) {
+			HiraganaWordQuizVO word = workerService.getWordByhiraganaWordSeq(hiraganaWordSeq);
+			model.addAttribute("word", word);
+			return "admin/adminQuizManagement/adminHiraganaWordUpdate";
+		}
+		
+		
+	@RequestMapping(value="updateHiraganaWord", method=RequestMethod.POST)
+	public String updateHiraganaWordAction(@RequestParam(value="uploadWordImage") MultipartFile uploadWordImage,
+											@RequestParam(value="uploadWordSound") MultipartFile uploadWordSound,
+											HiraganaWordQuizVO vo, HttpSession session, Model model) {
+		// image file이 있을 때 처리
+		String imageFileName = "";
+		if(! uploadWordImage.isEmpty()) {
+			String rootPath = session.getServletContext().getRealPath("WEB-INF/resources/images/hiraganaWordImages/");
+			imageFileName = uploadWordImage.getOriginalFilename();
+			File file = new File(rootPath + imageFileName);
+			System.out.println(rootPath + imageFileName);
+			try {
+				uploadWordImage.transferTo(file);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// sound file 있을 때 처리
+		String soundFileName = "";
+		if(! uploadWordSound.isEmpty()) {
+			String rootPath = session.getServletContext().getRealPath("WEB-INF/resources/sounds/hiraganaWordSounds/");
+			soundFileName = uploadWordSound.getOriginalFilename();
+			File file = new File(rootPath + soundFileName);
+			try {
+				uploadWordSound.transferTo(file);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if(!imageFileName.equals("")) {
+			vo.setHiraganaWordImage(imageFileName);
+		}
+		
+		if(!soundFileName.equals("")) {
+			vo.setHiraganaWordSound(soundFileName);
+		}
+
+		workerService.updateHiraganaWord(vo);
+		model.addAttribute("message", "수정 되었습니다");
+		return "redirect: updateHiraganaWord?hiraganaWordSeq=" + vo.getHiraganaWordSeq();
+	}
+	
+	
+	// hiragana단어를 삭제
+	@RequestMapping(value="deleteHiraganaWord")
+	public String deleteHiraganaWord(int hiraganaWordSeq) {
+		workerService.deleteHiraganaWord(hiraganaWordSeq);
 		return "redirect: hiraganaWordList";
 	}
 }
