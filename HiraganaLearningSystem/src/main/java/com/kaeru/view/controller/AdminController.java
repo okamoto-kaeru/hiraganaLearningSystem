@@ -329,7 +329,8 @@ public class AdminController {
 		// image file이 있을 때 처리
 		String imageFileName = "";
 		if(! uploadWordImage.isEmpty()) {
-			String rootPath = session.getServletContext().getRealPath("/WEB-INF/resources/images/hiraganaWordImages");
+			String rootPath = session.getServletContext().getRealPath("WEB-INF/resources/images/hiraganaWordImages/");
+			imageFileName = uploadWordImage.getOriginalFilename();
 			File file = new File(rootPath + imageFileName);
 			System.out.println(rootPath + imageFileName);
 			try {
@@ -342,7 +343,8 @@ public class AdminController {
 		// sound file 있을 때 처리
 		String soundFileName = "";
 		if(! uploadWordSound.isEmpty()) {
-			String rootPath = session.getServletContext().getRealPath("/WEB-INF/resources/sounds/hiraganaWordSounds");
+			String rootPath = session.getServletContext().getRealPath("WEB-INF/resources/sounds/hiraganaWordSounds/");
+			soundFileName = uploadWordSound.getOriginalFilename();
 			File file = new File(rootPath + soundFileName);
 			try {
 				uploadWordSound.transferTo(file);
