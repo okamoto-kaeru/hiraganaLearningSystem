@@ -269,3 +269,7 @@ a:visited:hover{
 	cursor : pointer;
 	display: none;
 }
+
+.mypageInfo {
+	text-align: center;
+}

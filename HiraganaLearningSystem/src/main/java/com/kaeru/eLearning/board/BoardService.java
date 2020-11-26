@@ -24,5 +24,8 @@ public interface BoardService {
 	void replyBoard(BoardVO vo);
 
 	void deleteReply(BoardVO vo);
-
+	
+	
+	// my page
+	List<BoardVO> getBoardListByWriterId(String writerId);
 }

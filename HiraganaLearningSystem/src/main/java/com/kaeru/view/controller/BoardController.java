@@ -153,4 +153,12 @@ public class BoardController {
 			return "redirect:getBoard?bseq=" + vo.getBseq();
 		}
 	}
+	
+	
+	// 마이 페이지에서 내가 쓴 글 리스트를 조회
+	@RequestMapping(value="goMyBoard")
+	public String goMyBoardView(@RequestParam(value="boardList") List<BoardVO> boardList, Model model) {
+		model.addAttribute("boardList", boardList);
+		return "board/boardMain";
+	}
 }

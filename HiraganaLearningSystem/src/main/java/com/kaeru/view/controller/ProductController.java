@@ -97,7 +97,6 @@ public class ProductController {
 		} else {
 			String memberId = loginUser.getMemberId();
 			List<CartVO> cartList = cartService.getCartList(memberId);
-			System.out.println("cartList :" + cartList);
 			model.addAttribute("cartList", cartList);
 			
 			int totalPrice = 0;

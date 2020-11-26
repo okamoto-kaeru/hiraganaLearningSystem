@@ -58,4 +58,9 @@ public class BoardDAO {
 		mybatis.delete("BoardDAO.deleteReply", vo);
 	}
 
+	
+	// mypage용
+	public List<BoardVO> getBoardListByWriterId(String writerId) {
+		return mybatis.selectList("BoardDAO.getBoardListByWriterId", writerId);
+	}
 }

@@ -39,7 +39,7 @@
 					</c:choose>
 					<li><a href="hiraganaHome">공부하기</a></li>
 					<li> / </li>
-					<li><a href="mypage">마이 페이지</a></li>
+					<li><a href="goMypage">마이 페이지</a></li>
 					<li> / </li>
 					<li><a href="shopping">교재사기</a></li>
 					<li> / </li>

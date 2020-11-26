@@ -5,7 +5,7 @@
 <table id="indexTable" style="border-spacing: 60px;">
 	<tr>
 		<td><a href="hiraganaHome"><img src="images/linkImages/goStudy.png" height=250px width=400px></a></td>
-		<td><a href="mypage"><img src="images/linkImages/goMypage.png" height=250px width=400px></a></td>
+		<td><a href="goMypage"><img src="images/linkImages/goMypage.png" height=250px width=400px></a></td>
 	</tr>
 	<tr>
 		<td><a href="shopping"><img src="images/linkImages/goShopping.png" height=250px width=400px></a></td>

@@ -15,9 +15,13 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.kaeru.eLearning.address.AddressService;
 import com.kaeru.eLearning.address.AddressVO;
+import com.kaeru.eLearning.board.BoardService;
+import com.kaeru.eLearning.board.BoardVO;
+import com.kaeru.eLearning.cart.CartService;
+import com.kaeru.eLearning.cart.CartVO;
 import com.kaeru.eLearning.member.MemberService;
 import com.kaeru.eLearning.member.MemberVO;
-import com.kaeru.eLearning.member.impl.GradeServiceImpl;
+import com.kaeru.eLearning.order.OrderService;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -30,7 +34,13 @@ public class MemberController {
 	private AddressService addressService;
 	
 	@Autowired
-	private GradeServiceImpl gradeService;
+	private CartService cartService;
+	
+	@Autowired
+	private OrderService orderService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView() {
@@ -125,19 +135,6 @@ public class MemberController {
 		return "redirect:login";
 	}
 	
-	
-	@RequestMapping(value="/mypage")
-	public String myPageView(HttpSession session, Model model) {
-		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
-		if(loginUser == null) {
-			model.addAttribute("jump", "mypage");
-			return "member/login";
-		} else {
-			return "redirect:orderList";
-		}
-	}
-	
-	
 	// 주소찾기 위한 화면 출력
 	@RequestMapping(value="/searchAddress")
 	public String searchAddressView() {
@@ -199,5 +196,50 @@ public class MemberController {
 	public String updatePassword(MemberVO vo) {
 		memberService.updatePassword(vo);
 		return "member/updatePasswordOK";
+	}
+	
+	
+	// 마이페이지 화면 표시
+	@RequestMapping(value="goMypage")
+	public String mypageView(HttpSession session, Model model) {
+		// login 여부를 확인 
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		if(loginUser == null) {
+			model.addAttribute("jump", "goMypage");
+			return "member/login";
+		} else {
+			// 장바구니 정보를 얻어 옴
+			String memberId = loginUser.getMemberId();
+			List<CartVO> cartList = cartService.getCartList(memberId);
+			if(cartList.isEmpty()) {
+				model.addAttribute("cart", "장바구니에 <span style='color: red; font-size: 1.5em'>상품 없음</span>");
+			} else {
+				String productName = cartList.get(0).getProductName();
+				if(cartList.size() == 1) {
+					model.addAttribute("cart", "장바구니에 <span style='color: orange; font-size: 1.5em'>" + productName + "</span>이/가 있습니다.");
+				} else {
+					model.addAttribute("cart", "장바구니에 <span style='color: orange; font-size: 1.5em'>" + productName + "</span> 외 <span style='color: red; font-size: 1.5em'>" + (cartList.size() - 1) + "개</span>의 상품이 있습니다.");
+				}		
+			}
+			
+			// 주문 정보를 얻어 옴
+			List<Integer> oseqList = orderService.getOrderNumber(memberId);
+			if(oseqList.isEmpty()) {
+				model.addAttribute("order", "발송을 기다리는 <span style='color: red; font-size: 1.5em'>상품 없음</span>");
+			} else {
+				model.addAttribute("order", "발송을 기다리는 <span style='color: red; font-size: 1.5em'>상품 있음</span>");
+			}
+			
+			// 게시판 정보를 얻어 옴
+			List<BoardVO> boardList = boardService.getBoardListByWriterId(memberId);
+			model.addAttribute("boardList", boardList);
+			if(boardList.isEmpty()) {
+				model.addAttribute("board", "내가 쓴 글 없음");
+			} else {
+				model.addAttribute("board", "내가 쓴 글 <span style='color: orange; font-size: 1.5em'>있음</span>");
+			}
+			
+			return "mypage/mypageMain";
+		}
 	}
 }

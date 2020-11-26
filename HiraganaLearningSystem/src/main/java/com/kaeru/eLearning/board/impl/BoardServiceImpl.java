@@ -61,4 +61,9 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.deleteReply(vo);
 	}
 
+	@Override
+	public List<BoardVO> getBoardListByWriterId(String writerId) {
+		return boardDAO.getBoardListByWriterId(writerId);
+	}
+
 }
