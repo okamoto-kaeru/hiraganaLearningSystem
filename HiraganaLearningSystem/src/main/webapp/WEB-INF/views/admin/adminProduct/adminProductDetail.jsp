@@ -60,6 +60,6 @@
 </table>
 <div style="margin-top: 20px;">
 	<input type="button" class="button blueButton center" value="정보 수정" onclick="location.href='updateProduct?pseq=${product.pseq}'">
-	<input type="button" class="button greenButton center" value="상품 리프트" onclick="location.href='adminProduct'" style="margin-left: 10px;">
+	<input type="button" class="button greenButton center" value="상품 리스트" onclick="location.href='adminProduct'" style="margin-left: 10px;">
 </div>
 <%@ include file="../../footer.jsp" %>

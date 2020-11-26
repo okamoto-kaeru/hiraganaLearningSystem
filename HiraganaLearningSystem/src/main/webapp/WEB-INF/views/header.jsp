@@ -34,6 +34,7 @@
 						<c:otherwise>
 							<li>${loginUser.memberId} 님</li>
 							<li><a href="logout">로그아웃</a></li>
+							<li> / </li>
 						</c:otherwise>
 					</c:choose>
 					<li><a href="hiraganaHome">공부하기</a></li>
