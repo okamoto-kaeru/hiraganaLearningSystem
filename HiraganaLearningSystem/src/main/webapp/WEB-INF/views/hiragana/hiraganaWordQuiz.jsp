@@ -46,7 +46,7 @@ $(window).on('load', function() {
 				clearInterval(id);
 				countDown--;
 				$('#countDown').text(countDown);
-				answerArr[count] = "images/quiz/timeup.png";
+				answerArr[count] = "시간 초가";
 				resultOX[count] = "images/quiz/wrong.png";	// x를 담는다
 				judge.attr('src', "images/quiz/wrong.png");
 				answering();
@@ -60,7 +60,12 @@ $(window).on('load', function() {
 		// 답하기를 클릭하면 동작하는 기능
 		$('#answerButton').on('click', function() {
 			clearInterval(id);
-			answerArr[count] = $('#inputWord').text();		// 학습자가 고른 답을 answerArr에 담는다.
+			if($('#inputWord').text() == "") {
+				answerArr[count] = "답을 안 했어요...";		// 학습자가 고른 답을 answerArr에 담는다.
+			} else {
+				answerArr[count] = $('#inputWord').text();		// 학습자가 고른 답을 answerArr에 담는다.
+			}
+			
 			if(hiraganaWordList[answer].hiraganaWordId == $('#inputWord').text()) {	// 정답이면
 				resultOX[count] = "images/quiz/collect.png";	// o를 담는다
 				judge.attr('src', "images/quiz/collect.png");

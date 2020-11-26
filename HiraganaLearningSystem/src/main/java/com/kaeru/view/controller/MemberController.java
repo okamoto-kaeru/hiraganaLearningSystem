@@ -104,15 +104,19 @@ public class MemberController {
 	public String joinAction(@RequestParam(value="address1", defaultValue="") String address1,
 							 @RequestParam(value="address2", defaultValue="") String address2,
 							  MemberVO vo, Model model) {
-		vo.setAddress(address1 + address2);
-		
-		// 회원 등록
-		int result = memberService.insertMember(vo);
-		
-		if (result > 0) {
+		// 이름하고 이메일이 이미 등록되어 있는 사람이 또 같은 이름, 이메일로 등록하면, id찾기를 할 때,
+		// 오류가 생기니까, 그 경우에는 다른 이름으로 등록하라고 메시지를 표시
+		MemberVO member = memberService.findId(vo);
+		if(member != null) {
+			model.addAttribute("idMessage", "이름이 틀리거나 이메일 입력이 잘 못했습니다.");
+			return "member/joinNG";
+		} else {
+			// 주소를 합쳐서 memberVO객체에 저장
+			vo.setAddress(address1 + address2);
+			// 회원 등록
+			memberService.insertMember(vo);
 			return "member/joinOK";
 		}
-		return "member/joinNG";
 	}
 
 	@RequestMapping(value = "/logout")
