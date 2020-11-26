@@ -322,16 +322,16 @@ public class AdminController {
 	}
 	
 	// 히라가나 단어형 퀴즈 등록 
-	@RequestMapping(value="/insertHiraganaWord", method=RequestMethod.POST)
+	@RequestMapping(value="/insertQuiz", method=RequestMethod.POST)
 	public String insertHiraganaWord(@RequestParam(value="uploadWordImage") MultipartFile uploadWordImage,
 									@RequestParam(value="uploadWordSound") MultipartFile uploadWordSound,
 									HiraganaWordQuizVO vo, HttpSession session) {
 		// image file이 있을 때 처리
 		String imageFileName = "";
 		if(! uploadWordImage.isEmpty()) {
-			String root_path = session.getServletContext().getRealPath("/WEB-INF/resources/images/hiraganaWordImages");
-			imageFileName = root_path + uploadWordImage.getOriginalFilename();
-			File file = new File(imageFileName);
+			String rootPath = session.getServletContext().getRealPath("/WEB-INF/resources/images/hiraganaWordImages");
+			File file = new File(rootPath + imageFileName);
+			System.out.println(rootPath + imageFileName);
 			try {
 				uploadWordImage.transferTo(file);
 			} catch (IllegalStateException | IOException e) {
@@ -342,16 +342,15 @@ public class AdminController {
 		// sound file 있을 때 처리
 		String soundFileName = "";
 		if(! uploadWordSound.isEmpty()) {
-			String root_path = session.getServletContext().getRealPath("/WEB-INF/resources/sounds/hiraganaWordSounds");
-			soundFileName = root_path + uploadWordSound.getOriginalFilename();
-			File file = new File(soundFileName);
+			String rootPath = session.getServletContext().getRealPath("/WEB-INF/resources/sounds/hiraganaWordSounds");
+			File file = new File(rootPath + soundFileName);
 			try {
 				uploadWordSound.transferTo(file);
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		vo.setHiraganaWordImage(imageFileName);
 		vo.setHiraganaWordSound(soundFileName);
 		
