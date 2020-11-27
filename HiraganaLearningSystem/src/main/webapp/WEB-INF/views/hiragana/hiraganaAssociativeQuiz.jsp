@@ -196,7 +196,7 @@ $(document).ajaxComplete(function() {
 <%@ include file="../header.jsp" %>
 
 <!-- 히라가나 퀴즈 화면 -->
-<div class="test" style="height: 510px; position: relative; top: 30px; border: 1px solid #ccc; padding-top: 20px; padding-bottom: 20px;">
+<div class="test" style="height: 510px; position: relative; top: 30px; padding-top: 20px; padding-bottom: 20px;">
 <span id="amountOfQuiz" style="font-size: 35px; margin-left: 50px; position: absolute; top: 10px; left: -30px; color: #6af702">첫번째 문제</span><span id="countDown" style="font-size: 5em; margin-left: 50px; position: absolute; top: 10px; right: 30px; color: #5151ff">시작!</span>
 	<img id="image1" width="200" height="250" class="pointer imageButton" style="position: relative; right: 50px;">
 	<img id="image2" width="200" height="250" class="pointer imageButton" style="position: relative; left: 50px;"><br>
@@ -206,7 +206,7 @@ $(document).ajaxComplete(function() {
 </div>
 
 <!-- o, x 이미지 -->
-<img id="judge" class="center" width="400px" height="400px" style="position: absolute; top: 210px; left: 278px; display: none;">
+<img id="judge" class="center" width="400px" height="400px" style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, 0); display: none;">
 
 <!-- hiragana 퀴즈에 메인 이미지 -->
 <c:choose>
@@ -231,8 +231,8 @@ $(document).ajaxComplete(function() {
 </audio>
 
 <!-- 스타트 버튼, 다음 문제 버튼 -->
-<input type="button" class="button greenButton center" id="start" value="공부 시작" style="margin-top: 50px; height: 50px; display: none; font-size: 2em;">
-<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="margin-top: 50px; margin-bottom: 30px; height: 50px; display: none; font-size: 2em;">
+<input type="button" class="button greenButton center" id="start" value="공부 시작" style="position: absolute; left: 50%; top: 85%; transform: translate(-50%, -50%); height: 90px; display: none; font-size: 2em;">
+<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="font-size: 2em; width: 600px; height: 80px; position: absolute; top: 80%; left: 50%; transform: translate(-50%, 0px); display: none;">
 <p id="caution" style="color: red;">*음성이 나옵니다.</p>
 
 <!-- 성적 확인 시 modal 표시 -->

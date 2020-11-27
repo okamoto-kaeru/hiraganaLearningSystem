@@ -264,10 +264,17 @@ a:visited:hover{
 }
 
 #hiraganaInput img{
-	width: 80px;
-	height: 80px;
+	width: 8.5%;
+	height: 8.5%;
 	cursor : pointer;
 	display: none;
+}
+
+.quizButton {
+	height: 80px; 
+	font-size: 1.5em; 
+	position: absolute; 
+	bottom: 10%; 
 }
 
 .mypageInfo {
