@@ -13,7 +13,6 @@ public class MemberVO {
 	private String zipNum;
 	private String address;
 	private String phone;
-	private int progress;	// default: 0  あ행 1~5, か행 11~15.....	
 	private String useyn;
 	private Timestamp regdate;
 }

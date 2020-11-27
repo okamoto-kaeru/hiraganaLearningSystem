@@ -19,6 +19,7 @@ import com.kaeru.eLearning.hiragana.HiraganaVO;
 import com.kaeru.eLearning.hiragana.HiraganaWordQuizVO;
 import com.kaeru.eLearning.member.GradeService;
 import com.kaeru.eLearning.member.GradeVO;
+import com.kaeru.eLearning.member.MemberService;
 import com.kaeru.eLearning.member.MemberVO;
 
 @Controller
@@ -29,6 +30,9 @@ public class HiraganaController {
 	
 	@Autowired
 	private GradeService gradeService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value="/hiraganaHome", method=RequestMethod.GET)
 	public String hiraganaHomeView() {
@@ -95,7 +99,7 @@ public class HiraganaController {
 		return map;
 	}
 	
-	// 히라가나 퀴즈 결과하고 진행도를 저장한다
+	// 히라가나 퀴즈 결과를 저장한다
 	@RequestMapping(value="/newGradeAndOneMoreTime")
 	public String newGradeAndOneMoreTime(GradeVO gradeVO) {
 		gradeService.insertGrade(gradeVO);
@@ -120,10 +124,9 @@ public class HiraganaController {
 	@RequestMapping(value="/hiraganaWordQuizForm")
 	public String hiraganaWordQuizView(@RequestParam(value="hiraganaLine") String hiraganaLine,
 										HttpSession session, Model model) {
-		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
-
 		model.addAttribute("hiraganaLine", hiraganaLine);
 		
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		if(loginUser == null) {
 			model.addAttribute("jump", "hiraganaWordQuizForm");
 			return "member/login";
@@ -131,7 +134,7 @@ public class HiraganaController {
 			model.addAttribute("memberId", loginUser.getMemberId());
 			model.addAttribute("whatQuiz", "hiraganaWordQuiz");
 			
-			// 무순 행을 공부하는지 전달
+			// 무순 행을 공부하는지 히라가나로 전달
 			List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
 			model.addAttribute("whatLine", hiraganaLineList.get(0).getHiraganaText());
 			return "hiragana/hiraganaWordQuiz";

@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 
-<div style="margin-top: 20px;">
+<div style="margin-bottom: 20px;">
 	<%@ include file="productMenu.jsp" %>
-	<div style="width: 80%; float: right">
+	<div style="width: 80%; float: right;">
 	<h1>상품정보</h1>
 	<c:forEach items="${kindList}" var="product">
 		<div style="margin-left: auto; margin-right: auto;">

@@ -76,6 +76,7 @@ a:hover{
 
 a:visited{
 	color:#c488ff;
+	text-decoration: none;
 }
 
 a:visited:hover{
@@ -138,6 +139,7 @@ a:visited:hover{
 	border-radius: 10px;
     border-color: rgb(255, 240, 245);
     width: 10em;
+    height: 50px;
     cursor: pointer;
 }
 
@@ -264,7 +266,7 @@ a:visited:hover{
 }
 
 #hiraganaInput img{
-	width: 8.5%;
+	width: auto;
 	height: 8.5%;
 	cursor : pointer;
 	display: none;
@@ -277,6 +279,7 @@ a:visited:hover{
 	bottom: 10%; 
 }
 
-.mypageInfo {
-	text-align: center;
+#tabButton {
+	display: inline-block;
+	margin-bottom: 30px;
 }

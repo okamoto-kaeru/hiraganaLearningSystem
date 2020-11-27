@@ -15,12 +15,12 @@
 	}
 </script>
 
-<div style="margin-top: 20px;">
+<div style="margin: 20px, 0;">
 	<%@ include file="productMenu.jsp" %>
-	<div style="width: 80%; float: right">
+	<div style="width: 80%; float: right; margin-bottom: 20px;">
 		<h1>상품 상세 정보</h1>
 		<form name="frm">
-			<table id="detailTable" style="text-align: center; margin-left: auto; margin-right: auto; font-size: 25px;">
+			<table class="center" id="detailTable" style="text-align: center; font-size: 25px; margin-bottom: 20px;">
 				<tr>
 					<td><img src="images/productImages/${productVO.image}" width="300" height="300"></td>
 				</tr>

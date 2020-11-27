@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 
-<div style="margin-top: 20px;">
-	<%@ include file="productMenu.jsp" %>
+<div style="margin: 20px, 0;">
+    <%@ include file="productMenu.jsp" %>
 	<div style="width: 80%; float: right">
 	<h2 style="text-align: center; color: orange;">신상품</h2>
 		<div id="newProductImages">

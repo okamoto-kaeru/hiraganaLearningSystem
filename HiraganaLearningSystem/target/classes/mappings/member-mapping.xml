@@ -24,5 +24,4 @@
 	<update id="updatePassword">
 		UPDATE member SET pwd=#{pwd} WHERE memberId=#{memberId}
 	</update>
-	
 </mapper>

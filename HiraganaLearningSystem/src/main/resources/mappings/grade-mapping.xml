@@ -5,5 +5,8 @@
 	<insert id="insertGrade" parameterType="grade">
 		INSERT INTO grade(gradeSeq, memberId, hiraganaLine, whatQuiz, score) VALUES(gradeSequence.NEXTVAL, #{memberId}, #{hiraganaLine}, #{whatQuiz}, #{score})
 	</insert>
-
+	
+	<select id="getGradeByMemberId" parameterType="String" resultType="grade">
+		SELECT * FROM grade WHERE memberId=#{memberId} ORDER BY playDate DESC
+	</select>
 </mapper>

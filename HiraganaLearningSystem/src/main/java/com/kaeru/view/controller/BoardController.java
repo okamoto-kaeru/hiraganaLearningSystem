@@ -16,12 +16,16 @@ import com.kaeru.eLearning.board.BoardVO;
 import com.kaeru.eLearning.member.MemberVO;
 import com.kaeru.eLearning.util.Criteria;
 import com.kaeru.eLearning.util.PageMaker;
+import com.kaeru.eLearning.worker.WorkerService;
 
 @Controller
 public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private WorkerService workerService;
 	
 	// 게시판 글을 list에 담아 화면 표시
 	@RequestMapping(value="/boardMain")
@@ -157,8 +161,19 @@ public class BoardController {
 	
 	// 마이 페이지에서 내가 쓴 글 리스트를 조회
 	@RequestMapping(value="goMyBoard")
-	public String goMyBoardView(@RequestParam(value="boardList") List<BoardVO> boardList, Model model) {
+	public String goMyBoardView(@RequestParam(value="memberId", defaultValue="") String writerId, Model model, Criteria criteria) {
+		criteria.setNumPerPage(5);
+		List<BoardVO> boardList = workerService.getBoardListByWriterId(writerId, criteria);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("writerId", writerId);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCriteria(criteria);
+		pageMaker.setTotalCount(workerService.getTotalBoard(writerId));
+		
+		
+		model.addAttribute("pageMaker", pageMaker);
+
 		return "board/boardMain";
 	}
 }

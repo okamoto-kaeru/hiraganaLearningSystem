@@ -4,12 +4,12 @@
 
 <table id="indexTable" style="border-spacing: 60px;">
 	<tr>
-		<td><a href="hiraganaHome"><img src="images/linkImages/goStudy.png" height=250px width=400px></a></td>
-		<td><a href="goMypage"><img src="images/linkImages/goMypage.png" height=250px width=400px></a></td>
+		<td><img class="pointer" src="images/linkImages/goStudy.png" height=250px width=400px onclick="location.href='hiraganaHome'"></td>
+		<td><img class="pointer" src="images/linkImages/goMypage.png" height=250px width=400px onclick="location.href='goMypage'"></td>
 	</tr>
 	<tr>
-		<td><a href="shopping"><img src="images/linkImages/goShopping.png" height=250px width=400px></a></td>
-		<td><a href="boardMain"><img src="images/linkImages/goBoard.png" height=250px width=400px></a></td>
+		<td><img class="pointer" src="images/linkImages/goShopping.png" height=250px width=400px onclick="location.href='shopping'"></td>
+		<td><img class="pointer" src="images/linkImages/goBoard.png" height=250px width=400px onclick="location.href='boardMain'"></td>
 	</tr>
 </table>
 

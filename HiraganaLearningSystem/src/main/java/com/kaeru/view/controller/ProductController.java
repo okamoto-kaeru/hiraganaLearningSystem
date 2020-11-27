@@ -238,21 +238,20 @@ public class ProductController {
 			
 			model.addAttribute("orderList", orderList);
 			
+			// 등록 일자등 공통 정보를 조회하기 위해서 첫번째 요소를 저장
+			OrderVO detailInfo = orderList.get(0);
 			
-			String result = "2";
-			
+			String detailResult = "2";
 			// 각 주문 가격을 더한다.
 			int totalPrice = 0;
 			for(OrderVO vo : orderList) {
 				totalPrice += vo.getPrice2() * vo.getQuantity();
 				if(vo.getResult().equals("1")) { // 발송 처리 정보를 보고, 하나라도 안되면, 준비중으로 하기
-					result = "1";
+					detailResult = "1";
 				}
 			}
 			
-			// 등록 일자등 공통 정보를 조회하기 위해서 첫번째 요소를 저장
-			OrderVO detailInfo = orderList.get(0);
-			detailInfo.setResult(result);
+			detailInfo.setResult(detailResult);
 			model.addAttribute("detailInfo", detailInfo);
 			
 			model.addAttribute("totalPrice", totalPrice);
@@ -293,15 +292,17 @@ public class ProductController {
 				}
 				orderVO.setProductName(name);
 				
-				// 상품 가격 합계 저장
+				// 상품 가격 합계 저장 & 상품이 다 발송되었는지 체크
+				String result = "2";
 				int totalPrice = 0;
 				for(OrderVO item : list) {
 					totalPrice += item.getPrice2() * item.getQuantity();
+					if(item.getResult().equals("1")) {	// 하나라도 발송 안 한 상품이 있으면, 발숭 준비상태로 함
+						result = "1";
+					}
 				}
 				orderVO.setPrice2(totalPrice);
-				
-				// 발송 처리 여부 저장
-				orderVO.setResult(list.get(0).getResult());
+				orderVO.setResult(result);
 				
 				orderList.add(orderVO);
 			}

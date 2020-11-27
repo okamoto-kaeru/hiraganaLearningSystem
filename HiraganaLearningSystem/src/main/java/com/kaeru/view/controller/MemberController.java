@@ -19,6 +19,8 @@ import com.kaeru.eLearning.board.BoardService;
 import com.kaeru.eLearning.board.BoardVO;
 import com.kaeru.eLearning.cart.CartService;
 import com.kaeru.eLearning.cart.CartVO;
+import com.kaeru.eLearning.member.GradeService;
+import com.kaeru.eLearning.member.GradeVO;
 import com.kaeru.eLearning.member.MemberService;
 import com.kaeru.eLearning.member.MemberVO;
 import com.kaeru.eLearning.order.OrderService;
@@ -41,6 +43,9 @@ public class MemberController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private GradeService gradeService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView() {
@@ -210,33 +215,76 @@ public class MemberController {
 		} else {
 			// 장바구니 정보를 얻어 옴
 			String memberId = loginUser.getMemberId();
+			model.addAttribute("memberId", memberId);
+			
 			List<CartVO> cartList = cartService.getCartList(memberId);
 			if(cartList.isEmpty()) {
-				model.addAttribute("cart", "장바구니에 <span style='color: red; font-size: 1.5em'>상품 없음</span>");
+				model.addAttribute("cart", false);
 			} else {
+				model.addAttribute("cart", true);
 				String productName = cartList.get(0).getProductName();
 				if(cartList.size() == 1) {
-					model.addAttribute("cart", "장바구니에 <span style='color: orange; font-size: 1.5em'>" + productName + "</span>이/가 있습니다.");
+					model.addAttribute("cartInfo", "장바구니에 <span style='color: orange; font-size: 1.5em'>" + productName + "</span>이/가 있습니다.");
 				} else {
-					model.addAttribute("cart", "장바구니에 <span style='color: orange; font-size: 1.5em'>" + productName + "</span> 외 <span style='color: red; font-size: 1.5em'>" + (cartList.size() - 1) + "개</span>의 상품이 있습니다.");
+					model.addAttribute("cartInfo", "장바구니에 <span style='color: orange; font-size: 1.5em'>" + productName + "</span> 외 <span style='color: red; font-size: 1.5em'>" + (cartList.size() - 1) + "개</span>의 상품이 있습니다.");
 				}		
 			}
 			
 			// 주문 정보를 얻어 옴
 			List<Integer> oseqList = orderService.getOrderNumber(memberId);
 			if(oseqList.isEmpty()) {
-				model.addAttribute("order", "발송을 기다리는 <span style='color: red; font-size: 1.5em'>상품 없음</span>");
+				model.addAttribute("order", false);
 			} else {
-				model.addAttribute("order", "발송을 기다리는 <span style='color: red; font-size: 1.5em'>상품 있음</span>");
+				model.addAttribute("order", true);
 			}
 			
 			// 게시판 정보를 얻어 옴
 			List<BoardVO> boardList = boardService.getBoardListByWriterId(memberId);
 			model.addAttribute("boardList", boardList);
 			if(boardList.isEmpty()) {
-				model.addAttribute("board", "내가 쓴 글 없음");
+				model.addAttribute("board", false);
 			} else {
-				model.addAttribute("board", "내가 쓴 글 <span style='color: orange; font-size: 1.5em'>있음</span>");
+				model.addAttribute("board", true);
+			}
+			
+			// 진도 정보를 얻어 옴
+			List<GradeVO> gradeList = gradeService.getGradeByMemberId(memberId);
+			if(gradeList.isEmpty()) {
+				model.addAttribute("grade", false);
+			} else {
+				model.addAttribute("grade", true);
+				
+				// 어떤 행을 공부했는지 저장
+				String hiraganaLine = gradeList.get(0).getHiraganaLine();
+				model.addAttribute("hiraganaLine", hiraganaLine);
+				String whatLine = "";
+				switch(hiraganaLine) {
+				case "hiraganaLine_a": whatLine = "あ행";
+				  break;
+				case "hiraganaLine_ka": whatLine = "か행";
+				  break;
+				case "hiraganaLine_sa": whatLine = "さ행";
+				  break;
+				case "hiraganaLine_ta": whatLine = "た행";
+				  break;
+				case "hiraganaLine_na": whatLine = "な행";
+				  break;
+				case "hiraganaLine_ha": whatLine = "は행";
+				  break;
+				case "hiraganaLine_ma": whatLine = "ま행";
+				  break;
+				case "hiraganaLine_ya": whatLine = "や행";
+				  break;
+				case "hiraganaLine_ra": whatLine = "ら행";
+				  break;
+				case "hiraganaLine_wa": whatLine = "わ행";
+				  break;
+				}
+				model.addAttribute("whatLine", whatLine);
+				
+				// 어떤 공부를 했는지 저장
+				String kind = gradeList.get(0).getWhatQuiz();
+				model.addAttribute("kind", kind);
 			}
 			
 			return "mypage/mypageMain";
