@@ -22,10 +22,10 @@
 </script>
 
 <h1 style="color: black; background-color: #ceffdf;">${loginUser.memberId} 님 페이지</h1>
-<div id="tabButton">
-	<button class="button orangeButton" id="study" style="margin-right: 10px;">공부 정보</button>
-	<button class="button pinkButton" id="order">주문 정보</button>
-	<button class="button greenButton" id="board" style="margin-left: 10px;">게시판 정보</button>
+<div id="tabNav">
+	<a id="study" href="#" style="margin-right: 10px;">공부 정보</a>
+	<a href="#" id="order">주문 정보</a>
+	<a href="#" id="board" style="margin-left: 10px;">게시판 정보</a>
 </div>
 <div id="tabBody">
 	<div id="tab1">
@@ -72,7 +72,7 @@
 				<td>
 					<c:choose>
 						<c:when test="${cart}">
-							${cartInfo}<br>　→　<a href="cartList">장바구니 보기</a>
+							${cartInfo}<br><br>　→　<a href="cartList"">장바구니 보기</a>
 						</c:when>
 						<c:otherwise>
 							장바구니에 상품이 없습니다.

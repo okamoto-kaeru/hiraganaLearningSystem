@@ -20,7 +20,7 @@
 				</tr>
 				<c:forEach items="${orderList}" var="order">
 					<tr>
-						<td>${order.memberName}</td>
+						<td><a href="memberList?memberName=${order.memberName}">${order.memberName}</a></td>
 						<td>${order.oseq}</td>
 						<td>${order.productName}</td>
 						<td><fmt:formatNumber pattern="₩#,###">${order.price2}</fmt:formatNumber></td>

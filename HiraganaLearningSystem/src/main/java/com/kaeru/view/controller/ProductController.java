@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kaeru.eLearning.cart.CartService;
 import com.kaeru.eLearning.cart.CartVO;
+import com.kaeru.eLearning.member.MemberService;
 import com.kaeru.eLearning.member.MemberVO;
 import com.kaeru.eLearning.order.OrderService;
 import com.kaeru.eLearning.order.OrderVO;
@@ -31,6 +32,9 @@ public class ProductController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	// 쇼핑 페이지 표시
 	@RequestMapping("/shopping")
@@ -119,13 +123,19 @@ public class ProductController {
 	}
 	
 	
-	// 장바구니에 있는 상품을 주문 처리
+	// 장바구니에 있는 상품을 주문 처리(주소, 전화번호 정보가 없으면 회원 정보 수정 페이지로 이동)
 	@RequestMapping(value="/insertOrder")
 	public String insertOrder(OrderVO orderVO, HttpSession session, Model model) {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		loginUser = memberService.getMemberByMemberId(loginUser.getMemberId());
 		if(loginUser == null) {
 			model.addAttribute("jump", "insertOrder");
 			return "member/login";
+		} else if(loginUser.getZipNum() == null || loginUser.getAddress1() == null || loginUser.getAddress2() == null || loginUser.getPhone() == null) {
+			model.addAttribute("member", loginUser);
+			model.addAttribute("message", "주문 하실려면 주소, 전화번호 정보가 필요합니다.");
+			model.addAttribute("url", "cartList");
+			return "member/updateMember";
 		} else {
 			// oseq의 최대값을 조회
 			int maxOseq = orderService.getMaxOseq();

@@ -2,10 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 
-<h1>히라가나를 공부 합시다.</h1>
+<h1 style="margin-top: 50px;">히라가나 학습</h1>
 <p style="color: green;">
-	히라가나 기본글자는 46글자가 있습니다.<br>
-	한글의 가나다라...와 같이 순서가 있습니다.<br>
+	히라가나에는 46자의 기본 글자가 있습니다.<br>
 	순서대로 공부하시는 것을 권장합니다!
 </p>
 <div style="margin-top: 20px;">
@@ -22,7 +21,7 @@
 			<option value="hiraganaLine_ra">⑨ ら행</option>
 			<option value="hiraganaLine_wa">⑩ わ행 + ん</option>
 		</select>
-		<input type="submit" class="button pinkButton" value="을 공부해요!" style="height: 3em; margin-left: 10px; text-weight: 20;">
+		<input type="submit" class="button pinkButton" value="시작!" style="font-size: 18px; height: 3em; margin-left: 10px; text-weight: 20;">
 	</form>
 </div>
 <%@ include file="../footer.jsp" %>

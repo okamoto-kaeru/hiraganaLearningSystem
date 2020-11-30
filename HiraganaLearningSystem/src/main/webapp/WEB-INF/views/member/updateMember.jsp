@@ -8,22 +8,20 @@ function postZip() {
 				"toolbar=no, menubar=no, scrollbars=no, resizable=no, width=400, height=350");
 }
 </script>
+<p style="color: pink; position: relative; top: 30px; font-size: 1.5em;">${message}</p>
 <main id="joinMain" style="display: inline-block">
-	<form action="join" method="post" name="frm">
-		<h2 style="color:green;">신규 가입</h2>
+	<form action="updateMemberInfo" method="post" name="frm">
+	<input type="hidden" name="url" value="${url}">
+		<h2 style="color:green;">회원 정보 갱신</h2>
 		<table style="color: graytext;">
 			<caption style="color: red; font-size: 18px; text-align: center">입력 필수 항목</caption>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="memberName" placeholder="이름"></td>
+				<td><input type="text" name="memberName" value="${member.memberName}"></td>
 			</tr>
 			<tr>
 				<th>ID(닉네임)</th>
-				<td><input type="text" name="memberId" placeholder="아이디"></td>
-				<td>
-					<input type="button" class="button greenButton" name="checkButton" value="중복확인" onclick="idCheck()" style="margin-left: 8px;">
-					<input type="hidden" name="memberIdChecked">
-				</td>
+				<td><input type="text" name="memberId" value="${member.memberId}" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
@@ -35,7 +33,7 @@ function postZip() {
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input type="email" placeholder="email" name="email"></td>
+				<td><input type="email" placeholder="email" name="email" value="${member.email}"></td>
 			</tr>
 		</table>
 		<table id="addInfo"  style="color: graytext; text-align: left; margin-top: 20px;">
@@ -45,22 +43,22 @@ function postZip() {
 			</tr>
 			<tr>
 				<th>우편번호 </th>
-				<td><input type="text" name="zipNum" placeholder="우편번호" size="10em"></td>
+				<td><input type="text" name="zipNum" placeholder="우편번호" size="10em" value="${member.zipNum}"></td>
 			</tr>
 			<tr>
 				<th>주소 </th>
-				<td><input type="text" name="address1" placeholder="oo시 oo구 oo동 oo" size="50em"></td>
+				<td><input type="text" name="address1" size="50em" value="${member.address1}"></td>
 			</tr>
 			<tr>
 				<th>동 이하 </th>
-				<td><input type="text" name="address2" placeholder="상세 주소" size="50em"></td>
+				<td><input type="text" name="address2" size="50em" value="${member.address2}"></td>
 			</tr>
 			<tr>
 				<th>전화번호 </th>
-				<td><input type="text" name="phone" placeholder="전화번호" size="20em"></td>
+				<td><input type="text" name="phone" size="20em" value="${member.phone}"></td>
 			</tr>
 			<tr>
-				<td colspan="2"  style="text-align: center;"><input class="button pinkButton center" type="button" value="회원 가입" onclick="join_save()" style="height: 30px;"></td>
+				<td colspan="2"  style="text-align: center;"><input class="button pinkButton center" type="button" value="회원 정보 수정" onclick="updateMemberInfo()" style="height: 30px;"></td>
 			</tr>
 		</table>
 	</form>

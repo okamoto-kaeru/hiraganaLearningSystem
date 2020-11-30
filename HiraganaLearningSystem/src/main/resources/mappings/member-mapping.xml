@@ -7,7 +7,7 @@
 	</select>
 	
 	<insert id="insertMember">
-		INSERT INTO member(memberId, pwd, memberName, email, zipNum, address, phone) VALUES(#{memberId}, #{pwd}, #{memberName}, #{email}, #{zipNum}, #{address}, #{phone})
+		INSERT INTO member(memberId, pwd, memberName, email, zipNum, address1, address2, phone) VALUES(#{memberId}, #{pwd}, #{memberName}, #{email}, #{zipNum}, #{address1}, #{address2}, #{phone})
 	</insert>
 	
 	<!-- id 찾기 -->
@@ -23,5 +23,10 @@
 	<!-- password 변경 -->
 	<update id="updatePassword">
 		UPDATE member SET pwd=#{pwd} WHERE memberId=#{memberId}
+	</update>
+	
+	<!-- 회원 정보 변경 -->
+	<update id="updateMemberInfo" parameterType="member">
+		UPDATE member SET pwd=#{pwd}, memberName=#{memberName}, email=#{email}, zipNum=#{zipNum}, address1=#{address1}, address2=#{address2},phone=#{phone} WHERE memberId=#{memberId}
 	</update>
 </mapper>

@@ -25,9 +25,7 @@ $(window).on('load', function() {
 	});
 	
 		
-	var timerID;
 	var count = 0;
-	var judge = $('#judge');
 	
 	var answerArr = new Array(10);		// 학습자의 답
 	var collectAnswerArr = new Array(10);	// 정답
@@ -44,11 +42,11 @@ $(window).on('load', function() {
 		var id = setInterval(function() {
 			if(countDown == 1) {
 				clearInterval(id);
+				$('#wrongImage').slideDown(500);			// x이미지가 내려온다.
 				countDown--;
 				$('#countDown').text(countDown);
-				answerArr[count] = "시간 초가";
+				answerArr[count] = "시간 초과";
 				resultOX[count] = "images/quiz/wrong.png";	// x를 담는다
-				judge.attr('src', "images/quiz/wrong.png");
 				answering();
 			} else {
 				countDown--;
@@ -67,13 +65,15 @@ $(window).on('load', function() {
 			}
 			
 			if(hiraganaWordList[answer].hiraganaWordId == $('#inputWord').text()) {	// 정답이면
+				$('#collectAnswerSound').get(0).play();
+				$('#collectImage').slideDown(500);			// o이미지가 내려온다.
 				resultOX[count] = "images/quiz/collect.png";	// o를 담는다
-				judge.attr('src', "images/quiz/collect.png");
 				amountOfCollectAnswer++;
 				answering();
 			} else {	// 답이 틀리면
+				$('#wrongAnswerSound').get(0).play();
+				$('#wrongImage').slideDown(500);			// x이미지가 내려온다.
 				resultOX[count] = "images/quiz/wrong.png";	// x를 담는다
-				judge.attr('src', "images/quiz/wrong.png");
 				answering();
 			}
 			
@@ -85,7 +85,6 @@ $(window).on('load', function() {
 		$('#answerButton').off();
 		$('#hiraganaInput img').off();
 		clearInterval(timeID);	// 퀴즈 음성을 멈춘다.
-		judge.slideDown(500);			// 이미지가 내려온다.
 		$('#showResult tr:last').after('<tr><td>' + (count + 1) + '</td>' 
 									+ '<td><span style="font-size: 30px;">' + collectAnswerArr[count] + '</span></td>'
 									+'<td><span style="font-size: 30px;">' + answerArr[count] + '</td>'
@@ -102,7 +101,7 @@ $(window).on('load', function() {
 	// 답을 정한다.
 	function makeAnswer() {
 		// o, x를 숨긴다.
-		$('#judge').hide();
+		$('.judge').hide();
 		
 		// 히라가나 객체 순서를 썩는다
 		for(var i = 0 ; i < hiraganaWordList.length ; i++) {
@@ -183,7 +182,7 @@ $(window).on('load', function() {
 		if(count < 10) {
 			$('#nextQuiz').hide();
 			$('#countDown').text('시작!');
-			$('#amountOfQuiz').text(count + 1 + '번째 문제');
+			$('#amountOfQuiz').text('문제' + count + 1);
 			doTest();
 		} else {
 			$('#score').attr('value', amountOfCollectAnswer * 10)
@@ -191,16 +190,6 @@ $(window).on('load', function() {
 			$('.jsModal').fadeIn();
 		}
 	});
-	
-	function answer() {
-		clearInterval(id);
-		answerArr[count] = $(this).attr('src');		// 학습자가 고른 답을 answerArr에 담는다.
-		resultOX[count] = "images/quiz/collect.png";	// o를 담는다
-		judge.attr('src', "images/quiz/collect.png");
-		amountOfCollectAnswer++;
-		$(this).addClass("selected");
-		answering();
-	}
 });
 
 //ajax 읽기가 끝나면 스타트 버튼이 나옴
@@ -225,7 +214,7 @@ function gradeAndGoHiraganaHome() {
 
 <!-- 히라가나 퀴즈 화면 -->
 <div class="test" style="height: 250px; position: relative; top: 10px; padding-top: 10px; padding-bottom: 10px;">
-	<span id="amountOfQuiz" style="font-size: 35px; margin-left: 50px; position: absolute; top: 10px; left: -30px; color: #6af702">첫번째 문제</span>
+	<span id="amountOfQuiz" style="font-size: 35px; margin-left: 50px; position: absolute; top: 10px; left: -30px;">문제 1</span>
 	<button class="button pinkButton quizButton" onclick="$('#inputWord').text('')" style="left: 2%">다시 입력</button>
 	<span id="countDown" style="font-size: 5em; margin-left: 50px; position: absolute; top: 10px; right: 30px; color: #5151ff">시작!</span>
 	<button class="button orangeButton quizButton" id="answerButton" style="right: 2%">답하기</button>
@@ -310,7 +299,8 @@ function gradeAndGoHiraganaHome() {
 </table>
 
 <!-- o, x 이미지 -->
-<img id="judge" class="center" width="400px" height="400px" style="position: absolute; top: 15%; left: 50%; transform: translate(-50%, 0); display: none;">
+<img id="collectImage" class="center judge" src="images/quiz/collect.png" width="400px" height="400px" style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, 0); display: none;">
+<img id="wrongImage" class="center judge" src="images/quiz/wrong.png" width="400px" height="400px" style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, 0); display: none;">
 
 <!-- hiragana word 퀴즈에 메인 이미지 -->
 <img id="explain" src="images/linkImages/hiraganaQuizAssociateExplain.png" width="960px" height="580px" style="position: absolute; top: 130px;">
@@ -321,11 +311,17 @@ function gradeAndGoHiraganaHome() {
 
 
 <!-- audio -->
-<audio id="hiraganaBGSound" loop>
-	<source src="sounds/hiraganaSounds/hiraganaBGSong.mp3" type="audio/mpeg">
+<audio id="hiraganaBGSound" preload="auto" loop>
+	<source src="sounds/quizSounds/hiraganaBGSong.mp3" type="audio/mpeg">
 </audio>
 <audio id="quizSound">
 	<source id="quizSrc" src="" type="audio/mpeg">
+</audio>
+<audio id="collectAnswerSound" preload="auto">
+	<source id="collectAnswerSrc" src="sounds/quizSounds/collectSound.mp3" type="audio/mpeg">
+</audio>
+<audio id="wrongAnswerSound" preload="auto">
+	<source id="wrongAnswerSrc" src="sounds/quizSounds/wrongSound.mp3" type="audio/mpeg">
 </audio>
 
 <!-- 스타트 버튼, 다음 문제 버튼 -->

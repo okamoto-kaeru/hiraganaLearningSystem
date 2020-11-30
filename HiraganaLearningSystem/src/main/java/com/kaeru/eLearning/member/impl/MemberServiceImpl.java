@@ -37,4 +37,9 @@ public class MemberServiceImpl implements MemberService {
 	public void updatePassword(MemberVO vo) {
 		memberDAO.updatePassword(vo);
 	}
+
+	@Override
+	public void updateMemberInfo(MemberVO vo) {
+		memberDAO.updateMemberInfo(vo);
+	}
 }

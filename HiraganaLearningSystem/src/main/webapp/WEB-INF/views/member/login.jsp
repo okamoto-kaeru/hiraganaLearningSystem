@@ -11,6 +11,7 @@
 					<!-- 로그인 화면에 오기 전 화면 정보 저장 -->
 					<input type="hidden" name="jump" value="${jump}">
 					<input type="hidden" name="pseq" value="${pseq}">
+					<input type="hidden" name="bseq" value="${bseq}">
 					<input type="hidden" name="hiraganaLine" value="${hiraganaLine}">
 					<input type="hidden" name="whatQuiz" value="${whatQuiz}">
 

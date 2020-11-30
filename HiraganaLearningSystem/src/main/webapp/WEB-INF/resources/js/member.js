@@ -64,7 +64,7 @@ function findPasswordForm() {
 
 
 
-//
+// password변경
 function goUpdatePassword() {
 	if(document.frm.pwd.value == "") {
 		alert("암호를 입력해 주세요.");
@@ -72,6 +72,26 @@ function goUpdatePassword() {
 	} else if(document.frm.pwdCheck.value != document.frm.pwd.value) {
 		alert("암호가 일치하지 않습니다.");
 		document.frm.pwd.focus();
+	} else {
+		document.frm.submit();
+	}
+}
+
+
+// 회원 정보 수정
+function updateMemberInfo() {	
+	if(document.frm.memberName.value == "") {
+		alert("이름을 입력해 주세요.");
+		document.frm.memberName.focus();
+	} else if(document.frm.pwd.value == "") {
+		alert("암호를 입력해 주세요.");
+		document.frm.pwd.focus();
+	} else if(document.frm.pwdCheck.value != document.frm.pwd.value) {
+		alert("암호가 일치하지 않습니다.");
+		document.frm.pwd.focus();
+	} else if(document.frm.email.value == "") {
+		alert("이메일을 입력해 주세요.");
+		document.frm.email.focus();
 	} else {
 		document.frm.submit();
 	}
