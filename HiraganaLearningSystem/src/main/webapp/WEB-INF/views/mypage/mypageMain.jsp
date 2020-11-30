@@ -33,12 +33,12 @@
 			<c:when test="${grade}">
 				<table class="table center">
 					<tr>
-						<th  style="width: 33%; font-size: 3em;">성적</th>
+						<th  style="width: 33%;">성적</th>
 						<th style="width: 33%;">마지막에 공부한 내용</th>
 						<td rowspan="2" style="width: 33%;"><a href="hiraganaSelectMethods?hiraganaLine=${hiraganaLine}" style="font-size: 2.5em;">${hiraganaLine} 공부하기</a></td>
 					</tr>
 					<tr>
-						<td><a href="*">성적보기</a></td>
+						<td><a href="*" style="font-size: 2.5em;"">성적보기</a></td>
 						<td style="color: orange; font-size: 2em;">
 							${hiraganaLine}
 							<c:choose>

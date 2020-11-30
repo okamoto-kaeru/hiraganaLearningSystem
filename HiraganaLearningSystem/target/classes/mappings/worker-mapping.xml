@@ -42,7 +42,7 @@
 	<select id="adminOrderList" parameterType="HashMap" resultType="order">
 	<![CDATA[
 		SELECT * 
-			FROM (SELECT rownum as rn, odseq, oseq, memberId, memberName, zipNum, address, phone, indate, pseq, productName, quantity, price2, result 
+			FROM (SELECT rownum as rn, odseq, oseq, memberId, memberName, zipNum, address1, address2, phone, indate, pseq, productName, quantity, price2, result 
 					FROM (SELECT * FROM orders_view ORDER BY result, oseq DESC) 
 						WHERE memberName LIKE '%'|| #{memberName} ||'%' AND rownum <= #{criteria.pageNumberNow} * #{criteria.numPerPage} ORDER BY ROWNUM)
 					WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}
@@ -62,7 +62,7 @@
 	
 	<select id="memberList" parameterType="HashMap" resultType="member">
 	<![CDATA[
-		SELECT * FROM (SELECT ROWNUM as rn, memberId, pwd, memberName, email, zipNum, address, phone, useyn, regdate 
+		SELECT * FROM (SELECT ROWNUM as rn, memberId, pwd, memberName, email, zipNum, address1, address2, phone, useyn, regdate 
                     FROM (SELECT * FROM member ORDER BY memberName)
                     WHERE memberName LIKE '%'|| #{memberName} ||'%' AND ROWNUM <= #{criteria.pageNumberNow} * #{criteria.numPerPage} ORDER BY ROWNUM) 
     			WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}

@@ -2,6 +2,8 @@ package com.kaeru.view.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -364,9 +366,11 @@ public class AdminController {
 	
 	// 히라가나 단어 정보 수정 화면 이동
 	@RequestMapping(value="updateHiraganaWord", method=RequestMethod.GET)
-	public String updateHiraganaWordView(@RequestParam(value="hiraganaWordSeq") int hiraganaWordSeq, Model model) {
+	public String updateHiraganaWordView(@RequestParam(value="hiraganaWordSeq") int hiraganaWordSeq,
+										@RequestParam(value="message", defaultValue="") String message, Model model) {
 			HiraganaWordQuizVO word = workerService.getWordByhiraganaWordSeq(hiraganaWordSeq);
 			model.addAttribute("word", word);
+			model.addAttribute("message", message);
 			return "admin/adminQuizManagement/adminHiraganaWordUpdate";
 		}
 		
@@ -374,7 +378,7 @@ public class AdminController {
 	@RequestMapping(value="updateHiraganaWord", method=RequestMethod.POST)
 	public String updateHiraganaWordAction(@RequestParam(value="uploadWordImage") MultipartFile uploadWordImage,
 											@RequestParam(value="uploadWordSound") MultipartFile uploadWordSound,
-											HiraganaWordQuizVO vo, HttpSession session, Model model) {
+											HiraganaWordQuizVO vo, HttpSession session) throws UnsupportedEncodingException {
 		// image file이 있을 때 처리
 		String imageFileName = "";
 		if(! uploadWordImage.isEmpty()) {
@@ -410,8 +414,8 @@ public class AdminController {
 		}
 
 		workerService.updateHiraganaWord(vo);
-		model.addAttribute("message", "수정 되었습니다");
-		return "redirect: updateHiraganaWord?hiraganaWordSeq=" + vo.getHiraganaWordSeq();
+		String encodedMessage = URLEncoder.encode("수정 되었습니다","UTF-8");
+		return "redirect: updateHiraganaWord?hiraganaWordSeq=" + vo.getHiraganaWordSeq() + "&message=" + encodedMessage;
 	}
 	
 	

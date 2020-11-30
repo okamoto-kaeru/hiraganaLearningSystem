@@ -11,7 +11,8 @@ public class OrderVO {
 	private String memberId;
 	private String memberName;
 	private String zipNum;
-	private String address;
+	private String address1;
+	private String address2;
 	private String phone;
 	private Timestamp indate;
 	private int pseq;

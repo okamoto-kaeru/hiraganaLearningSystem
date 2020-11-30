@@ -19,8 +19,7 @@
 			<td><fmt:formatDate value="${member.regdate}" type="date"/></td>
 			<td>${member.email}</td>
 			<td>${member.phone}</td>
-			<td>${member.address1}</td>
-			<td>${member.address2}</td>
+			<td>${member.address1} ${member.address2}</td>
 			<td>
 				<c:choose>
 					<c:when test="${member.useyn == 'y'}">

@@ -55,7 +55,7 @@
 		</tr>
 	</table>
 	<input class="button pinkButton" type="submit" value="저장" style="height: 30px; margin-top: 20px;" onclick="return adminHiraganaWordCheck()">
-	<input class="button blueButton" type="button" value="삭제" style="height: 30px; margin-top: 20px;" onclick="deleteHiraganaWord()">
+	<input class="button blueButton" type="button" value="삭제" style="height: 30px; margin-top: 20px; margin-bottom: 30px;" onclick="deleteHiraganaWord()">
 </form>
 
 <%@ include file="../../footer.jsp" %>
