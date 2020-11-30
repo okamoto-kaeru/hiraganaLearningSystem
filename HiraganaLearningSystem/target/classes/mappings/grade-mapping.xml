@@ -9,4 +9,16 @@
 	<select id="getGradeByMemberId" parameterType="String" resultType="grade">
 		SELECT * FROM grade WHERE memberId=#{memberId} ORDER BY playDate DESC
 	</select>
+	
+	
+	<!-- 최근 10번의 결과를 합한 결과를 반환 -->
+	<select id="getAverage" parameterType="String" resultType="grade">
+	<![CDATA[
+		SELECT hiraganaLine, whatQuiz, AVG(score) AS score
+		    FROM( SELECT *
+		        FROM( SELECT hiraganaLine, whatQuiz, score, row_number() over (partition by hiraganaLine, whatQuiz ORDER BY playDate DESC) as data 
+		                        FROM grade where memberId=#{memberId}) 
+		        WHERE data <= 10) GROUP BY hiraganaLine, whatQuiz;
+	]]>
+	</select>
 </mapper>

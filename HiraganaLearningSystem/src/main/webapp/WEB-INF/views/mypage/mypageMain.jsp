@@ -33,14 +33,14 @@
 			<c:when test="${grade}">
 				<table class="table center">
 					<tr>
-						<th  style="width: 33%;">성적</th>
+						<th  style="width: 33%; font-size: 3em;">성적</th>
 						<th style="width: 33%;">마지막에 공부한 내용</th>
-						<td rowspan="2" style="width: 33%;"><a href="hiraganaSelectMethods?hiraganaLine=${hiraganaLine}" style="font-size: 2.5em;">${whatLine} 공부하기</a></td>
+						<td rowspan="2" style="width: 33%;"><a href="hiraganaSelectMethods?hiraganaLine=${hiraganaLine}" style="font-size: 2.5em;">${hiraganaLine} 공부하기</a></td>
 					</tr>
 					<tr>
 						<td><a href="*">성적보기</a></td>
 						<td style="color: orange; font-size: 2em;">
-							${whatLine}
+							${hiraganaLine}
 							<c:choose>
 								<c:when test="${kind == 'hiraganaAssociativeQuiz'}">
 									<img class="pointer" src="images/linkImages/hiraganaQuizAssociate.png" width="150" height="100" onclick="location.href='hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=hiraganaAssociativeQuiz'">

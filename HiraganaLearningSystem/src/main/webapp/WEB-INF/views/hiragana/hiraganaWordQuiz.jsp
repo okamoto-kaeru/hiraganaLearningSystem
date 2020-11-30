@@ -42,6 +42,7 @@ $(window).on('load', function() {
 		var id = setInterval(function() {
 			if(countDown == 1) {
 				clearInterval(id);
+				$('#wrongAnswerSound').get(0).play();
 				$('#wrongImage').slideDown(500);			// x이미지가 내려온다.
 				countDown--;
 				$('#countDown').text(countDown);
@@ -149,23 +150,23 @@ $(window).on('load', function() {
 		$('#whatLine').fadeOut(500);
 		
 		// 키보드 대신 버튼 표시 각 행을 공부할 때, 공부한 글자만 나옴
-		if($('#hiraganaLine').attr('value') == 'hiraganaLine_a') {
+		if($('#hiraganaLine').attr('value') == 'あ행') {
 			$('.hiraganaLine_a').fadeIn(500);
-		} else if($('#hiraganaLine').attr('value') == 'hiraganaLine_ka') {
+		} else if($('#hiraganaLine').attr('value') == 'か행') {
 			$('.hiraganaLine_a').add($('.hiraganaLine_ka')).fadeIn(500);
-		} else if($('#hiraganaLine').attr('value') == 'hiraganaLine_sa') {
+		} else if($('#hiraganaLine').attr('value') == 'さ행') {
 			$('.hiraganaLine_a').add($('.hiraganaLine_ka')).add($('.hiraganaLine_sa')).fadeIn(500);
-		} else if($('#hiraganaLine').attr('value') == 'hiraganaLine_ta') {
+		} else if($('#hiraganaLine').attr('value') == 'た행') {
 			$('.hiraganaLine_a').add($('.hiraganaLine_ka')).add($('.hiraganaLine_sa')).add($('.hiraganaLine_ta')).fadeIn(500);
-		} else if($('#hiraganaLine').attr('value') == 'hiraganaLine_na') {
+		} else if($('#hiraganaLine').attr('value') == 'な행') {
 			$('.hiraganaLine_a').add($('.hiraganaLine_ka')).add($('.hiraganaLine_sa')).add($('.hiraganaLine_ta')).add($('.hiraganaLine_na')).fadeIn(500);
-		} else if($('#hiraganaLine').attr('value') == 'hiraganaLine_ha') {
+		} else if($('#hiraganaLine').attr('value') == 'は행') {
 			$('#hiraganaInput img').not($('.hiraganaLine_wa')).not($('.hiraganaLine_ra')).not($('.hiraganaLine_ya')).not($('.hiraganaLine_ma')).fadeIn(500);
-		} else if($('#hiraganaLine').attr('value') == 'hiraganaLine_ma') {
+		} else if($('#hiraganaLine').attr('value') == 'ま행') {
 			$('#hiraganaInput img').not($('.hiraganaLine_wa')).not($('.hiraganaLine_ra')).not($('.hiraganaLine_ya')).fadeIn(500);
-		} else if($('#hiraganaLine').attr('value') == 'hiraganaLine_ya') {
+		} else if($('#hiraganaLine').attr('value') == 'や행') {
 			$('#hiraganaInput img').not($('.hiraganaLine_wa')).not($('.hiraganaLine_ra')).fadeIn(500);
-		} else if($('#hiraganaLine').attr('value') == 'hiraganaLine_ra') {
+		} else if($('#hiraganaLine').attr('value') == 'ら행') {
 			$('#hiraganaInput img').not($('.hiraganaLine_wa')).fadeIn(500);
 		} else {
 			$('#hiraganaInput img').fadeIn(500);
@@ -182,7 +183,7 @@ $(window).on('load', function() {
 		if(count < 10) {
 			$('#nextQuiz').hide();
 			$('#countDown').text('시작!');
-			$('#amountOfQuiz').text('문제' + count + 1);
+			$('#amountOfQuiz').text('문제 ' + (count + 1));
 			doTest();
 		} else {
 			$('#score').attr('value', amountOfCollectAnswer * 10)
@@ -218,7 +219,7 @@ function gradeAndGoHiraganaHome() {
 	<button class="button pinkButton quizButton" onclick="$('#inputWord').text('')" style="left: 2%">다시 입력</button>
 	<span id="countDown" style="font-size: 5em; margin-left: 50px; position: absolute; top: 10px; right: 30px; color: #5151ff">시작!</span>
 	<button class="button orangeButton quizButton" id="answerButton" style="right: 2%">답하기</button>
-	<img id="wordImage" width="150" height="150">
+	<img id="wordImage" width="267px" height="150px">
 		<div>
 			<span id="inputWord" style="text-align: center; font-size: 5em; color: orange;"></span>
 		</div>
@@ -307,7 +308,7 @@ function gradeAndGoHiraganaHome() {
 
 
 <!-- 무순 행인지 표시 -->
-<span id="whatLine" style="position:absolute; font-size: 8em; top: 500px; left: 30px; color: rgb(125, 12, 240);">${whatLine}행</span>
+<span id="whatLine" style="position:absolute; font-size: 8em; top: 500px; left: 30px; color: rgb(125, 12, 240);">${hiraganaLine}</span>
 
 
 <!-- audio -->
@@ -340,9 +341,9 @@ function gradeAndGoHiraganaHome() {
 				</tr>
 			</table>
 			<form method="get" name="frm">	<!-- 성적을 기록하는 hidden -->
-				<input type="hidden" name="hiraganaLine" id="hiraganaLine" value="${hiraganaLine}">
-				<input type="hidden" name="memberId" id="memberId" value="${memberId}">
-				<input type="hidden" name="whatQuiz" id="whatQuiz" value="${whatQuiz}">
+				<input type="hidden" id="hiraganaLine" name="hiraganaLine" value="${hiraganaLine}">
+				<input type="hidden" name="memberId" value="${memberId}">
+				<input type="hidden" name="whatQuiz" value="${whatQuiz}">
 				<input type="hidden" id="score" name="score">
 				<input type="button" class="button blueButton center" onclick="gradeAndHiraganaWordOneMoreTime()" value="다시 하기" style="margin-top: 20px; height: 50px;">
 				<input type="button" class="button greenButton center" onclick="gradeAndGoHiraganaHome()" value="다른행 공부하기" style="margin-top: 20px; height: 50px;">

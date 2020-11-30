@@ -48,6 +48,7 @@ $(window).on('load', function() {
 		var id = setInterval(function() {
 			if(countDown == 1) {
 				clearInterval(id);
+				$('#wrongAnswerSound').get(0).play();
 				$('#wrongImage').slideDown(500);			// 이미지가 내려온다.
 				countDown--;
 				$('#countDown').text(countDown);
@@ -165,7 +166,7 @@ $(window).on('load', function() {
 		// 설명화면을 제거
 		$('#explain').fadeOut(500);
 		$('#caution').fadeOut(500);
-		$('#whatLine').fadeOut(500);
+		$('#hiraganaLine').fadeOut(500);
 		$('#start').hide();
 		
 		doTest();
@@ -177,7 +178,7 @@ $(window).on('load', function() {
 		if(count < 10) {
 			$('#nextQuiz').hide();
 			$('#countDown').text('시작!');
-			$('#amountOfQuiz').text('문제' + count + 1);
+			$('#amountOfQuiz').text('문제 ' + (count + 1));
 			doTest();
 		} else {
 			$('#score').attr('value', amountOfCollectAnswer * 10)
@@ -219,7 +220,7 @@ $(document).ajaxComplete(function() {
 </c:choose>
 
 <!-- 무순 행인지 표시 -->
-<span id="whatLine" style="position:absolute; font-size: 8em; top: 500px; left: 30px; color: rgb(125, 12, 240);">${whatLine}행</span>
+<span id="hiraganaLine" style="position:absolute; font-size: 8em; top: 500px; left: 30px; color: rgb(125, 12, 240);">${hiraganaLine}</span>
 
 
 <!-- audio -->
@@ -252,9 +253,9 @@ $(document).ajaxComplete(function() {
 				</tr>
 			</table>
 			<form method="get" name="frm">	<!-- 성적을 기록하는 hidden -->
-				<input type="hidden" name="hiraganaLine" id="hiraganaLine" value="${hiraganaLine}">
-				<input type="hidden" name="memberId" id="memberId" value="${memberId}">
-				<input type="hidden" name="whatQuiz" id="whatQuiz" value="${whatQuiz}">
+				<input type="hidden" name="hiraganaLine" value="${hiraganaLine}">
+				<input type="hidden" name="memberId" value="${memberId}">
+				<input type="hidden" name="whatQuiz" value="${whatQuiz}">
 				<input type="hidden" id="score" name="score">
 				<input type="button" class="button blueButton center" onclick="goNewGradeAndOneMoreTime()" value="다시 하기" style="margin-top: 20px; height: 50px;">
 				<c:choose>

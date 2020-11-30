@@ -21,16 +21,16 @@
 			<th>행</th>
 			<td>
 				<select name="hiraganaLine">
-					<option value="hiraganaLine_a" <c:if test="${word.hiraganaLine=='hiraganaLine_a'}">selected="selected"</c:if>>あ행</option>
-					<option value="hiraganaLine_ka" <c:if test="${word.hiraganaLine == 'hiraganaLine_ka'}">selected="selected"</c:if>>か행</option>
-					<option value="hiraganaLine_sa" <c:if test="${word.hiraganaLine == 'hiraganaLine_sa'}">selected="selected"</c:if>>さ행</option>
-					<option value="hiraganaLine_ta" <c:if test="${word.hiraganaLine == 'hiraganaLine_ta'}">selected="selected"</c:if>>た행</option>
-					<option value="hiraganaLine_na" <c:if test="${word.hiraganaLine == 'hiraganaLine_na'}">selected="selected"</c:if>>な행</option>
-					<option value="hiraganaLine_ha" <c:if test="${word.hiraganaLine == 'hiraganaLine_ha'}">selected="selected"</c:if>>は행</option>
-					<option value="hiraganaLine_ma" <c:if test="${word.hiraganaLine == 'hiraganaLine_ma'}">selected="selected"</c:if>>ま행</option>
-					<option value="hiraganaLine_ya" <c:if test="${word.hiraganaLine == 'hiraganaLine_ya'}">selected="selected"</c:if>>や행</option>
-					<option value="hiraganaLine_ra" <c:if test="${word.hiraganaLine == 'hiraganaLine_ra'}">selected="selected"</c:if>>ら행</option>
-					<option value="hiraganaLine_wa" <c:if test="${word.hiraganaLine == 'hiraganaLine_wa'}">selected="selected"</c:if>>わ행</option>
+					<option value="あ행" <c:if test="${word.hiraganaLine=='あ행'}">selected="selected"</c:if>>あ행</option>
+					<option value="か행" <c:if test="${word.hiraganaLine == 'か행'}">selected="selected"</c:if>>か행</option>
+					<option value="さ행" <c:if test="${word.hiraganaLine == 'さ행'}">selected="selected"</c:if>>さ행</option>
+					<option value="た행" <c:if test="${word.hiraganaLine == 'た행'}">selected="selected"</c:if>>た행</option>
+					<option value="な행" <c:if test="${word.hiraganaLine == 'な행'}">selected="selected"</c:if>>な행</option>
+					<option value="は행" <c:if test="${word.hiraganaLine == 'は행'}">selected="selected"</c:if>>は행</option>
+					<option value="ま행" <c:if test="${word.hiraganaLine == 'ま행'}">selected="selected"</c:if>>ま행</option>
+					<option value="や행" <c:if test="${word.hiraganaLine == 'や행'}">selected="selected"</c:if>>や행</option>
+					<option value="ら행" <c:if test="${word.hiraganaLine == 'ら행'}">selected="selected"</c:if>>ら행</option>
+					<option value="わ행" <c:if test="${word.hiraganaLine == 'わ행'}">selected="selected"</c:if>>わ행</option>
 				</select>
 			</td>
 		</tr>

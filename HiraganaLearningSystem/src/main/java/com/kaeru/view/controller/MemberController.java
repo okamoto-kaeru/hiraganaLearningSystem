@@ -273,31 +273,7 @@ public class MemberController {
 				// 어떤 행을 공부했는지 저장
 				String hiraganaLine = gradeList.get(0).getHiraganaLine();
 				model.addAttribute("hiraganaLine", hiraganaLine);
-				String whatLine = "";
-				switch(hiraganaLine) {
-				case "hiraganaLine_a": whatLine = "あ행";
-				  break;
-				case "hiraganaLine_ka": whatLine = "か행";
-				  break;
-				case "hiraganaLine_sa": whatLine = "さ행";
-				  break;
-				case "hiraganaLine_ta": whatLine = "た행";
-				  break;
-				case "hiraganaLine_na": whatLine = "な행";
-				  break;
-				case "hiraganaLine_ha": whatLine = "は행";
-				  break;
-				case "hiraganaLine_ma": whatLine = "ま행";
-				  break;
-				case "hiraganaLine_ya": whatLine = "や행";
-				  break;
-				case "hiraganaLine_ra": whatLine = "ら행";
-				  break;
-				case "hiraganaLine_wa": whatLine = "わ행";
-				  break;
-				}
-				model.addAttribute("whatLine", whatLine);
-				
+								
 				// 어떤 공부를 했는지 저장
 				String kind = gradeList.get(0).getWhatQuiz();
 				model.addAttribute("kind", kind);

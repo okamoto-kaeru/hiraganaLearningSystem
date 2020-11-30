@@ -18,18 +18,7 @@
 		<tr>
 			<td>${word.hiraganaWordId}</td>
 			<td>${word.hiraganaWordKind}</td>
-			<c:choose>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_a'}"><td>あ행</td></c:when>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_ka'}"><td>か행</td></c:when>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_sa'}"><td>さ행</td></c:when>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_ta'}"><td>た행</td></c:when>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_na'}"><td>な행</td></c:when>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_ha'}"><td>は행</td></c:when>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_ma'}"><td>ま행</td></c:when>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_ya'}"><td>や행</td></c:when>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_ra'}"><td>ら행</td></c:when>
-				<c:when test="${word.hiraganaLine == 'hiraganaLine_wa'}"><td>わ행</td></c:when>				
-			</c:choose>
+			<td>${word.hiraganaLine}</td>
 			<td><a href="updateHiraganaWord?hiraganaWordSeq=${word.hiraganaWordSeq}">정보 수정</a></td>
 		</tr>
 	</c:forEach>

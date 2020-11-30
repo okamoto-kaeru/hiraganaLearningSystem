@@ -18,16 +18,16 @@
 			<th>행</th>
 			<td>
 				<select name="hiraganaLine">
-					<option value="hiraganaLine_a">あ행</option>
-					<option value="hiraganaLine_ka">か행</option>
-					<option value="hiraganaLine_sa">さ행</option>
-					<option value="hiraganaLine_ta">た행</option>
-					<option value="hiraganaLine_na">な행</option>
-					<option value="hiraganaLine_ha">は행</option>
-					<option value="hiraganaLine_ma">ま행</option>
-					<option value="hiraganaLine_ya">や행</option>
-					<option value="hiraganaLine_ra">ら행</option>
-					<option value="hiraganaLine_wa">わ행</option>
+					<option value="あ행">あ행</option>
+					<option value="か행">か행</option>
+					<option value="さ행">さ행</option>
+					<option value="た행">た행</option>
+					<option value="な행">な행</option>
+					<option value="は행">は행</option>
+					<option value="ま행">ま행</option>
+					<option value="や행">や행</option>
+					<option value="ら행">ら행</option>
+					<option value="わ행">わ행</option>
 				</select>
 			</td>
 		</tr>

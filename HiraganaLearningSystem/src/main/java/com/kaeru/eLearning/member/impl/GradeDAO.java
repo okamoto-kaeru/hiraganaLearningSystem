@@ -22,4 +22,8 @@ public class GradeDAO {
 	public List<GradeVO> getGradeByMemberId(String memberId) {
 		return mybatis.selectList("GradeDAO.getGradeByMemberId", memberId);
 	}
+	
+	public List<GradeVO> getAverage(String memberId) {
+		return mybatis.selectList("GradeDAO.getAverage", memberId);
+	}
 }

@@ -24,4 +24,9 @@ public class GradeServiceImpl implements GradeService {
 		return gradeDAO.getGradeByMemberId(memberId);
 	}
 
+	@Override
+	public List<GradeVO> getAverage(String memberId) {
+		return gradeDAO.getAverage(memberId);
+	}
+
 }

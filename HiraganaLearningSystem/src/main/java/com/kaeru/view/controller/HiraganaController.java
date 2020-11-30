@@ -1,5 +1,7 @@
 package com.kaeru.view.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,12 +74,8 @@ public class HiraganaController {
 		} else {
 			model.addAttribute("memberId", loginUser.getMemberId());
 			
-			// 무순 행을 공부하는지 전달
-			List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
-			model.addAttribute("whatLine", hiraganaLineList.get(0).getHiraganaText());
-			
 			// や행하고 わ행인 경우 선택자가 5개가 아니고 3개이므로 다른 화면의로 이동
-			if(hiraganaLine.equals("hiraganaLine_ya") || hiraganaLine.equals("hiraganaLine_wa")) {
+			if(hiraganaLine.equals("や행") || hiraganaLine.equals("わ행")) {
 				return "hiragana/hiraganaAssociativeQuizForYaAndWa";
 			} else {
 				return "hiragana/hiraganaAssociativeQuiz";
@@ -101,15 +99,17 @@ public class HiraganaController {
 	
 	// 히라가나 퀴즈 결과를 저장한다
 	@RequestMapping(value="/newGradeAndOneMoreTime")
-	public String newGradeAndOneMoreTime(GradeVO gradeVO) {
+	public String newGradeAndOneMoreTime(GradeVO gradeVO) throws UnsupportedEncodingException {
 		gradeService.insertGrade(gradeVO);
-		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + gradeVO.getHiraganaLine() + "&whatQuiz=" + gradeVO.getWhatQuiz();
+		String encodedHiraganaLine = URLEncoder.encode(gradeVO.getHiraganaLine(), "UTF-8");
+		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + encodedHiraganaLine + "&whatQuiz=" + gradeVO.getWhatQuiz();
 	}
 	
 	@RequestMapping(value="/newGradeAndGoHiraganaTextQuiz")
-	public String goNewGradeAndGoHiraganaTextQuiz(GradeVO gradeVO) {
+	public String goNewGradeAndGoHiraganaTextQuiz(GradeVO gradeVO) throws UnsupportedEncodingException {
 		gradeService.insertGrade(gradeVO);
-		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + gradeVO.getHiraganaLine() + "&whatQuiz=hiraganaTextQuiz";
+		String encodedHiraganaLine = URLEncoder.encode(gradeVO.getHiraganaLine(), "UTF-8");
+		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + encodedHiraganaLine + "&whatQuiz=hiraganaTextQuiz";
 	}
 	
 	/* 프린트 출력 화면으로 이동 */
@@ -133,10 +133,7 @@ public class HiraganaController {
 		} else {
 			model.addAttribute("memberId", loginUser.getMemberId());
 			model.addAttribute("whatQuiz", "hiraganaWordQuiz");
-			
-			// 무순 행을 공부하는지 히라가나로 전달
-			List<HiraganaVO> hiraganaLineList = hiraganaService.getHiraganaLine(hiraganaLine);
-			model.addAttribute("whatLine", hiraganaLineList.get(0).getHiraganaText());
+
 			return "hiragana/hiraganaWordQuiz";
 		}
 	}
@@ -152,9 +149,10 @@ public class HiraganaController {
 	}
 	
 	@RequestMapping(value="gradeAndHiraganaWordOneMoreTime")
-	public String gradeAndHiraganaWordOneMoreTime(GradeVO gradeVO) {
+	public String gradeAndHiraganaWordOneMoreTime(GradeVO gradeVO) throws UnsupportedEncodingException {
 		gradeService.insertGrade(gradeVO);
-		return "redirect: hiraganaWordQuizForm?hiraganaLine=" + gradeVO.getHiraganaLine();
+		String encodedHiraganaLine = URLEncoder.encode(gradeVO.getHiraganaLine(), "UTF-8");
+		return "redirect: hiraganaWordQuizForm?hiraganaLine=" + encodedHiraganaLine;
 	}
 	
 	@RequestMapping(value="gradeAndGoHiraganaHome")
