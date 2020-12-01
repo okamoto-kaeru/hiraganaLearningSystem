@@ -10,6 +10,10 @@
 		SELECT * FROM grade WHERE memberId=#{memberId} ORDER BY playDate DESC
 	</select>
 	
+	<!-- 회원가입시 성적보기 위해서 score null데이터 삽입 -->
+	<insert id="initGrade" parameterType="grade">
+		INSERT INTO grade(gradeSeq, memberId, hiraganaLine, whatQuiz) VALUES(gradeSequence.NEXTVAL, #{memberId}, #{hiraganaLine}, #{whatQuiz})
+	</insert>
 	
 	<!-- 최근 10번의 결과를 합한 결과를 반환 -->
 	<select id="getAverage" parameterType="String" resultType="grade">

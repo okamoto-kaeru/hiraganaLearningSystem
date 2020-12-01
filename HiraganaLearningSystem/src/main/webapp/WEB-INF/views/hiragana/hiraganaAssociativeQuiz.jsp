@@ -146,8 +146,6 @@ $(window).on('load', function() {
 		$('#quizSound').get(0).play();
 			
 		timeID = setInterval(function() {
-			$('#quizSrc').attr('src', 'sounds/hiraganaSounds/' + hiraganaVOArr[answer].hiraganaSound);
-			$('#quizSound').get(0).load();
 			$('#quizSound').get(0).play();
 			if(countDown == 0) {
 				clearInterval(timeID);

@@ -21,7 +21,6 @@ import com.kaeru.eLearning.hiragana.HiraganaVO;
 import com.kaeru.eLearning.hiragana.HiraganaWordQuizVO;
 import com.kaeru.eLearning.member.GradeService;
 import com.kaeru.eLearning.member.GradeVO;
-import com.kaeru.eLearning.member.MemberService;
 import com.kaeru.eLearning.member.MemberVO;
 
 @Controller
@@ -32,9 +31,7 @@ public class HiraganaController {
 	
 	@Autowired
 	private GradeService gradeService;
-	
-	@Autowired
-	private MemberService memberService;
+
 	
 	@RequestMapping(value="/hiraganaHome", method=RequestMethod.GET)
 	public String hiraganaHomeView() {

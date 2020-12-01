@@ -9,4 +9,6 @@ public interface GradeService {
 	public List<GradeVO> getGradeByMemberId(String memberId);
 	
 	public List<GradeVO> getAverage(String memberId);
+	
+	public void initGrade(String memberId);
 }

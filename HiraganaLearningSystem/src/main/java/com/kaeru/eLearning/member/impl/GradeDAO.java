@@ -26,4 +26,51 @@ public class GradeDAO {
 	public List<GradeVO> getAverage(String memberId) {
 		return mybatis.selectList("GradeDAO.getAverage", memberId);
 	}
+	
+	// 회원가입시 성적보기 위해서 null데이터 삽입
+	public void initGrade(String memberId) {
+		GradeVO vo = new GradeVO();
+		vo.setMemberId(memberId);
+		
+		vo.setHiraganaLine("あ행");
+		initGradeShortCut(vo);
+		
+		vo.setHiraganaLine("か행");
+		initGradeShortCut(vo);
+		
+		vo.setHiraganaLine("さ행");
+		initGradeShortCut(vo);
+		
+		vo.setHiraganaLine("た행");
+		initGradeShortCut(vo);
+		
+		vo.setHiraganaLine("な행");
+		initGradeShortCut(vo);
+		
+		vo.setHiraganaLine("は행");
+		initGradeShortCut(vo);
+		
+		vo.setHiraganaLine("ま행");
+		initGradeShortCut(vo);
+		
+		vo.setHiraganaLine("や행");
+		initGradeShortCut(vo);
+		
+		vo.setHiraganaLine("ら행");
+		initGradeShortCut(vo);
+		
+		vo.setHiraganaLine("わ행");
+		initGradeShortCut(vo);
+	}
+	
+	public void initGradeShortCut(GradeVO vo) {
+		vo.setWhatQuiz("hiraganaAssociativeQuiz");
+		mybatis.insert("GradeDAO.initGrade", vo);
+		
+		vo.setWhatQuiz("hiraganaTextQuiz");
+		mybatis.insert("GradeDAO.initGrade", vo);
+		
+		vo.setWhatQuiz("hiraganaWordQuiz");
+		mybatis.insert("GradeDAO.initGrade", vo);
+	}
 }

@@ -38,7 +38,7 @@
 						<td rowspan="2" style="width: 33%;"><a href="hiraganaSelectMethods?hiraganaLine=${hiraganaLine}" style="font-size: 2.5em;">${hiraganaLine} 공부하기</a></td>
 					</tr>
 					<tr>
-						<td><a href="*" style="font-size: 2.5em;"">성적보기</a></td>
+						<td><a href="showGrade" style="font-size: 2.5em;"">성적보기</a></td>
 						<td style="color: orange; font-size: 2em;">
 							${hiraganaLine}
 							<c:choose>

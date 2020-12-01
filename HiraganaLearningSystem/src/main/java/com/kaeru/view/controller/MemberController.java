@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -19,6 +21,7 @@ import com.kaeru.eLearning.board.BoardService;
 import com.kaeru.eLearning.board.BoardVO;
 import com.kaeru.eLearning.cart.CartService;
 import com.kaeru.eLearning.cart.CartVO;
+import com.kaeru.eLearning.member.GoogleChartService;
 import com.kaeru.eLearning.member.GradeService;
 import com.kaeru.eLearning.member.GradeVO;
 import com.kaeru.eLearning.member.MemberService;
@@ -46,6 +49,9 @@ public class MemberController {
 	
 	@Autowired
 	private GradeService gradeService;
+	
+	@Autowired
+	private GoogleChartService googleChartService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView() {
@@ -133,6 +139,7 @@ public class MemberController {
 		} else {
 			// 회원 등록
 			memberService.insertMember(vo);
+			gradeService.initGrade(vo.getMemberId());	// 성적보기를 위한 처리(null데이터 삽입)
 			return "member/joinOK";
 		}
 	}
@@ -281,5 +288,24 @@ public class MemberController {
 			
 			return "mypage/mypageMain";
 		}
+	}
+	
+	@RequestMapping(value="showGrade")
+	public String showGrade(HttpSession session, Model model) {
+		// login 여부를 확인 
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		if(loginUser == null) {
+			model.addAttribute("jump", "showGrade");
+			return "member/login";
+		} else {
+			model.addAttribute("memberId", loginUser.getMemberId());
+			return "mypage/myGrade";
+		}
+	}
+	
+	@RequestMapping(value="gradeGraph", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public JSONObject gradeGraph(@RequestParam(value="memberId") String memberId) {
+		return googleChartService.getChartData(memberId);
 	}
 }
