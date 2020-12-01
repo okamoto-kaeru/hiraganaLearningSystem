@@ -331,9 +331,9 @@ function gradeAndGoHiraganaHome() {
 <!-- 성적 확인 시 modal 표시 -->
 <div class="modal jsModal">
 	<div class="modalBackGround">
-		<div class="modalContent">
+		<div class="modalContent" style="width: 45%">
 			<h2>성적</h2>
-			<table class="table" id="showResult" style="text-align: center;">
+			<table class="table center" id="showResult" style="text-align: center;">
 				<tr>
 					<th>문제 번호</th><th>정답</th><th>당신의 답</th><th>결과</th>
 				</tr>

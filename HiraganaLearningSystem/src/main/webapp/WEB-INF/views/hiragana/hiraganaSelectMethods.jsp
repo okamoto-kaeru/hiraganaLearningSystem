@@ -21,13 +21,12 @@
 	        <span style="color: red;">*로그인 필수</span>
 	    </td>
 	</tr>
-	<tr>
-	    <td style="font-size: 1.5em; text-align: left;">④ 히라가나를 <span style="color: #dd00dd; font-size: 1.5em;">쓰고</span><br> 익혀 봅시다!</td>
-		<td><a href="#"><img src="images/linkImages/goWrite.png" height=250px width=400px></a></td>
-    </tr>
     <tr>
-        <td style="font-size: 1.5em; text-align: left;">⑤ 단어형 퀴즈를 풀고<br> <span style="color: #ff8040; font-size: 1.5em;">완전히</span> 외워 봅시다!</td>
-        <td><a href="hiraganaWordQuizForm?hiraganaLine=${hiraganaLine}"><img src="images/linkImages/hiraganaQuizWord.png" height=250px width=400px></a></td>
+        <td style="font-size: 1.5em; text-align: left;">④ 단어형 퀴즈를 풀고<br> <span style="color: #ff8040; font-size: 1.5em;">완전히</span> 외워 봅시다!</td>
+        <td>
+        	<a href="hiraganaWordQuizForm?hiraganaLine=${hiraganaLine}"><img src="images/linkImages/hiraganaQuizWord.png" height=250px width=400px></a>
+        	<span style="color: red;">*로그인 필수</span>
+        </td>
 	</tr>
 </table>
 

@@ -9,7 +9,7 @@ function goNewGradeAndGoHiraganaTextQuiz() {
 	document.frm.submit();
 }
 
-function goNewGradeAndGoHiraganaWrite() {
-	document.frm.action = "newGradeAndGoHiraganaWrite";
+function goNewGradeAndGoHiraganaWordQuiz() {
+	document.frm.action = "goNewGradeAndGoHiraganaWordQuiz";
 	document.frm.submit();
 }

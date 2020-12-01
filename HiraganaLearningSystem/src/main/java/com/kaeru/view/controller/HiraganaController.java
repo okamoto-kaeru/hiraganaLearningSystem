@@ -110,10 +110,11 @@ public class HiraganaController {
 	}
 	
 	/* 프린트 출력 화면으로 이동 */
-	@RequestMapping(value="/newGradeAndGoHiraganaWrite")
-	public String hiraganaWriteView(GradeVO gradeVO) {
+	@RequestMapping(value="/goNewGradeAndGoHiraganaWordQuiz")
+	public String hiraganaWriteView(GradeVO gradeVO) throws UnsupportedEncodingException {
 		gradeService.insertGrade(gradeVO);
-		return "hiraganaWrite?hiraganaLine=" + gradeVO.getHiraganaLine();
+		String encodedHiraganaLine = URLEncoder.encode(gradeVO.getHiraganaLine(), "UTF-8");
+		return "redirect: hiraganaWordQuizForm?hiraganaLine=" + encodedHiraganaLine + "&whatQuiz=hiraganaTextQuiz";
 	}
 	
 	

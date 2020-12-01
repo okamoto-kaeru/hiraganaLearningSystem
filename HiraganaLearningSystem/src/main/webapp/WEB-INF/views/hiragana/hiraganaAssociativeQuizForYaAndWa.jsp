@@ -261,7 +261,7 @@ $(document).ajaxComplete(function() {
 						<input type="button" class="button greenButton center" onclick="goNewGradeAndGoHiraganaTextQuiz()" value="다음 단계로 가기" style="margin-top: 20px; height: 50px;">
 					</c:when>
 					<c:otherwise>
-						<input type="button" class="button greenButton center" onclick="goNewGradeAndGoHiraganaWrite()" value="다음 단계로 가기" style="margin-top: 20px; height: 50px;">
+						<input type="button" class="button greenButton center" onclick="goNewGradeAndGoHiraganaWordQuiz()" value="다음 단계로 가기" style="margin-top: 20px; height: 50px;">
 					</c:otherwise>
 				</c:choose>
 			</form>
