@@ -18,7 +18,7 @@
 <body>
 	<div id="container">
 		<header>
-			<img class="pointer" id="headerLogo" src="images/kaeruClass.jpg" onclick="location.href='index'" height="100px" width="200px">
+			<img class="pointer" id="headerLogo" src="images/kaeruClass.jpg" onclick="location.href='index'" height="100px" width="167px">
 			<nav id="headerNav">
 				<ul>
 					<c:choose>

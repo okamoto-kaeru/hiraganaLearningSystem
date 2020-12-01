@@ -8,7 +8,7 @@ function idCheck() {
 	var url="idCheckForm?memberId=" + document.frm.memberId.value;
 	window.open(url,
 				"_blank_1",
-	"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=400, height=250");
+	"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=300");
 }
 
 

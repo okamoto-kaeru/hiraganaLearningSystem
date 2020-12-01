@@ -11,29 +11,33 @@
 <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
-
+	
       function drawChart() {
-        var jsonData = $.ajax({
-        	type: 'POST',
+    	var jsonData;
+        $.ajax({
+        	type: 'GET',
     		headers: {
     			Accept: "application/json; charset=UTF-8",
     			"Content-type": "application/json; charset=UTF-8"
     		},
         	url: "gradeGraph",
         	data : { memberId : '${memberId}'},
-        	success: function(map) {
-        		console.log(jsonData)
+        	async: false,
+        	success: function(result) {
+        		jsonData = result;
+        		console.log(jsonData);
     		},
     		error: function() {
-    			console.log(${memberId});
     			alert("failed to data receive!");
     		}
-        }).responseText;
+        });
 
+        var data = new google.visualization.DataTable(jsonData);
+        
         var options = {
           chart: {
-            title: '각 퀴즈 10번의 성적',
-            subtitle: '각 행의 연상법 1글자, 히라가나 1글자, 단어형 퀴즈 성적',
+            title: '각 퀴즈 10번의 평균',
+            subtitle: '각 행의 연상법 1글자, 히라가나 1글자, 단어형의 퀴즈 성적',
           },
           bars: 'vertical',
           vAxis: {format: 'decimal'},
@@ -43,7 +47,7 @@
 
         var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-        chart.draw(jsonData, google.charts.Bar.convertOptions(options));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
       }
     </script>
 <title>개구리 선생님의 일본어 교실</title>
@@ -84,8 +88,8 @@
 			</nav>
 			<hr color="lightgreen" width="100%">
 		</header>
-		
-    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-
+	<div style="margin-top: 80px;">
+    	<div id="columnchart_material" style="width: 100%; height: auto;"></div>
+	</div>
 
 <%@ include file="../footer.jsp" %>

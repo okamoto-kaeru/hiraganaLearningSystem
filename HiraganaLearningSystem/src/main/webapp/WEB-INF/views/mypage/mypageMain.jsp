@@ -29,37 +29,30 @@
 </div>
 <div id="tabBody">
 	<div id="tab1">
-		<c:choose>
-			<c:when test="${grade}">
-				<table class="table center">
-					<tr>
-						<th  style="width: 33%;">성적</th>
-						<th style="width: 33%;">마지막에 공부한 내용</th>
-						<td rowspan="2" style="width: 33%;"><a href="hiraganaSelectMethods?hiraganaLine=${hiraganaLine}" style="font-size: 2.5em;">${hiraganaLine} 공부하기</a></td>
-					</tr>
-					<tr>
-						<td><a href="showGrade" style="font-size: 2.5em;"">성적보기</a></td>
-						<td style="color: orange; font-size: 2em;">
-							${hiraganaLine}
-							<c:choose>
-								<c:when test="${kind == 'hiraganaAssociativeQuiz'}">
-									<img class="pointer" src="images/linkImages/hiraganaQuizAssociate.png" width="150" height="100" onclick="location.href='hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=hiraganaAssociativeQuiz'">
-								</c:when>
-								<c:when test="${kind == 'hiraganaTextQuiz'}">
-									<img class="pointer" src="images/linkImages/hiraganaQuizText.png" width="150" height="100" onclick="location.href='hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=hiraganaTextQuiz'">
-								</c:when>
-								<c:otherwise>
-									<img class="pointer" src="images/linkImages/hiraganaQuizWord.png" width="150" height="100" onclick="location.href='hiraganaWordQuizForm?hiraganaLine=${hiraganaLine}'">
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-				</table>
-			</c:when>
-			<c:otherwise>
-				<p style="font-size: 2em;">아직 공부를 안했습니다.</p>
-			</c:otherwise>
-		</c:choose>
+		<table class="table center">
+			<tr>
+				<th  style="width: 33%;">성적</th>
+				<th style="width: 33%;">마지막에 공부한 내용</th>
+				<td rowspan="2" style="width: 33%;"><a href="hiraganaSelectMethods?hiraganaLine=${hiraganaLine}" style="font-size: 2.5em;">${hiraganaLine} 공부하기</a></td>
+			</tr>
+			<tr>
+				<td><a href="showGrade" style="font-size: 2.5em;">성적보기</a></td>
+				<td style="color: orange; font-size: 2em;">
+					${hiraganaLine}
+					<c:choose>
+						<c:when test="${kind == 'hiraganaAssociativeQuiz'}">
+							<img class="pointer" src="images/linkImages/hiraganaQuizAssociate.png" width="150" height="100" onclick="location.href='hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=hiraganaAssociativeQuiz'">
+						</c:when>
+						<c:when test="${kind == 'hiraganaTextQuiz'}">
+							<img class="pointer" src="images/linkImages/hiraganaQuizText.png" width="150" height="100" onclick="location.href='hiraganaAssociativeQuizForm?hiraganaLine=${hiraganaLine}&whatQuiz=hiraganaTextQuiz'">
+						</c:when>
+						<c:otherwise>
+							<img class="pointer" src="images/linkImages/hiraganaQuizWord.png" width="150" height="100" onclick="location.href='hiraganaWordQuizForm?hiraganaLine=${hiraganaLine}'">
+						</c:otherwise>
+					</c:choose>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<div id="tab2" style="display: none;">
 		<table class="table center">

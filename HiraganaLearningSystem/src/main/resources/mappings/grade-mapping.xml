@@ -22,7 +22,7 @@
 		    FROM( SELECT *
 		        FROM( SELECT hiraganaLine, whatQuiz, score, row_number() over (partition by hiraganaLine, whatQuiz ORDER BY playDate DESC) as data 
 		                        FROM grade where memberId=#{memberId}) 
-		        WHERE data <= 10) GROUP BY hiraganaLine, whatQuiz;
+		        WHERE data <= 10) GROUP BY hiraganaLine, whatQuiz
 	]]>
 	</select>
 </mapper>

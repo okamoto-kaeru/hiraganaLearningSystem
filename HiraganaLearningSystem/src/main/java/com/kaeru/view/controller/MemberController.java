@@ -272,20 +272,15 @@ public class MemberController {
 			
 			// 진도 정보를 얻어 옴
 			List<GradeVO> gradeList = gradeService.getGradeByMemberId(memberId);
-			if(gradeList.isEmpty()) {
-				model.addAttribute("grade", false);
-			} else {
-				model.addAttribute("grade", true);
-				
-				// 어떤 행을 공부했는지 저장
-				String hiraganaLine = gradeList.get(0).getHiraganaLine();
-				model.addAttribute("hiraganaLine", hiraganaLine);
-								
-				// 어떤 공부를 했는지 저장
-				String kind = gradeList.get(0).getWhatQuiz();
-				model.addAttribute("kind", kind);
-			}
 			
+			// 어떤 행을 공부했는지 저장
+			String hiraganaLine = gradeList.get(0).getHiraganaLine();
+			model.addAttribute("hiraganaLine", hiraganaLine);
+							
+			// 어떤 공부를 했는지 저장
+			String kind = gradeList.get(0).getWhatQuiz();
+			model.addAttribute("kind", kind);
+
 			return "mypage/mypageMain";
 		}
 	}
