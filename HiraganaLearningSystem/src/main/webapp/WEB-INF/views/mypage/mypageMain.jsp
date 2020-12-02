@@ -5,16 +5,22 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#study').on('click', function() {
+			$('#tabNav a').removeClass();
+			$(this).addClass("tabFocus");
 			$('#tabBody div').hide();
 			$('#tab1').show();
 		});
 		
 		$('#order').on('click', function() {
+			$('#tabNav a').removeClass();
+			$(this).addClass("tabFocus");
 			$('#tabBody div').hide();
 			$('#tab2').show();
 		});
 		
 		$('#board').on('click', function() {
+			$('#tabNav a').removeClass();
+			$(this).addClass("tabFocus");
 			$('#tabBody div').hide();
 			$('#tab3').show();
 		});
@@ -22,8 +28,8 @@
 </script>
 
 <h1 style="color: black; background-color: #ceffdf;">${loginUser.memberId} 님 페이지</h1>
-<div id="tabNav">
-	<a id="study" href="#" style="margin-right: 10px;">공부 정보</a>
+<div id="tabNav" style="font-size: 30px;">
+	<a class="tabFocus" id="study" href="#" style="margin-right: 10px;">공부 정보</a>
 	<a href="#" id="order">주문 정보</a>
 	<a href="#" id="board" style="margin-left: 10px;">게시판 정보</a>
 </div>

@@ -35,9 +35,9 @@
 		</div>
 	</form>
 	<div class="clear"></div>
-	<p style="font-size: 13px;">
-		<a onclick="findIdForm()">아이디를 잊으셨나요?</a>
-		<a onclick="findPasswordForm()" style="margin-left: 20px;">비밀번호를 잊으셨나요?</a>
+	<p style="font-size: 13px; color: cornflowerblue;">
+		<a href="#" onclick="findIdForm()">아이디를 잊으셨나요?</a>
+		<a href="#" onclick="findPasswordForm()" style="margin-left: 20px;">비밀번호를 잊으셨나요?</a>
 	</p>
 </div>
 	<h3 style="color: red;">${message}</h3>

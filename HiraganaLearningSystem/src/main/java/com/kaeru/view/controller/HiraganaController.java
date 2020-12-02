@@ -94,13 +94,23 @@ public class HiraganaController {
 		return map;
 	}
 	
-	// 히라가나 퀴즈 결과를 저장한다
+	
+	// 히라가나 퀴즈 결과를 저장하고 다시 퀴즈 화면으로 이동
 	@RequestMapping(value="/newGradeAndOneMoreTime")
 	public String newGradeAndOneMoreTime(GradeVO gradeVO) throws UnsupportedEncodingException {
 		gradeService.insertGrade(gradeVO);
 		String encodedHiraganaLine = URLEncoder.encode(gradeVO.getHiraganaLine(), "UTF-8");
 		return "redirect: hiraganaAssociativeQuizForm?hiraganaLine=" + encodedHiraganaLine + "&whatQuiz=" + gradeVO.getWhatQuiz();
 	}
+	
+	
+	@RequestMapping(value="/goNewGradeAndGoMovie")
+	public String goNewGradeAndGoMovie(GradeVO gradeVO) throws UnsupportedEncodingException {
+		gradeService.insertGrade(gradeVO);
+		String encodedHiraganaLine = URLEncoder.encode(gradeVO.getHiraganaLine(), "UTF-8");
+		return "redirect: goHiraganaMovie?hiraganaLine=" + encodedHiraganaLine;
+	}
+	
 	
 	@RequestMapping(value="/newGradeAndGoHiraganaTextQuiz")
 	public String goNewGradeAndGoHiraganaTextQuiz(GradeVO gradeVO) throws UnsupportedEncodingException {
@@ -145,6 +155,7 @@ public class HiraganaController {
 		List<HiraganaWordQuizVO> hiraganaWordList = hiraganaService.getHiraganaWordQuiz(hiraganaLine);
 		return hiraganaWordList;
 	}
+	
 	
 	@RequestMapping(value="gradeAndHiraganaWordOneMoreTime")
 	public String gradeAndHiraganaWordOneMoreTime(GradeVO gradeVO) throws UnsupportedEncodingException {

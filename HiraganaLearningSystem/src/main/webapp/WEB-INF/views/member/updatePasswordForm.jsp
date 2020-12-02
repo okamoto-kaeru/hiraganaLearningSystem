@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div style="margin-left: 20px;">
-		<h1>비밀번호 찾기 결과</h1>
+		<h1>비밀번호 변경</h1>
 		<hr color="lightgreen" width="100%">
 		<c:choose>
 			<c:when test="${!empty passwordMessage}">
@@ -34,10 +34,8 @@
 								<th>비밀번호(확인) </th>
 								<td><input type="password" placeholder="비밀번호 확인" name=pwdCheck></td>
 							</tr>
-							<tr>
-								<td colspan="2"  style="text-align: center;"><input class="button pinkButton center" type="button" value="비밀번호 변경" onclick="goUpdatePassword()" style="height: 30px;"></td>
-							</tr>
 						</table>
+						<input class="button pinkButton center" type="button" value="비밀번호 변경" onclick="goUpdatePassword()" style="height: 30px; margin-top: 20px;">
 					</form>
 				</div>
 			</c:otherwise>

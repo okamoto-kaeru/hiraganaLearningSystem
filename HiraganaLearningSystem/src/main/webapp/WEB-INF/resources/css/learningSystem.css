@@ -55,8 +55,8 @@ header{
 
 #headerNav{
 	float: right;
-	margin-bottom: 2em;
-	padding-top: 15px;
+	padding-top: 44px;
+	font-size: 18px;
 }
 
 #headerNav ul li{
@@ -68,19 +68,21 @@ header{
 
 a:link{
 	color:#8899ec;
+	text-decoration: none;
 }
 
 a:hover{
-	color:#a6fffd;
+	color:#1efffa;
+	text-decoration: underline;
 }
 
 a:visited{
 	color:#c488ff;
-	text-decoration: none;
 }
 
 a:visited:hover{
 	color:#f4a6ff;
+	text-decoration: underline;
 }
 
 
@@ -275,4 +277,13 @@ a:visited:hover{
 #tabNav {
 	display: inline-block;
 	margin-bottom: 50px;
+}
+
+#study, #order, #board {
+	color: black;
+}
+
+
+.tabFocus {
+	border: 2px solid orange;
 }

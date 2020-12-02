@@ -191,6 +191,24 @@ $(document).ajaxComplete(function() {
 	$('#start').fadeIn(300);
 });
 
+
+//동영상 다시보기 버튼을 누르면 성적을 저장하고 동영상 페이지로 이동
+function goNewGradeAndGoMovie() {
+	document.frm.action = "goNewGradeAndGoMovie";
+	document.frm.submit();
+}
+
+//다시하기 버튼을 누르면 성적을 저장하고 다시 이 페이지로 이동
+function gradeAndHiraganaWordOneMoreTime() {
+	document.frm.action="gradeAndHiraganaWordOneMoreTime";
+	document.frm.submit();
+}
+
+//단어형 퀴즈가 끝나고 다른행 가기 버튼을 클릭하면, hiraganaHome로 화면 이동
+function gradeAndGoHiraganaHome() {
+	document.frm.action="gradeAndGoHiraganaHome";
+	document.frm.submit();
+}
 </script>    
 
 <%@ include file="../header.jsp" %>
@@ -238,7 +256,7 @@ $(document).ajaxComplete(function() {
 <!-- 스타트 버튼, 다음 문제 버튼 -->
 <input type="button" class="button greenButton center" id="start" value="공부 시작" style="position: absolute; left: 50%; top: 85%; transform: translate(-50%, -50%); height: 90px; display: none; font-size: 2em;">
 <span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="font-size: 2em; width: 600px; height: 80px; position: absolute; top: 80%; left: 50%; transform: translate(-50%, 0px); display: none;">
-<p id="caution" style="color: red;">*음성이 나옵니다.</p>
+<p id="caution" style="color: red; position: absolute; bottom: 10%; right: 15%; background-color: white; font-size: 22px;">*음성이 나옵니다.</p>
 
 <!-- 성적 확인 시 modal 표시 -->
 <div class="modal jsModal">
@@ -255,6 +273,7 @@ $(document).ajaxComplete(function() {
 				<input type="hidden" name="memberId" value="${memberId}">
 				<input type="hidden" name="whatQuiz" value="${whatQuiz}">
 				<input type="hidden" id="score" name="score">
+				<input type="button" class="button orangeButton center" onclick="goNewGradeAndGoMovie()" value="다시 동영상 보기" style="margin-top: 20px; height: 50px;">
 				<input type="button" class="button blueButton center" onclick="goNewGradeAndOneMoreTime()" value="다시 하기" style="margin-top: 20px; height: 50px;">
 				<c:choose>
 					<c:when test='${whatQuiz == "hiraganaAssociativeQuiz"}'>
