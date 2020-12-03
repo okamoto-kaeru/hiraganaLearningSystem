@@ -37,22 +37,6 @@ public class BoardController {
 		word = word.trim();
 		model.addAttribute("word", word);
 		
-		
-		// word에 2개 이상의 단어가 있는 경우
-		if(word.indexOf(" ") > 0) {
-			String newWord = "SELECT * FROM board";
-			int index = word.indexOf(" ");
-			while(index > 0) {
-				String word1 = word.substring(0, index);
-				word = word.substring(index + 1);
-				newWord = "SELECT * FROM (" + newWord + ") WHERE content LIKE '%'|| " + word1 + " ||'%'";
-				index = word.indexOf(" ");
-			}
-			word = "(SELECT * FROM (" + newWord + ") WHERE content LIKE '%'|| " + word + " ||'%')";
-		} else {
-			word = "board WHERE content LIKE '%'|| " + word + " ||'%'";
-		}
-		
 		List<BoardVO> boardList = boardService.getBoardList(word, criteria);
 		model.addAttribute("boardList", boardList);
 		
