@@ -6,9 +6,9 @@ import com.kaeru.eLearning.util.Criteria;
 
 public interface BoardService {
 	
-	int getTotalBoard();
+	int getTotalBoard(String word);
 	
-	List<BoardVO> getBoardList(Criteria criteria);
+	List<BoardVO> getBoardList(String word, Criteria criteria);
 
 	BoardVO getBoard(int bseq);
 
@@ -19,7 +19,9 @@ public interface BoardService {
 	void updateBoard(BoardVO vo);
 
 	// 댓글용
-	List<BoardVO> getReply(int bseq);
+	public int getTotalReply(int bseq);
+	
+	List<BoardVO> getReply(int bseq, Criteria criteria);
 
 	void replyBoard(BoardVO vo);
 

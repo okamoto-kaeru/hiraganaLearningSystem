@@ -4,8 +4,8 @@
 
 <h2>게시판 정보</h2>
 <form action="adminBoardList">
-	<input type="text" name="memberId">
-	<input type="submit" class="button pinkButton" value="검색" style="margin-bottom: 20px;">
+	<input type="text" name="writerId" placeholder="회원 ID를 넣고 검색">
+	<input type="submit" class="button pinkButton adminSearch" value="검색" style="margin-bottom: 20px;">
 </form>
 
 <c:choose>

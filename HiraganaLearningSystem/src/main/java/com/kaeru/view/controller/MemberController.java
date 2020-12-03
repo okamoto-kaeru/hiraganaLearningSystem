@@ -54,8 +54,20 @@ public class MemberController {
 	private GoogleChartService googleChartService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginView() {
-		return "member/login";
+	public String loginView(@RequestParam(value="jump", defaultValue="") String jump,
+						  @RequestParam(value="pseq", defaultValue="") String pseq,
+						  @RequestParam(value="bseq", defaultValue="") String bseq,
+						  @RequestParam(value="hiraganaLine", defaultValue="") String hiraganaLine,
+						  @RequestParam(value="whatQuiz", defaultValue="") String whatQuiz,
+						  Model model) {
+			
+			// 로그인 화면에 도기 전 화면 정보를 Model 객체에 담는다.
+			model.addAttribute("jump", jump);
+			model.addAttribute("pseq", pseq);
+			model.addAttribute("bseq", bseq);
+			model.addAttribute("hiraganaLine", hiraganaLine);
+			model.addAttribute("whatQuiz", whatQuiz);
+			return "member/login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -68,7 +80,7 @@ public class MemberController {
 		
 		MemberVO loginUser = memberService.getMemberByMemberId(vo.getMemberId());
 		
-		// 로그인 화면전 화면 정보를 Model 객체에 담는다.
+		// 로그인 실패시 필요한 전 화면 정보를 Model 객체에 담는다.
 		model.addAttribute("jump", jump);
 		model.addAttribute("pseq", pseq);
 		model.addAttribute("bseq", bseq);

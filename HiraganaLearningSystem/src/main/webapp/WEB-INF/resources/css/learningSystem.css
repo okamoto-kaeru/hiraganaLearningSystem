@@ -19,11 +19,11 @@ html, body{
 }
 
 h1 {
-	color: #e998fa;
+	color: #9fdefd;
 }
 
 h2{
-	color: #9fdefd;
+	color: #ff9c39;
 }
 
 .clear{
@@ -98,7 +98,6 @@ a:visited:hover{
 }
 
 .subMenuProduct {
-	font-size: 2em;
 	float: left; 
 	width: 10%;
 	margin-left: 0;
@@ -214,19 +213,14 @@ a:visited:hover{
 }
 
 
-#replyTable {
+.boardTable {
 	border: 1px solid #ccc;
 	margin-top: 30px;
 }
 
-#replyTable td {
-	border: 1px solid #ccc;
-}
-
-#replyTable th{
+#replyTable th {
 	background-color: #e1c8b5; 
 }
-
 
 .selected {
 	border: 3px solid #ff8040;
@@ -286,4 +280,8 @@ a:visited:hover{
 
 .tabFocus {
 	border: 2px solid orange;
+}
+
+.adminSearch{
+	margin-left: 20px;
 }

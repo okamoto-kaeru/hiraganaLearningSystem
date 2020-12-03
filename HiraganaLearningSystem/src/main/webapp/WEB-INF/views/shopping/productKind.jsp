@@ -6,6 +6,7 @@
 	<%@ include file="productMenu.jsp" %>
 	<div style="width: 80%; float: right;">
 	<h1>상품정보</h1>
+	<c:if test="${empty kindList}"><p style="font-size: 2em;">상품이 없습니다.</p></c:if>
 	<c:forEach items="${kindList}" var="product">
 		<div style="margin-left: auto; margin-right: auto;">
 			<a href="productDetail?pseq=${product.pseq}">

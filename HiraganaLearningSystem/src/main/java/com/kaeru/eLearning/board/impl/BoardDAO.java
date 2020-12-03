@@ -18,13 +18,14 @@ public class BoardDAO {
 	private SqlSessionTemplate mybatis;
 	
 	
-	public int getTotalBoard() {
-		return mybatis.selectOne("BoardDAO.getTotalBoard");
+	public int getTotalBoard(String word) {
+		return mybatis.selectOne("BoardDAO.getTotalBoard", word);
 	}
 	
-	public List<BoardVO> getBoardList(Criteria criteria) {
+	public List<BoardVO> getBoardList(String word, Criteria criteria) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("criteria", criteria);
+		map.put("word", word);
 		return mybatis.selectList("BoardDAO.getBoardList", map);
 	}
 	
@@ -37,6 +38,7 @@ public class BoardDAO {
 	}
 	
 	public void deleteBoard(int bseq) {
+		mybatis.delete("BoardDAO.deleteBoardRep", bseq);
 		mybatis.delete("BoardDAO.deleteBoard", bseq);
 	}
 	
@@ -46,8 +48,15 @@ public class BoardDAO {
 	
 	
 	// 댓글용
-	public List<BoardVO> getReply(int bseq) {
-		return mybatis.selectList("BoardDAO.getReply", bseq);
+	public int getTotalReply(int bseq) {
+		return mybatis.selectOne("BoardDAO.getTotalReply", bseq);
+	}
+	
+	public List<BoardVO> getReply(int bseq, Criteria criteria) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("criteria", criteria);
+		map.put("bseq", bseq);
+		return mybatis.selectList("BoardDAO.getReply", map);
 	}
 	
 	public void replyBoard(BoardVO vo) {

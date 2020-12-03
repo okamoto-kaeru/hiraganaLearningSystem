@@ -3,7 +3,10 @@
 <%@ include file="../header.jsp" %>
 <h1>게시판</h1>
 <input class="button orangeButton center" type="button" name="writeBoard" value="새글 작성" onclick="location.href='writeBoard'" style="width: 50%"><br>
-
+<form action="boardMain">
+	<input type="text" name="word">
+	<input type="submit" class="button pinkButton adminSearch" value="검색" style="margin-bottom: 20px;">
+</form>
 <c:forEach items="${boardList}" var="item">
 	<div style="border: 1px solid #ccc;">
 		<table class="table center" style="width: 100%; table-layout: fixed;">
@@ -27,17 +30,17 @@
 </c:forEach>
 <div class="pagenation">
 	<c:if test="${pageMaker.prev}">
-		<a href="boardMain${pageMaker.makeQuery(pageMaker.startPage-1)}">[← 이전]&nbsp;</a>
+		<a href="boardMain${pageMaker.makeQuery(pageMaker.startPage-1)}&word=${word}">[← 이전]&nbsp;</a>
 	</c:if>
 
 	<!-- [1][2][3]... 표시 부분 -->
 	<c:forEach begin="${pageMaker.startPage}"
 		end="${pageMaker.endPage}" var="index">
-		<a href="boardMain${pageMaker.makeQuery(index)}">[${index}]</a>
+		<a href="boardMain${pageMaker.makeQuery(index)}&word=${word}">[${index}]</a>
 	</c:forEach>
 
 	<c:if test="${pageMaker.next}">
-		<a href="boardMain${pageMaker.makeQuery(pageMaker.endPage+1)}">&nbsp;[다음 →]</a>
+		<a href="boardMain${pageMaker.makeQuery(pageMaker.endPage+1)}&word=${word}">&nbsp;[다음 →]</a>
 	</c:if>
 </div>
 <p>현재 페이지 : ${pageMaker.criteria.pageNumberNow}</p>

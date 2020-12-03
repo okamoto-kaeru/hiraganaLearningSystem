@@ -1,5 +1,6 @@
 package com.kaeru.view.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -29,14 +30,36 @@ public class BoardController {
 	
 	// 게시판 글을 list에 담아 화면 표시
 	@RequestMapping(value="/boardMain")
-	public String getBoardList(Model model, Criteria criteria) {
+	public String getBoardList(@RequestParam(value="word", defaultValue="") String word, Model model, Criteria criteria) {
 		criteria.setNumPerPage(5);
-		List<BoardVO> boardList = boardService.getBoardList(criteria);
+		
+		// 공백 제거
+		word = word.trim();
+		model.addAttribute("word", word);
+		
+		
+		// word에 2개 이상의 단어가 있는 경우
+		if(word.indexOf(" ") > 0) {
+			String newWord = "SELECT * FROM board";
+			int index = word.indexOf(" ");
+			while(index > 0) {
+				String word1 = word.substring(0, index);
+				word = word.substring(index + 1);
+				newWord = "SELECT * FROM (" + newWord + ") WHERE content LIKE '%'|| " + word1 + " ||'%'";
+				index = word.indexOf(" ");
+			}
+			word = "(SELECT * FROM (" + newWord + ") WHERE content LIKE '%'|| " + word + " ||'%')";
+		} else {
+			word = "board WHERE content LIKE '%'|| " + word + " ||'%'";
+		}
+		
+		List<BoardVO> boardList = boardService.getBoardList(word, criteria);
 		model.addAttribute("boardList", boardList);
+		
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCriteria(criteria);
-		pageMaker.setTotalCount(boardService.getTotalBoard());
+		pageMaker.setTotalCount(boardService.getTotalBoard(word));
 		model.addAttribute("pageMaker", pageMaker);
 		
 		return "board/boardMain";
@@ -67,7 +90,7 @@ public class BoardController {
 	
 	// 게시판 한개의 정보를 조회
 	@RequestMapping(value="/getBoard")
-	public String getBoardView(@RequestParam(value="bseq") int bseq, Model model) {
+	public String getBoardView(@RequestParam(value="bseq") int bseq, Model model, Criteria criteria) {
 		// 게시판 정보
 		BoardVO board = boardService.getBoard(bseq);
 		
@@ -76,12 +99,23 @@ public class BoardController {
 		content = content.replaceAll("\r\n", "<br>");
 		board.setContent(content);
 		
+		criteria.setNumPerPage(7);
 		// 댓글 정보
-		List<BoardVO> rep = boardService.getReply(bseq);
+		List<BoardVO> rep = boardService.getReply(bseq, criteria);
+		
+		// 댓글도 줄 바꾸기가 그대로 표시할 수 있게 해줌
+		for(int i = 0 ; i < rep.size() ; i++) {
+			rep.get(i).setReplyContent(rep.get(i).getReplyContent().replaceAll("\r\n", "<br>"));
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCriteria(criteria);
+		pageMaker.setTotalCount(boardService.getTotalReply(bseq));
 		
 		// model에 저장
 		model.addAttribute("board", board);
 		model.addAttribute("rep", rep);
+		model.addAttribute("pageMaker", pageMaker);
 		
 		return "board/boardDetail";
 	}

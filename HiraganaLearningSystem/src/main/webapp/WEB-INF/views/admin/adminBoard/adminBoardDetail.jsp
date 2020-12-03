@@ -3,12 +3,12 @@
 <%@ include file="../adminHeader.jsp" %>
 <h1>게시판</h1>
 
-<table class="table center" style="width: 100%;">
+<table class="table center boardTable" style="width: 100%;">
 	<tr>
 		<th class="center" colspan="2" style="font-size: 2em;">${board.title}</th>
 	</tr>
 	<tr>
-		<td colspan="2" style="text-align: left; white-space: prewrap;">${board.content}</td>
+		<td colspan="2" style="text-align: left; white-space: prewrap; background-color: ivory; font-size: 1.3em;">${board.content}</td>
 	</tr>
 	<tr>
 		<td style="text-align: left;">
@@ -24,7 +24,7 @@
 		<td colspan="2"><input type="button" class="button blueButton" value="삭제" onclick="location.href='deleteBoardAdmin?bseq=${board.bseq}'"></td>
 	</tr>
 </table>
-<table id="replyTable">
+<table id="replyTable" class="table boardTable center" style="width: 80%;">
 	<tr>
 		<th colspan="2">댓글</th>
 	</tr>
@@ -32,7 +32,7 @@
 		<c:when test="${!empty rep}">
 			<c:forEach items="${rep}" var="reply">
 				<tr>
-					<td colspan="2" style="text-align: left; white-space: prewrap;">${reply.replyContent}<br> 
+					<td colspan="2" style="text-align: left; white-space: prewrap; background-color: ivory; padding: 20px;">${reply.replyContent}<br><br>
 						<span style="text-align: left; font-size: 13px; background-color: #ebffd5;">
 							작성자: ${reply.replyId}
 						</span>
@@ -53,5 +53,20 @@
 		</c:otherwise>
 	</c:choose>
 </table>
+<div class="pagenation">
+	<c:if test="${pageMaker.prev}">
+		<a href="getBoardAdmin${pageMaker.makeQuery(pageMaker.startPage-1)}&bseq=${board.bseq}">[← 이전]&nbsp;</a>
+	</c:if>
+
+	<!-- [1][2][3]... 표시 부분 -->
+	<c:forEach begin="${pageMaker.startPage}"
+		end="${pageMaker.endPage}" var="index">
+		<a href="getBoardAdmin${pageMaker.makeQuery(index)}&bseq=${board.bseq}">[${index}]</a>
+	</c:forEach>
+
+	<c:if test="${pageMaker.next}">
+		<a href="getBoardAdmin${pageMaker.makeQuery(pageMaker.endPage+1)}&bseq=${board.bseq}">&nbsp;[다음 →]</a>
+	</c:if>
+</div>
 
 <%@ include file="../../footer.jsp" %>

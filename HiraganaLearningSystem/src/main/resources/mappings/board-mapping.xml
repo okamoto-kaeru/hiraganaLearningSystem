@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BoardDAO">
-	<select id="getTotalBoard" resultType="int">
-		SELECT COUNT(*) FROM board
+	<select id="getTotalBoard" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM board WHERE content LIKE '%'|| #{word} ||'%'
 	</select>
 	
 	<select id="getBoardList" parameterType="HashMap" resultType="board">
 	<![CDATA[
 		SELECT * FROM (SELECT ROWNUM AS rn, bseq, title, content, writerId, writeDate 
-							FROM (SELECT * FROM board ORDER BY bseq DESC) 
+							FROM (SELECT * FROM board WHERE content LIKE '%'|| #{word} ||'%' ORDER BY bseq DESC)
 							WHERE ROWNUM <= #{criteria.pageNumberNow} * #{criteria.numPerPage})
 				WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}
 	]]>
@@ -21,18 +21,33 @@
 	<insert id="writeBoard">
 		INSERT INTO board(bseq, title, content, writerId) VALUES(board_seq.NEXTVAL, #{title}, #{content}, #{writerId})
 	</insert>
-
+	
+	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM board WHERE bseq=#{bseq}
+	</delete>
+	
+	<!-- 댓글 있으면 무결성 제약조건위배로 되니까 댓글도 삭제 -->
+	<delete id="deleteBoardRep" parameterType="int">
+		DELETE FROM board_rep WHERE bseq=#{bseq}
 	</delete>
 	
 	<update id="updateBoard" parameterType="board">
 		UPDATE board SET title=#{title}, content=#{content} WHERE writerId=#{writerId} AND bseq=#{bseq}
 	</update>
 	
-	<!-- 댓글용 -->	
-	<select id="getReply" resultType="board">
-		SELECT * FROM board_rep WHERE bseq=#{bseq} ORDER BY replySeq ASC
+	<!-- 댓글용 -->
+	<select id="getTotalReply" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM board_rep WHERE bseq=#{bseq}
+	</select>
+	
+	<select id="getReply" parameterType="HashMap" resultType="board">
+	<![CDATA[
+		SELECT * 
+			FROM (SELECT ROWNUM as rn, replySeq, bseq, replyContent, replyId, replyDate 
+				FROM(SELECT * FROM board_rep WHERE bseq=#{bseq} ORDER BY replySeq ASC) WHERE ROWNUM <= #{criteria.pageNumberNow} * #{criteria.numPerPage})
+			WHERE rn > (#{criteria.pageNumberNow} - 1) * #{criteria.numPerPage}
+	]]>
 	</select>
 	
 	<insert id="replyBoard">

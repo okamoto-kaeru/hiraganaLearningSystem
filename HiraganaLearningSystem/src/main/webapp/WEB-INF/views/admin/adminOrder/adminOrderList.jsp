@@ -4,8 +4,8 @@
 
 <h2>주문 정보</h2>
 <form action="adminOrderList">
-	<input type="text" name="memberName">
-	<input type="submit" class="button pinkButton" value="검색">
+	<input type="text" name="memberName" placeholder="회원 이름을 넣고 검색">
+	<input type="submit" class="button pinkButton adminSearch" value="검색">
 </form>
 
 <c:choose>

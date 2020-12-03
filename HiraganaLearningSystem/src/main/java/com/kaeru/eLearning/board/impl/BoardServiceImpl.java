@@ -17,13 +17,13 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public int getTotalBoard() {
-		return boardDAO.getTotalBoard();
+	public int getTotalBoard(String word) {
+		return boardDAO.getTotalBoard(word);
 	}
 	
 	@Override
-	public List<BoardVO> getBoardList(Criteria criteria) {
-		return boardDAO.getBoardList(criteria);
+	public List<BoardVO> getBoardList(String word, Criteria criteria) {
+		return boardDAO.getBoardList(word, criteria);
 	}
 
 	@Override
@@ -45,10 +45,15 @@ public class BoardServiceImpl implements BoardService {
 	public void updateBoard(BoardVO vo) {
 		boardDAO.updateBoard(vo);
 	}
-
+	
 	@Override
-	public List<BoardVO> getReply(int bseq) {
-		return boardDAO.getReply(bseq);
+	public int getTotalReply(int bseq) {
+		return boardDAO.getTotalReply(bseq);
+	}
+	
+	@Override
+	public List<BoardVO> getReply(int bseq, Criteria criteria) {
+		return boardDAO.getReply(bseq, criteria);
 	}
 
 	@Override

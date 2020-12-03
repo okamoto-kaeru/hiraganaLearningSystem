@@ -4,8 +4,8 @@
 
 <h2>상품 정보</h2>
 <form action="adminProduct">
-	<input type="text" name="productName">
-	<input type="submit" class="button pinkButton" value="검색">
+	<input type="text" name="productName" placeholder="상품 이름을 넣고 검색">
+	<input type="submit" class="button pinkButton adminSearch" value="검색">
 </form>
 <div style="text-align: right;">
 	<input type="button" class="button orangeButton" value="새 상품 추가" onclick="location.href='insertProduct'">

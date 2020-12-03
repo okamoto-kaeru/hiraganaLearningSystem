@@ -263,7 +263,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="getBoardAdmin")
-	public String getBoardAdmin(@RequestParam(value="bseq") int bseq, Model model) {
+	public String getBoardAdmin(@RequestParam(value="bseq") int bseq, Model model, Criteria criteria) {
 		// 게시판 정보
 		BoardVO board = boardService.getBoard(bseq);
 		
@@ -273,10 +273,22 @@ public class AdminController {
 		board.setContent(content);
 		
 		// 댓글 정보
-		List<BoardVO> rep = boardService.getReply(bseq);
+		criteria.setNumPerPage(7);
+		// 댓글 정보
+		List<BoardVO> rep = boardService.getReply(bseq, criteria);
+		
+		// 댓글도 줄 바꾸기가 그대로 표시할 수 있게 해줌
+		for(int i = 0 ; i < rep.size() ; i++) {
+			rep.get(i).setReplyContent(rep.get(i).getReplyContent().replaceAll("\r\n", "<br>"));
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCriteria(criteria);
+		pageMaker.setTotalCount(boardService.getTotalReply(bseq));
 		
 		model.addAttribute("board", board);
 		model.addAttribute("rep", rep);
+		model.addAttribute("pageMaker", pageMaker);
 		
 		return "admin/adminBoard/adminBoardDetail";
 	}
@@ -307,6 +319,7 @@ public class AdminController {
 	public String hiraganaWordListView(@RequestParam(value="hiraganaWordKind", defaultValue="") String hiraganaWordKind, Criteria criteria, Model model) {
 		List<HiraganaWordQuizVO> hiraganaWordList = workerService.getHiraganaWord(hiraganaWordKind, criteria);
 		model.addAttribute("hiraganaWordList", hiraganaWordList);
+		model.addAttribute("hiraganaWordKind", hiraganaWordKind);
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCriteria(criteria);

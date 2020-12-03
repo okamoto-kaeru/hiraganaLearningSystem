@@ -4,10 +4,10 @@
 
 <h2>상품 정보</h2>
 <form action="hiraganaWordList">
-	<input type="text" name="hiraganaWordKind">
-	<input type="submit" class="button pinkButton" value="검색">
+	<input type="text" name="hiraganaWordKind" placeholder="단어 종류를 넣고 검색">
+	<input type="submit" class="button pinkButton adminSearch" value="검색">
 </form>
-<div style="text-align: right;">
+<div style="text-align: right; margin-top: -50px;">
 	<input type="button" class="button orangeButton" value="새 단어 등록" onclick="location.href='insertHiraganaWord'">
 </div>
 <table class="table center" style="margin-top: 30px;">

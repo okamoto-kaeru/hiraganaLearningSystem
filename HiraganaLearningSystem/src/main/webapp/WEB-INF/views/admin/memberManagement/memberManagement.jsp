@@ -4,8 +4,8 @@
 
 <h2>회원 정보</h2>
 <form action="memberList">
-	<input type="text" name="memberName">
-	<input type="submit" class="button pinkButton" value="검색">
+	<input type="text" name="memberName" placeholder="회원 이름을 넣고 검색">
+	<input type="submit" class="button pinkButton adminSearch" value="검색">
 </form>
 
 <table class="table center" style="margin-top: 30px; border-spacing: 1em 0.5em;">

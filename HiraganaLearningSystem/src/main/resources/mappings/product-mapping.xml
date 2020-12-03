@@ -19,6 +19,6 @@
 	</select>
 	
 	<select id="getProductListByKind" parameterType="String" resultType="product">
-		SELECT * FROM product WHERE kind=#{kind} ORDER BY productName
+		SELECT * FROM product WHERE kind=#{kind} AND useyn='y' ORDER BY productName
 	</select>
 </mapper>

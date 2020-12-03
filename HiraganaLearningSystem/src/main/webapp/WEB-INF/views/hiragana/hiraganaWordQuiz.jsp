@@ -223,7 +223,7 @@ function gradeAndGoHiraganaHome() {
 	<span id="amountOfQuiz" style="font-size: 35px; margin-left: 50px; position: absolute; top: 10px; left: -30px;">문제 1</span>
 	<button class="button pinkButton quizButton" onclick="$('#inputWord').text('')" style="left: 2%">다시 입력</button>
 	<span id="countDown" style="font-size: 5em; margin-left: 50px; position: absolute; top: 10px; right: 30px; color: #5151ff">시작!</span>
-	<button class="button orangeButton quizButton" id="answerButton" style="right: 2%">답하기</button>
+	<button class="button orangeButton quizButton" id="answerButton" style="right: 2%">답 제출</button>
 	<img id="wordImage" width="267px" height="150px">
 		<div>
 			<span id="inputWord" style="text-align: center; font-size: 5em; color: orange;"></span>
