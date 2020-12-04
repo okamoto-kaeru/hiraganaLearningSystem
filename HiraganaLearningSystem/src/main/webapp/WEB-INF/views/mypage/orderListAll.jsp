@@ -5,7 +5,7 @@
 	<div style="width: 15%; margin-top: 80px;float: left">
 	<%@ include file="orderMenu.jsp" %>
 	</div>
-	<div style="width: 85%; margin-top: 30px;float: right">
+	<div style="width: 83%; margin-top: 30px;float: right">
 		<h1>주문 정보</h1>
 		
 		<c:choose>

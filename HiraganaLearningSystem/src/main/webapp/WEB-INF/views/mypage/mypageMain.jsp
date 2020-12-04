@@ -81,7 +81,7 @@
 				<td>
 					<c:choose>
 						<c:when test="${order}">
-							<a href="orderList">발송을 기다리는 <span style='color: orange; font-size: 1.5em'>상품이 있습니다</span><br> →　주문내역 보기</a>
+							<a href="orderList">발송을 기다리는 <br><span style='color: orange; font-size: 1.5em'>상품이 있습니다</span><br> →　주문내역 보기</a>
 						</c:when>
 						<c:otherwise>
 							발송을 기다리는 상품이 없습니다.

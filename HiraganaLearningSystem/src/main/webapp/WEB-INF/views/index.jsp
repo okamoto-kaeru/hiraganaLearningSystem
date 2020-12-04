@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 
-<table id="indexTable" style="border-spacing: 60px;">
+<table class="responseTable" id="indexTable" style="border-spacing: 60px;">
 	<tr>
 		<td><img class="pointer" src="images/linkImages/goStudy.png" height=250px width=400px onclick="location.href='hiraganaHome'"></td>
 		<td><img class="pointer" src="images/linkImages/goMypage.png" height=250px width=400px onclick="location.href='goMypage'"></td>

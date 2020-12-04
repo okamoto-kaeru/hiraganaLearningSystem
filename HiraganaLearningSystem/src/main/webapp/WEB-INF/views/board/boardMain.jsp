@@ -9,18 +9,18 @@
 </form>
 <c:forEach items="${boardList}" var="item">
 	<div style="border: 1px solid #ccc;">
-		<table class="table center" style="width: 100%; table-layout: fixed;">
+		<table class="table center responseTable" style="width: 100%; table-layout: fixed;">
 			<tr>
-				<th class="center" colspan="2" style="font-size: 2em;"><a href="getBoard?bseq=${item.bseq}">${item.title}</a></th>
+				<th class="center" colspan="2" style="font-size: 0.3rem;"><a href="getBoard?bseq=${item.bseq}">${item.title}</a></th>
 			</tr>
 			<tr>
-				<td class="center" id="boardContent" colspan="2">${item.content}</td>
+				<td class="center" id="boardContent" colspan="2" style="font-size: 0.23rem;">${item.content}</td>
 			</tr>
 			<tr>
-				<td style="text-align: left;">
+				<td style="text-align: left; font-size: 0.13rem;">
 					작성자: ${item.writerId}
 				</td>
-				<td style="text-align: right; font-size: 13px;">
+				<td style="text-align: right; font-size: 0.13rem;">
 					작성일: <fmt:formatDate value="${item.writeDate}" pattern="yyyy년 MM월 dd일 -- HH시 mm분"/>
 				</td>
 				

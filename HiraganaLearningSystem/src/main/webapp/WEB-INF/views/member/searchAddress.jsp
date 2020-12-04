@@ -17,7 +17,7 @@
 </script>
 </head>
 <body>
-	<div style="margin-left: 20px;">
+	<div style="margin-left: 0.2rem;">
 		<h1>주소 찾기</h1>
 		<form name="frm" action="findAddress" method="post">
 			동: <input type="text" name="dong" placeholder="동을 입력해 주세요">
@@ -26,14 +26,14 @@
 	</div>
 		<hr color="lightgreen" width="100%">
 		<c:if test="${!empty addressList}">
-			<table class="table">
+			<table class="table" style="font-size: 0.3rem;">
 				<tr>
 					<th>우편번호</th><th>주소</th>
 				</tr>
 				<c:forEach items="${addressList}" var="address">
 					<tr>
 						<td>${address.zipNum}</td>
-						<td><a onclick="result('${address.zipNum}', '${address.sido}', '${address.gugun}', '${address.dong}')">${address.sido} ${address.gugun} ${address.dong}</a></td>
+						<td><a href="" onclick="result('${address.zipNum}', '${address.sido}', '${address.gugun}', '${address.dong}')">${address.sido} ${address.gugun} ${address.dong}</a></td>
 					</tr>
 				</c:forEach>
 			</table>

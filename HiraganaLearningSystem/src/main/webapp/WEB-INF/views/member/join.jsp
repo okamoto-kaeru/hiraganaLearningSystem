@@ -49,7 +49,7 @@ function postZip() {
 			</tr>
 			<tr>
 				<th>주소 </th>
-				<td><input type="text" name="address1" placeholder="oo시 oo구 oo동 oo" size="50em"></td>
+				<td><input class="responseButtonCenter" type="text" name="address1" placeholder="oo시 oo구 oo동 oo" size="50em"></td>
 			</tr>
 			<tr>
 				<th>동 이하 </th>
@@ -60,7 +60,7 @@ function postZip() {
 				<td><input type="text" name="phone" placeholder="전화번호" size="20em"></td>
 			</tr>
 			<tr>
-				<td colspan="2"  style="text-align: center;"><input class="button pinkButton center" type="button" value="회원 가입" onclick="join_save()" style="height: 30px;"></td>
+				<td colspan="2"  style="text-align: center;"><input class="button pinkButton center responseButtonCenter" type="button" value="회원 가입" onclick="join_save()" style="height: 30px;"></td>
 			</tr>
 		</table>
 	</form>

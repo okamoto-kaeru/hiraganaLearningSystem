@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <h1 style="font-size: 3em;">${hiraganaLine} 학습</h1>
-<table class="table" id="indexTable" style="border-spacing: 60px;">
+<table class="table responseTableBlock" id="indexTable" style="border-spacing: 60px;">
 	<tr>
 	    <td style="font-size: 1.5em; text-align: left;">① 처음은 동영상을 보고 <br> <span style="color: pink; font-size: 1.5em;">연상법</span>으로 외워 봅시다!</td>
 		<td><a href="goHiraganaMovie?hiraganaLine=${hiraganaLine}"><img src="images/linkImages/goMovie.png" height=250px width=400px></a></td>

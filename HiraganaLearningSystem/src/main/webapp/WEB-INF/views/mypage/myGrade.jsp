@@ -40,7 +40,13 @@
             subtitle: '각 행의 연상법 1글자, 히라가나 1글자, 단어형의 퀴즈 성적',
           },
           bars: 'vertical',
-          vAxis: {format: 'decimal'},
+          vAxis: {
+              viewWindowMode:'explicit',
+              viewWindow: {
+                max: 100,
+                min:0
+              },
+          },
           height: 400,
           colors: ['#1b9e77', '#d95f02', '#7570b3']
         };
@@ -59,7 +65,7 @@
 	<div id="container">
 		<header>
 			<img class="pointer" id="headerLogo" src="images/kaeruClass.jpg" onclick="location.href='index'" height="100px" width="200px">
-			<nav id="headerNav">
+			<nav id="headerNavPc">
 				<ul>
 					<c:choose>
 						<c:when test="${empty loginUser}">

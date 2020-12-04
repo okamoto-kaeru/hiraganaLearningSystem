@@ -12,10 +12,10 @@
 	</tr>
 	<tr>
 		<td style="text-align: left;">
-			<span style="text-align: left; font-size: 13px; background-color: #ebffd5;">
+			<span style="text-align: left; font-size: 0.13rem; background-color: #ebffd5;">
 				작성자: ${board.writerId}
 			</span>
-			<span style="float: right; text-align: right; font-size: 12px; background-color: #ebffd5;">
+			<span style="float: right; text-align: right; font-size: 0.12rem; background-color: #ebffd5;">
 				작성일: <fmt:formatDate value="${board.writeDate}" pattern="yyyy년 MM월 dd일 -- HH시 mm분"/>
 			</span>
 		</td>
@@ -34,11 +34,11 @@
 		<c:when test="${!empty rep}">
 			<c:forEach items="${rep}" var="reply">
 				<tr>
-					<td colspan="2" style="text-align: left; white-space: prewrap; background-color: ivory; padding: 20px;">${reply.replyContent}<br><br>
-						<span style="text-align: left; font-size: 13px; background-color: #ebffd5;">
+					<td colspan="2" style="text-align: left; white-space: prewrap; background-color: ivory; padding: 0.2rem;">${reply.replyContent}<br><br>
+						<span style="text-align: left; font-size: 0.13rem; background-color: #ebffd5;">
 							작성자: ${reply.replyId}
 						</span>
-						<span style="float: right; text-align: right; font-size: 12px; background-color: #ebffd5;">
+						<span style="float: right; text-align: right; font-size: 0.12rem; background-color: #ebffd5;">
 							작성일: <fmt:formatDate value="${reply.replyDate}" pattern="yyyy년 MM월 dd일 -- HH시 mm분"/>
 						</span>
 						<c:if test="${!empty loginUser && reply.replyId == loginUser.memberId}">
@@ -73,11 +73,11 @@
 	</c:if>
 </div>
 <p>현재 페이지 : ${pageMaker.criteria.pageNumberNow}</p>
-<div style="margin-top: 20px; margin-bottom: 30px;">
+<div style="margin-top: 0.2rem; margin-bottom: 0.3rem;">
 	<c:choose>
 		<c:when test="${!empty loginUser}">
 			<form name="frm" method="post" action="repWrite">
-				<textarea rows="10" cols="80" name="replyContent" placeholder="댓글 쓰기"></textarea><br>
+				<textarea rows="10" cols="100" name="replyContent" placeholder="댓글 쓰기"></textarea><br>
 				<input type="hidden" name="bseq" value="${board.bseq}">
 				<input type="submit" class="button orangeButton" name="reply" value="댓글 작성" onclick="return repCheck()">
 			</form>
