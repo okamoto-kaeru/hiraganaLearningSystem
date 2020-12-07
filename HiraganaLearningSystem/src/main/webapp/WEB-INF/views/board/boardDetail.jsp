@@ -8,7 +8,7 @@
 		<th class="center" colspan="2" style="font-size: 2em;">${board.title}</th>
 	</tr>
 	<tr>
-		<td colspan="2" style="text-align: left; white-space: prewrap; background-color: ivory; font-size: 1.3em;">${board.content}</td>
+		<td colspan="2" style="text-align: left; background-color: ivory; font-size: 1.3em;">${board.content}</td>
 	</tr>
 	<tr>
 		<td style="text-align: left;">
@@ -46,6 +46,7 @@
 								<input type="button" class="button blueButton" value="댓글 삭제" onclick="location.href='deleteReply?bseq=${board.bseq}&replySeq=${reply.replySeq}'">
 							</div>
 						</c:if>
+						<hr>
 					</td>
 				</tr>
 			</c:forEach>

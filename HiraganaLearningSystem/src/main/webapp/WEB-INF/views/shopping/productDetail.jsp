@@ -15,17 +15,17 @@
 	}
 </script>
 
-<div style="margin: 20px, 0;">
+<div style="margin: 0.2rem 0;">
 	<%@ include file="productMenu.jsp" %>
-	<div style="width: 80%; float: right; margin-bottom: 20px;">
+	<div style="width: 80%; float: right; margin-bottom: 0.2rem;">
 		<h1>상품 상세 정보</h1>
 		<form name="frm">
-			<table class="center" id="detailTable" style="text-align: center; font-size: 25px; margin-bottom: 20px;">
+			<table class="center" id="detailTable" style="text-align: center; font-size: 0.25rem; margin-bottom: 0.2rem;">
 				<tr>
-					<td><img src="images/productImages/${productVO.image}" width="300" height="300"></td>
+					<td><img class="poroductDetailImage" src="images/productImages/${productVO.image}"></td>
 				</tr>
 				<tr>
-					<th><span style="color: #00cc00; font-size: 40px;">${productVO.productName}</span></th>
+					<th><span style="color: #00cc00; font-size: 0.4rem;">${productVO.productName}</span></th>
 				</tr>
 				<tr>
 					<td>가격: ${productVO.price2}</td>

@@ -10,6 +10,10 @@ body{
 	font-size: 0.18rem;
 }
 
+.spOnly {
+	display: none;
+}
+
 /* 스마트 폰용 메뉴 */
 .sp-nav {
 	display: none;
@@ -134,6 +138,10 @@ a:visited:hover{
 	float: left;
 }
 
+#responseJoinButton {
+	display: none;
+}
+
 .inputForm {
 	padding: 0.1rem; 
 	width: 2.5rem;
@@ -150,6 +158,25 @@ a:visited:hover{
     border-spacing: 0px 10px; border-spacing: 0rem 0.1rem;
 }
 
+.joinFormTable td {
+	margin-left: 0.1rem;
+}
+
+.detailInfoDiv {
+	margin: 0 auto;
+	width: 60%;
+	text-align: left;
+}
+
+.detailInfoLabel {
+	background-color: #ceffdf;
+	padding: 0.05rem;
+}
+
+.detailInfo {
+	margin: 0.1rem 0 0.1rem 0.3rem;
+}
+
 .tableDiv {
 	width: 38%; 
 	float: left; 
@@ -162,6 +189,33 @@ a:visited:hover{
 
 #addInfo{
 	margin-top: 30px; margin-top: 0.3rem;
+}
+
+.indexImages {
+	height: 2.5rem;
+	width: 4rem;
+}
+
+.mypageImages {
+	height: 1rem;
+	width: 1.5rem;
+}
+
+.selectImages {
+	height: 2.5rem;
+	width: 4rem;
+}
+
+.movieFlame {
+	width:5.6rem; 
+	height:3.15rem;
+}
+
+#explain {
+	 width: 9.6rem;
+	 height: 5.8rem;
+	 position: absolute;
+	 top: 1.2rem;
 }
 
 
@@ -205,6 +259,12 @@ a:visited:hover{
 	color: #bb0004;
 }
 
+.modalButton {
+	 margin-top: 0.2rem; 
+	 height: 0.5rem; 
+	 font-size: 0.3rem;
+}
+
 #goJoinButton {
 	width: 1.2rem;
 }
@@ -219,6 +279,10 @@ a:visited:hover{
 	float: left;
 }
 
+#indexTable {
+	margin-top: 0.5rem;
+}
+
 
 #indexTable tr{
 	padding: 10px, 0;
@@ -230,6 +294,10 @@ a:visited:hover{
 
 #joinMain table{
 	margin: auto;
+}
+
+.spMypageTable {
+	display: none;
 }
 
 .table{
@@ -278,6 +346,23 @@ a:visited:hover{
 	border: 3px solid #ff8040;
 }
 
+.productItems {
+	width: 2rem;
+	height: 2.5rem;
+	margin-bottom: 0.3rem;
+}
+
+.productImages {
+	width: 1rem;
+	height: 1rem;
+	margin-top: 0.2rem;
+}
+
+.poroductDetailImage {
+	width: 3rem;
+	height: 3rem;
+}
+
 
 /* modal window */
 .modal {
@@ -299,6 +384,7 @@ a:visited:hover{
 
 .modalContent {
 	background-color: #fff;
+	width: 45%;
 	left: 50%;
 	top: 50%;
 	padding: 40px; padding: 0.4rem;
@@ -306,9 +392,14 @@ a:visited:hover{
 	transform: translate(-50%, -50%);
 }
 
+.judge {
+	width: 4rem;
+	 height: 4rem;
+}
+
+
 #hiraganaInput img{
-	width: auto;
-	height: 8.5%;
+	width: 0.65rem;
 	cursor : pointer;
 	display: none;
 }
@@ -338,7 +429,10 @@ a:visited:hover{
 	margin-left: 20px; margin-left: 0.2rem;
 }
 
-
+#wordImage {
+	width: 2.67rem;
+	height: 1.5rem;
+}
 
 
 /* ----------- Responsive design ---------- */
@@ -429,10 +523,13 @@ a:visited:hover{
 	.sp-nav li {
 		margin: 0;
 		padding: 0;
+		font-size: 25px;
+		color: aqua;
+		list-style: none;
 	}
 	
 	.sp-nav li span {
-		font-size: 15px;
+		font-size: 25px;
 		color: #fff;
 	}
 	
@@ -485,12 +582,12 @@ a:visited:hover{
 	    display: flex;
 	    flex-direction: column;
 	    width: 100%;
-	    min-width: 420px;
+	    min-width: 320px;
 	}
 	
 	#indexTable img {
-		width: 60%;
-		height: auto;
+		margin-top: 0.2rem;
+		margin-bottom: 0.1rem;
 	}
 	
 	/* -------------login page----------- */
@@ -511,14 +608,47 @@ a:visited:hover{
 		margin-left: 10%;
 	}
 	
-	#goJoinButton {
-		width: 30%;
-		display: block;
-		margin-left: 45%;
-	}
-	
 	#loginButton {
 		width: 50%;
+	}
+	
+	#goJoinButton {
+		display: none;
+	}
+	
+	#responseJoinButton {
+		width: 20%;
+	    position: absolute;
+	    display: block;
+	    left: 68%;
+	    top: 23%;
+	}
+	
+	/* --------------- mypage ------------------ */
+	.pcMypageTable {
+		display: none;
+	}
+	
+	.spMypageTable {
+		display: block;
+		border-spacing: 0.6rem;
+	}
+	
+	.spMypageTable th {
+		margin-bottom: 0.2rem;
+	}
+	
+	.spMypageTable tr {
+		margin-bottom: 0.3rem;
+	}
+	
+	.spMypageTable th, .spMypageTable td {
+		width: 100%;
+		display: block;
+	}
+	
+	#tabBody {
+		margin: 0 auto;
 	}
 	
 	.responseTable {
@@ -533,11 +663,10 @@ a:visited:hover{
 	.responseTableBlock {
 		width: 100%;
 		text-align: center;
-		margin-left: 10%;
 	}
 
 	.responseTableBlock th, .responseTableBlock td {
-		width: 80%;
+		width: 100%;
 		display: block;
 	}
 
@@ -545,8 +674,26 @@ a:visited:hover{
 		width: 80%;
 	}
 	
-	.responseButtonCenter {
-		margin: 0 auto;
+	textarea {
 		width: 100%;
 	}
+	
+	.spOnly {
+		display: block;
+	}
+	
+	.detailInfoDiv {
+		width: 90%;
+	}
+	
+	#explain {
+	    width: 7.9rem;
+	    height: 4.2rem;
+	}
+	
+	.modalContent {
+		width: 80%;
+		top: 10%;
+    	transform: translateX(-50%);
+    }
 }

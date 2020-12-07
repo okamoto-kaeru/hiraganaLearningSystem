@@ -259,9 +259,9 @@ public class MemberController {
 				model.addAttribute("cart", true);
 				String productName = cartList.get(0).getProductName();
 				if(cartList.size() == 1) {
-					model.addAttribute("cartInfo", "장바구니에<br><span style='color: orange; font-size: 1.5em'>" + productName + "</span><br>이/가 있습니다.");
+					model.addAttribute("cartInfo", "장바구니에<br><span style='color: orange; font-size: 0.4rem'>" + productName + "</span><br>이/가 있습니다.");
 				} else {
-					model.addAttribute("cartInfo", "장바구니에<br><span style='color: orange; font-size: 1.5em'>" + productName + "</span> 외 <span style='color: red; font-size: 1.5em'>" + (cartList.size() - 1) + "개</span><br>상품이 있습니다.");
+					model.addAttribute("cartInfo", "장바구니에<br><span style='color: orange; font-size: 0.4rem'>" + productName + "</span> 외 <span style='color: red; font-size: 0.4rem'>" + (cartList.size() - 1) + "개</span><br>상품이 있습니다.");
 				}		
 			}
 			

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../header.jsp" %>
 
-<script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(window).on('load', function() {
 	
@@ -212,8 +212,6 @@ function gradeAndGoHiraganaHome() {
 }
 </script>    
 
-<%@ include file="../header.jsp" %>
-
 <!-- 히라가나 퀴즈 화면 -->
 <div class="test" style="height: 510px; position: relative; top: 30px; padding-top: 20px; padding-bottom: 20px;">
 <span id="amountOfQuiz" style="font-size: 35px; margin-left: 50px; position: absolute; top: 10px; left: -30px;">문제 1</span><span id="countDown" style="font-size: 5em; margin-left: 50px; position: absolute; top: 10px; right: 30px; color: #5151ff">시작!</span>
@@ -225,16 +223,16 @@ function gradeAndGoHiraganaHome() {
 </div>
 
 <!-- o, x 이미지 -->
-<img id="collectImage" class="center judge" src="images/quiz/collect.png" width="400px" height="400px" style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, 0); display: none;">
-<img id="wrongImage" class="center judge" src="images/quiz/wrong.png" width="400px" height="400px" style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, 0); display: none;">
+<img id="collectImage" class="center judge" src="images/quiz/collect.png" style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, 0); display: none;">
+<img id="wrongImage" class="center judge" src="images/quiz/wrong.png" style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, 0); display: none;">
 
 <!-- hiragana 퀴즈에 메인 이미지 -->
 <c:choose>
 	<c:when test='${whatQuiz == "hiraganaAssociativeQuiz"}'>
-		<img id="explain" src="images/linkImages/hiraganaQuizAssociateExplain.png" width="960px" height="580px" style="position: absolute; top: 130px;">
+		<img id="explain" src="images/linkImages/hiraganaQuizAssociateExplain.png">
 	</c:when>
 	<c:otherwise>
-		<img id="explain" src="images/linkImages/hiraganaQuizTextExplain.png" width="960px" height="580px" style="position: absolute; top: 130px;">
+		<img id="explain" src="images/linkImages/hiraganaQuizTextExplain.png">
 	</c:otherwise>
 </c:choose>
 

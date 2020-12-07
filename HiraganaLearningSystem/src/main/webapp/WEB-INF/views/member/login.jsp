@@ -13,6 +13,7 @@
 			<h1>로그인</h1>
 			<div id="loginLogoDiv">
 				<img class="pointer" src="images/kaeruClass.jpg" id="mainLogo" alt="메인 페이지로 이동" onclick="location.href='index'">
+				<input type="button" id="responseJoinButton" name="new_user" class="button pinkButton" onclick="location.href='join'" value="신규가입">
 			</div>
 			<div class="tableDiv">
 				<table class="responseTableBlock">
