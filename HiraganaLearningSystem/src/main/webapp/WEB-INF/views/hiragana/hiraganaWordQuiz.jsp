@@ -31,14 +31,14 @@ $(window).on('load', function() {
 	var collectAnswerArr = new Array(10);	// 정답
 	var resultOX = new Array(10);	// 결과 ox
 	var amountOfCollectAnswer = 0;   // to show the score
-	var countDown = 11;  // doTest()에서 쓰는 countdown변수 선언
+	var countDown;  // doTest()에서 쓰는 countdown변수 선언
 	var answer; // answer를 담을 변수 선언
 	
 	// 히라가나 퀴즈 구현
 	function doTest() {	
 		makeAnswer();
 		
-		countDown = 11;
+		countDown = 21;
 		var id = setInterval(function() {
 			if(countDown == 1) {
 				clearInterval(id);
@@ -141,6 +141,7 @@ $(window).on('load', function() {
 		var audio = $('#hiraganaBGSound');
 		audio.prop('volume', 0.4);
 		audio.get(0).play();
+		$('.testScreen').fadeIn(300);
 		
 		// 설명화면을 제거
 		$('#explain').fadeOut(500);
@@ -217,19 +218,19 @@ function gradeAndGoHiraganaHome() {
 </script>    
 
 <!-- 히라가나 퀴즈 화면 -->
-<div class="test" style="height: 2.5rem; position: relative; top: 0.1rem; padding-top: 0.1rem; padding-bottom: 0.1rem;">
+<div class="testScreen" style="height: 2.5rem; position: relative; top: 0.3rem; padding-top: 0.1rem; padding-bottom: 0.1rem; display: none;">
 	<span id="amountOfQuiz" style="font-size: 0.35rem; margin-left: 0.5rem; position: absolute; top: 0.1rem; left: -0.3rem;">문제 1</span>
 	<button class="button pinkButton quizButton" onclick="$('#inputWord').text('')" style="left: 2%">다시 입력</button>
-	<span id="countDown" style="font-size: 0.7rem; margin-left: 0.5rem; position: absolute; top: 0.1rem; right: 0.3rem; color: #5151ff">시작!</span>
+	<span id="countDown" style="font-size: 0.3rem; margin-left: 0.5rem; position: absolute; top: 0.1rem; right: 0.3rem; color: #5151ff">시작!</span>
 	<button class="button orangeButton quizButton" id="answerButton" style="right: 2%">답 제출</button>
 	<img id="wordImage">
 		<div>
-			<span id="inputWord" style="text-align: center; font-size: 0.7rem; color: orange;"></span>
+			<span id="inputWord"></span>
 		</div>
 </div>
 
 <!-- 히라가나 입력 버튼 표시 -->
-<table class="center" id="hiraganaInput" style="text-align: center;">
+<table class="center" id="hiraganaInput" style="margin-top: 0.2rem;">
 	<!-- あ단 -->
 	<tr>
 		<td><img src="images/hiraganaTextImages/hiraganaTextImage_96.png" class="hiraganaLine_wa" onclick="$('#inputWord').append('ん')"></td>
@@ -306,13 +307,20 @@ function gradeAndGoHiraganaHome() {
 <img id="collectImage" class="center judge" src="images/quiz/collect.png" style="position: absolute; top: 23%; left: 50%; transform: translate(-50%, 0); display: none;">
 <img id="wrongImage" class="center judge" src="images/quiz/wrong.png" style="position: absolute; top: 23%; left: 50%; transform: translate(-50%, 0); display: none;">
 
-<!-- hiragana word 퀴즈에 메인 이미지 -->
-<img id="explain" src="images/linkImages/hiraganaQuizAssociateExplain.png">
-
-
-<!-- 무순 행인지 표시 -->
-<span id="whatLine" style="position:absolute; font-size: 1.1rem; top: 500px; left: 30px; color: rgb(125, 12, 240);">${hiraganaLine}</span>
-
+<div class="quizMain">
+	<!-- hiragana word 퀴즈에 메인 이미지 -->
+	<img id="explain" src="images/linkImages/hiraganaQuizWord.png">
+	
+	<!-- 무순 행인지 표시 -->
+	<span id="whatLine" style="font-size: 1.1rem; top: 80%; left: -30%; color: rgb(125, 12, 240);">${hiraganaLine}</span>
+	
+	<div>
+		<!-- 스타트 버튼, 다음 문제 버튼 -->
+		<input type="button" class="button greenButton center" id="start" value="공부 시작" style="position: relative; height: 0.9rem; display: none; font-size: 0.3rem; translate: transformX(-50%);">
+		<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="font-size: 0.3rem; width: 6rem; height: 0.8rem; position: relative; display: none; translate: transformX(-50%);">
+		<p id="caution" style="color: red; position: relative; font-size: 0.22rem;">*음성이 나옵니다.</p>
+	</div>
+</div>
 
 <!-- audio -->
 <audio id="hiraganaBGSound" preload="auto" loop>
@@ -328,12 +336,6 @@ function gradeAndGoHiraganaHome() {
 	<source id="wrongAnswerSrc" src="sounds/quizSounds/wrongSound.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 스타트 버튼, 다음 문제 버튼 -->
-<div>
-	<input type="button" class="button greenButton center" id="start" value="공부 시작" style="position: absolute; left: 50%; top: 85%; transform: translate(-50%, -50%); height: 0.9rem; display: none; font-size: 0.3rem;">
-	<span id="message"></span><input type="button" class="button greenButton center" id="nextQuiz" value="다음 문제" style="font-size: 0.3rem; width: 6rem; height: 0.8rem; position: absolute; top: 70%; left: 50%; transform: translate(-50%, 0px); display: none;">
-	<p id="caution" style="color: red; position: absolute; bottom: 10%; right: 15%; background-color: white; font-size: 0.22rem;">*음성이 나옵니다.</p>
-</div>
 
 <!-- 성적 확인 시 modal 표시 -->
 <div class="modal jsModal">
@@ -351,7 +353,7 @@ function gradeAndGoHiraganaHome() {
 				<input type="hidden" name="whatQuiz" value="${whatQuiz}">
 				<input type="hidden" id="score" name="score">
 				<input type="button" class="button orangeButton center modalButton" onclick="goNewGradeAndGoMovie()" value="다시 동영상 보기">
-				<input type="button" class="button blueButton center modalButton" onclick="gradeAndHiraganaWordOneMoreTime()" value="다시 하기">
+				<input type="button" class="button blueButton center modalButton" onclick="gradeAndHiraganaWordOneMoreTime()" value="다시 하기"><br>
 				<input type="button" class="button greenButton center modalButton" onclick="gradeAndGoHiraganaHome()" value="다른행 공부하기">
 			</form>
 		</div>
