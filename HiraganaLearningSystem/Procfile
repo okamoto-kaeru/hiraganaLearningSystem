@@ -1,2 +1,2 @@
-web: java -jar $JAVA_OPTS -Dserver.port=$PORT target/hiraganaLearningSystem-version.jar
-
+mvn package
+java -jar target/dependency/webapp-runner.jar target/*.war
