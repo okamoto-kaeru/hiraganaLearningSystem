@@ -105,7 +105,7 @@ $(window).on('load', function() {
 		}
 	}
 	
-	
+	var prevAnswer = "";
 	var timeID;
 	// 답을 정한다.
 	function makeAnswer() {
@@ -133,8 +133,13 @@ $(window).on('load', function() {
 		}
 		
 		
-		// 정답을 고른다
-		answer = Math.floor(Math.random() * 3);
+		// 정답을 고른다.  같은 문제가 연속으로 안나오게 한다.
+		do {
+			answer = Math.floor(Math.random() * 3);
+		} while(prevAnswer == hiraganaVOArr[answer])
+			
+		prevAnswer = hiraganaVOArr[answer];
+		
 		// 정답을 collectAnswerArr에 담는다.
 		collectAnswerArr[count] = hiraganaVOArr[answer];
 		

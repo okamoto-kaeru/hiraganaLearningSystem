@@ -40,6 +40,9 @@ function postZip() {
 		</table>
 		
 		<span style="color: red; font-size: 0.2rem;">교재 주문하실 분은 입력해 주세요</span><br>
+		<span style="color: red; font-size: 0.1rem;">
+			교제사기 기능은 web작성 연습을 위해 만든 겁니다. <br> 개인 정보 보호하기 위해 진짜 주소, 전화번호는 입력하지 마세요!<br>
+		</span><br>
 		<input type="button" class="button blueButton" value="주소 검색" onclick="postZip()" style="width: 2rem; margin-left: 0.08rem; height: 0.35rem;"><br>
 		<div class="detailInfoDiv">
 			<label class="detailInfoLabel" for="zipNum">우편번호</label><br><input type="text" class="detailInfo" id="zipNum" name="zipNum" placeholder="우편번호" style="width: 30%;"><br>

@@ -87,6 +87,7 @@ $(window).on('load', function() {
 		$('#hiraganaInput img').off();
 		clearInterval(timeID);	// 퀴즈 음성을 멈춘다.
 		$('#showResult tr:last').after('<tr><td>' + (count + 1) + '</td>' 
+									+ '<td><img src="images/hiraganaWordImages/' + hiraganaWordList[answer].hiraganaWordImage + '" style="width: 0.7rem; height: 0.5rem;"></td>'
 									+ '<td><span style="font-size: 0.3rem;">' + collectAnswerArr[count] + '</span></td>'
 									+'<td><span style="font-size: 0.3rem;">' + answerArr[count] + '</td>'
 									+'<td><img src="' + resultOX[count] + '" style="width: 0.5rem; height: 0.5rem;"></td></tr>');
@@ -97,7 +98,7 @@ $(window).on('load', function() {
 		}
 	}
 	
-	
+	var prevAnswer = "";
 	var timeID;
 	// 답을 정한다.
 	function makeAnswer() {
@@ -113,10 +114,17 @@ $(window).on('load', function() {
 		}
 
 		
-		// 정답을 고른다
-		answer = Math.floor(Math.random() * hiraganaWordList.length);
+		// 정답을 고른다. 같은 문제가 연속으로 안나오게 한다.
+		do {
+			answer = Math.floor(Math.random() * hiraganaWordList.length);
+		} while(prevAnswer == hiraganaWordList[answer].hiraganaWordId)
+		
+		
+		
 		// 정답을 collectAnswerArr에 담는다.
 		collectAnswerArr[count] = hiraganaWordList[answer].hiraganaWordId;
+		prevAnswer = hiraganaWordList[answer].hiraganaWordId;	// 다음 문제를 결정할 때 사용
+		
 		// 이미지를 배치
 		$('#wordImage').attr('src', 'images/hiraganaWordImages/' + hiraganaWordList[answer].hiraganaWordImage);		
 		
@@ -170,9 +178,9 @@ $(window).on('load', function() {
 		} else {
 			$('#hiraganaInput img').fadeIn(500);
 		}
-		console.log($('#hiraganaLine').attr('value'));
+
 		$('#start').hide();
-		
+		$('.quizMain').css('top', '-1.5rem');
 		doTest();
 	});
 	
