@@ -193,7 +193,7 @@ $(window).on('load', function() {
 			$('#amountOfQuiz').text('문제 ' + (count + 1));
 			doTest();
 		} else {
-			$('#score').attr('value', amountOfCollectAnswer * 10)
+			$('#score').attr('value', amountOfCollectAnswer * 10);
 			$('#showResult tr:last').after('<tr><th colspan="2">점수</th><td colspan="2" style="font-size: 0.4rem; color: orange;">' + (amountOfCollectAnswer * 10) + ' 점</td></tr>');
 			$('.jsModal').fadeIn();
 		}

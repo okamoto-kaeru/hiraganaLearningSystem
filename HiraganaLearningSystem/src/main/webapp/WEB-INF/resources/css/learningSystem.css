@@ -386,7 +386,6 @@ a:visited:hover{
 	position: fixed;
 	top: 0;
 	left: 0;
-	overflow:scroll;
 }
 
 .modalBackGround {
@@ -399,13 +398,16 @@ a:visited:hover{
 .modalContent {
 	background-color: #fff;
 	width: 45%;
+	height: 80vh;
 	left: 50%;
-	top: 50%;
+	top: 5%;
 	padding: 40px; padding: 0.4rem;
 	position: absolute;
-	transform: translate(-50%, -50%);
+	transform: translateX(-50%);
 	text-align: center;
+	overflow: auto;
 }
+
 
 .judge {
 	width: 4rem;
